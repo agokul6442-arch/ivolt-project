@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IVOLT MOTORS - Access Portal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.75)
+                ),
+                url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .login-box {
+            width: 850px;
+            min-height: 550px;
+            display: flex;
+            overflow: hidden;
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.7);
+        }
+
+        .left-side {
+            width: 50%;
+            padding: 50px;
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 45px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .logo span {
+            color: #00d9ff;
+        }
+
+        .left-side h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .left-side p {
+            color: #dddddd;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .slogan {
+            margin-top: 25px;
+            color: #00d9ff;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .right-side {
+            width: 50%;
+            padding: 45px;
+
+            background: rgba(255,255,255,0.96);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-side h2 {
+            font-size: 32px;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .login-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .option {
+            flex: 1;
+            padding: 18px;
+
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            color: white;
+            border-color: #0072ff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d9ff,
+                    #0072ff
+                );
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 20px rgba(0,114,255,0.3);
+        }
+
+        .role-icon {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+
+            .login-box {
+                width: 90%;
+                flex-direction: column;
+            }
+
+            .left-side,
+            .right-side {
+                width: 100%;
+            }
+
+            .left-side {
+                padding: 35px;
+            }
+
+            .right-side {
+                padding: 35px;
+            }
+
+            .login-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="left-side">
+
+        <div class="logo">
+            <span>IVOLT</span> MOTORS
+        </div>
+
+        <h2>
+            Welcome to IVOLT MOTORS
+        </h2>
+
+        <p>
+            Manage your vehicle information, driver details,
+            trips, documents, monitoring and fleet activities
+            easily and securely.
+        </p>
+
+        <div class="slogan">
+            Drive Smart • Stay Informed • Travel Safe
+        </div>
+
+    </div>
+
+    <div class="right-side">
+
+        <h2>
+            Access Portal
+        </h2>
+
+        <div class="subtitle">
+            Select your role to continue
+        </div>
+
+        <div class="login-options">
+
+            <button
+                class="option"
+                onclick="openAdminLogin()">
+
+                <span class="role-icon">
+                    
+                </span>
+
+                Admin
+
+            </button>
+
+            <button
+                class="option"
+                onclick="openDriverLogin()">
+
+                <span class="role-icon">
+                
+                </span>
+
+                Driver
+
+            </button>
+
+        </div>
+
+        <div class="footer-text">
+            IVOLT MOTORS Management System
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function openAdminLogin() {
+
+    window.location.href = "admin dashboard.html";
+}
+
+function openDriverLogin() {
+    window.location.href = "driverlogin.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IVOLT MOTORS - Driver Registration</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px 15px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.6),
+                    rgba(0,0,0,0.8)
+                ),
+                url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+        .signup-card {
+
+            width: 450px;
+
+            padding: 40px;
+
+            background: rgba(255,255,255,0.97);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.7);
+
+        }
+
+        .logo {
+
+            text-align: center;
+
+            font-size: 40px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+        .logo span {
+
+            color: #00bfff;
+
+        }
+
+        .title {
+
+            text-align: center;
+
+            font-size: 26px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #777;
+
+            margin-bottom: 25px;
+
+        }
+
+        .input-group {
+
+            margin-bottom: 16px;
+
+        }
+
+        label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #333;
+
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+
+        }
+
+        input:focus {
+
+            border-color: #0072ff;
+
+            box-shadow:
+                0 0 8px rgba(0,114,255,0.25);
+
+        }
+
+        .signup-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d9ff,
+                    #0072ff
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            margin-top: 5px;
+
+        }
+
+        .signup-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(0,114,255,0.4);
+
+        }
+
+        .message {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            display: none;
+
+            font-weight: bold;
+
+        }
+
+        .error {
+
+            color: #e53935;
+
+        }
+
+        .success {
+
+            color: #2e7d32;
+
+        }
+
+        .login-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #0072ff;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+        .login-link:hover {
+
+            text-decoration: underline;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="signup-card">
+
+
+    <div class="logo">
+
+        <span>IVOLT</span> MOTORS
+
+    </div>
+
+
+    <div class="title">
+
+        Driver Registration
+
+    </div>
+
+
+    <div class="subtitle">
+
+        Create your driver account
+
+    </div>
+
+
+    <form onsubmit="registerDriver(event)">
+
+
+        <!-- FULL NAME -->
+
+        <div class="input-group">
+
+            <label>
+
+                Full Name
+
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Enter Full Name"
+                required>
+
+        </div>
+
+
+        <!-- AGE -->
+
+<div class="input-group">
+
+    <label>
+        Age
+    </label>
+
+    <input
+        type="number"
+        id="age"
+        placeholder="Enter Age"
+        min="18"
+        max="100"
+        required>
+
+</div>
+
+
+       <!-- YEARS OF EXPERIENCE -->
+
+<div class="input-group">
+
+    <label>
+
+        Years of Experience
+
+    </label>
+
+    <input
+        type="number"
+        id="experience"
+        placeholder="Enter Years of Experience"
+        min="0"
+        max="50"
+        required>
+
+</div>
+
+
+        <!-- LICENSE NUMBER -->
+
+        <div class="input-group">
+
+            <label>
+
+                Email
+
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter Email Address"
+                required>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+
+                Phone Number
+
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter 10-digit Phone Number"
+                pattern="[0-9]{10}"
+                required>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+
+                Driver License Number
+
+            </label>
+
+            <input
+                type="text"
+                id="license"
+                placeholder="Enter Driving License Number"
+                required>
+
+        </div>
+
+        <!-- CAR REGISTRATION NUMBER -->
+
+<div class="input-group">
+
+    <label>
+
+        Car Registration Number
+
+    </label>
+
+    <input
+        type="text"
+        id="carRegistration"
+        placeholder="Enter Car Registration Number (e.g., TN01AB1234)"
+        maxlength="15"
+        required>
+
+</div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+            <label>
+
+                Password
+
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create Password"
+                required>
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="input-group">
+
+            <label>
+
+                Confirm Password
+
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="signup-btn">
+
+            Create Driver Account
+
+        </button>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="error"
+            class="message error">
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            id="success"
+            class="message success">
+
+            Driver account created successfully!
+
+        </div>
+
+
+    </form>
+
+
+    <a
+        href="driverlogin.html"
+        class="login-link">
+
+        ← Already registered? Login
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+
+async function registerDriver(event) {
+
+    event.preventDefault();
+
+
+    /* GET FORM VALUES */
+
+    const fullName =
+        document.getElementById("fullName")
+        .value
+        .trim();
+
+
+    const email =
+        document.getElementById("email")
+        .value
+        .trim();
+
+
+    const phone =
+        document.getElementById("phone")
+        .value
+        .trim();
+
+
+    const license =
+        document.getElementById("license")
+        .value
+        .trim();
+
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+
+    const confirmPassword =
+        try {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    fullName,
+                    age: document.getElementById("age").value,
+                    experience: document.getElementById("experience").value,
+                    email,
+                    phone,
+                    license,
+                    carRegistration: document.getElementById("carRegistration").value.trim(),
+                    password,
+                    confirmPassword
+                })
+            });
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                error.innerText = data.message || "Registration failed.";
+                error.style.display = "block";
+                return;
+            }
+
+            success.innerText = "Account created successfully! Driver ID: " + data.driver_id;
+            success.style.display = "block";
+
+            setTimeout(function() {
+                window.location.href = "driverlogin.html";
+            }, 2000);
+        } catch (registrationError) {
+            error.innerText = "Cannot connect to server.";
+            error.style.display = "block";
+        }
+        error.innerText =
+            "This phone number is already registered.";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    if (existingLicense === license) {
+
+        error.innerText =
+            "This driving license is already registered.";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    /* GENERATE DRIVER USERNAME */
+
+    const username =
+        fullName
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .substring(0, 8)
+        +
+        Math.floor(1000 + Math.random() * 9000);
+
+
+    /* SAVE DRIVER ACCOUNT */
+
+    localStorage.setItem(
+        "driverUsername",
+        username
+    );
+
+
+    localStorage.setItem(
+        "driverFullName",
+        fullName
+    );
+
+
+    localStorage.setItem(
+        "driverEmail",
+        email
+    );
+
+
+    localStorage.setItem(
+        "driverPhone",
+        phone
+    );
+
+
+    localStorage.setItem(
+        "driverLicense",
+        license
+    );
+
+
+    localStorage.setItem(
+        "driverPassword",
+        password
+    );
+
+
+    /* SHOW SUCCESS */
+
+    success.innerText =
+        "Account created successfully! Username: "
+        + username;
+
+
+    success.style.display = "block";
+
+
+    /* REDIRECT TO DRIVER LOGIN */
+
+    setTimeout(function() {
+
+        window.location.href =
+            "driver-login.html";
+
+    }, 2000);
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

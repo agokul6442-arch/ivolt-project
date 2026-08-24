@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IVOLT MOTORS - Driver Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.6),
+                    rgba(0,0,0,0.8)
+                ),
+                url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .login-card {
+            width: 430px;
+            padding: 45px;
+            background: rgba(255,255,255,0.97);
+            border-radius: 22px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.7);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: #00bfff;
+        }
+
+        .role {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+
+            border: 1px solid #ccc;
+            border-radius: 10px;
+
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #0072ff;
+
+            box-shadow:
+                0 0 8px rgba(0,114,255,0.25);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d9ff,
+                    #0072ff
+                );
+
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(0,114,255,0.4);
+        }
+
+        .register {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .register a {
+            color: #0072ff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .register a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+
+            color: #0072ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #e53935;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .success {
+            color: #2e7d32;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+    <div class="logo">
+        <span>IVOLT</span> MOTORS
+    </div>
+
+    <div class="role">
+        Driver Login
+    </div>
+
+    <div class="subtitle">
+        Login to your driver dashboard
+    </div>
+
+    <form onsubmit="adminLogin(event)">
+
+        <div class="input-group">
+
+           <label>
+    Driver ID
+</label>
+
+<input
+    type="text"
+    id="adminUsername"
+    placeholder="Enter Driver ID"
+    required>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>
+                Password
+            </label>
+            
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Enter Password"
+                autocomplete="current-password"
+                required>
+
+        </div>
+
+        <button
+            type="submit"
+            class="login-btn">
+            
+
+            Login as Driver
+
+        </button>
+
+        <div
+            class="error"
+            id="errorMessage">
+
+            Invalid username or password.
+
+        </div>
+
+        <div
+            class="success"
+            id="successMessage">
+
+            Login successful! Redirecting...
+            <a href="driver page.html">
+                Click here if not redirected
+            </a>    
+
+        </div>
+
+    </form>
+
+
+    <!-- SIGN UP OPTION -->
+
+    <div class="register">
+
+        Don't have an Driver account?
+
+        <a href="driverregister.html">
+            Register / Sign Up
+        </a>
+
+    </div>
+
+
+    <a
+        href="Homepage.html"
+        class="back">
+
+        ← Back to Access Portal
+
+    </a>
+
+</div>
+
+
+<script>
+
+async function adminLogin(event) {
+
+    event.preventDefault();
+
+    const username =
+        document.getElementById("adminUsername").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    try {
+
+        const response = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            document.getElementById(
+                "errorMessage"
+            ).style.display = "none";
+
+            document.getElementById(
+                "successMessage"
+            ).style.display = "block";
+
+            sessionStorage.setItem(
+                "loggedIn",
+                "true"
+            );
+
+            // Store the driver_id from API response
+            sessionStorage.setItem(
+                "driverId",
+                data.driver_id
+            );
+
+            // Store vehicle registration number
+            sessionStorage.setItem(
+                "carRegNo",
+                data.car_regno
+            );
+
+            setTimeout(function () {
+
+                window.location.href =
+                    "driver page.html";
+
+            }, 1000);
+
+        } else {
+
+            document.getElementById(
+                "errorMessage"
+            ).innerText =
+                "Invalid Driver ID or Password";
+
+            document.getElementById(
+                "errorMessage"
+            ).style.display = "block";
+
+            document.getElementById(
+                "successMessage"
+            ).style.display = "none";
+        }
+
+    } catch (error) {
+
+        document.getElementById(
+            "errorMessage"
+        ).innerText =
+            "Cannot connect to server";
+
+        document.getElementById(
+            "errorMessage"
+        ).style.display = "block";
+
+        document.getElementById(
+            "successMessage"
+        ).style.display = "none";
+    }
+}
+
+</script>
+
+</body>
+
+</html>
