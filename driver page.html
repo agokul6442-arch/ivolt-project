@@ -1291,7 +1291,9 @@ function updateBatteryPercentageColor() {
 /* ================= UI UPDATE DISPATCHER ================= */
 function updateAllCalculations() {
     // Sync SOC from slider
-    state.socPercent = Number(document.getElementById("batteryInput").value);
+    const batteryInput = document.getElementById("batteryInput");
+    state.socPercent = Math.min(100, Math.max(1, Number(batteryInput.value) || 1));
+    batteryInput.value = state.socPercent;
     
     // Sync destination distance
     const distInput = document.getElementById("destinationDistance");
@@ -1468,7 +1470,7 @@ async function loadDriverData() {
         if (carNumberEl) carNumberEl.innerText = data.Car_RegNo || "N/A";
 
         // Update telemetry data
-        const socPercent = Math.round(parseFloat(data.SOC_Percentage || 0));
+        const socPercent = Math.min(100, Math.max(1, Math.round(parseFloat(data.SOC_Percentage || 0))));
         const batteryCapacity = parseFloat(data.Battery_Capacity_kWh || 40.5);
          const estRange = parseFloat(data['Estimated Range_Range'] || data.Max_Range_km || 0);
 
