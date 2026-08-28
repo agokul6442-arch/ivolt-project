@@ -1248,7 +1248,7 @@ function calculateEVTelemetry() {
     // 1. Usable Energy in kWh = Battery Capacity * (SOC % / 100)
     const usableEnergyKWh = EV_SPECS.batteryCapacityKWh * (state.socPercent / 100);
 
-    // 2. Route Multiplier: City is more efficient (regen + lower speeds) vs Highway (aerodynamic drag)
+    // 2. Route Multiplier: City has lower consumption (~0.90) due to regen, Highway has higher consumption (~1.25) due to high-speed aerodynamic drag.
     const routeMultiplier = state.routeType === 'city' ? 0.90 : 1.25;
 
     // 3. Payload Multiplier: ~75kg per passenger, adds ~2.8% energy consumption per extra passenger
