@@ -1076,7 +1076,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
                     <span class="route-icon">🏙️</span>
                     <div class="route-details">
                         <h4>City Driving</h4>
-                        <p>High regenerative braking recovery, lower aerodynamic drag. (~12.2 kWh/100km)</p>
+                        <p>Frequent stop-and-go traffic, frequent acceleration. (~16.8 kWh/100km - Lower Range)</p>
                     </div>
                 </div>
 
@@ -1085,7 +1085,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
                     <span class="route-icon">🛣️</span>
                     <div class="route-details">
                         <h4>Highway Driving</h4>
-                        <p>High continuous speeds & aerodynamic resistance. (~16.8 kWh/100km)</p>
+                        <p>Smooth continuous cruising speed & high range efficiency. (~11.5 kWh/100km - Higher Range)</p>
                     </div>
                 </div>
             </div>
@@ -1248,8 +1248,8 @@ function calculateEVTelemetry() {
     // 1. Usable Energy in kWh = Battery Capacity * (SOC % / 100)
     const usableEnergyKWh = EV_SPECS.batteryCapacityKWh * (state.socPercent / 100);
 
-    // 2. Route Multiplier: City has lower consumption (~0.90) due to regen, Highway has higher consumption (~1.25) due to high-speed aerodynamic drag.
-    const routeMultiplier = state.routeType === 'city' ? 0.90 : 1.25;
+    // 2. Route Multiplier: Highway has lower consumption (~0.85) giving higher range, City has higher consumption (~1.25) due to stop-and-go traffic.
+    const routeMultiplier = state.routeType === 'highway' ? 0.85 : 1.25;
 
     // 3. Payload Multiplier: ~75kg per passenger, adds ~2.8% energy consumption per extra passenger
     const grossWeight = EV_SPECS.kerbWeightKg + (state.passengerCount * 75);
@@ -1331,7 +1331,7 @@ function updateAllCalculations() {
     // 3. Update Specs / Details Page UI
     document.getElementById("detailsSoC").innerText = state.socPercent + "%";
     document.getElementById("detailsPassCount").innerText = `${state.passengerCount} Person(s) (${data.grossWeight} kg Total Mass)`;
-    document.getElementById("detailsRoute").innerText = state.routeType === 'city' ? 'City (Regen Active)' : 'Highway (High-Speed Cruise)';
+    document.getElementById("detailsRoute").innerText = state.routeType === 'highway' ? 'Highway (High Range Efficiency)' : 'City (Stop-and-Go Traffic)';
 }
 
 /* ================= RANGE PREDICTION ================= */
@@ -1351,7 +1351,7 @@ async function predictRange() {
             EV_Weight_kg: EV_SPECS.kerbWeightKg,
             Passenger_Count: state.passengerCount,
             Energy_Consumption_kWh_per_100km: EV_SPECS.baseConsumption,
-            Highway_City: state.routeType === "city" ? "City" : "Highway"
+            Highway_City: state.routeType === "highway" ? "City" : "Highway"
         })
     });
     if (!modelResponse.ok) {
