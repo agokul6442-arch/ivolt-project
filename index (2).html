@@ -3954,35 +3954,42 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
     });
         
     // Find top earner
-    let topEarner = null;
-    let maxRevenue = 0;
-        
-    Object.values(driverStats).forEach(driver => {
-      if (driver.totalRevenue > maxRevenue) {
-        maxRevenue = driver.totalRevenue;
-        topEarner = driver;
-      }
-    });
+   const sortedDrivers = Object.values(driverStats)
+    .sort((a, b) => Number(b.totalRevenue) - Number(a.totalRevenue));
+
+const topEarner = sortedDrivers[0];
         
     // Find most active driver
-    let mostActive = null;
-    let maxTrips = 0;
-        
-    Object.values(driverStats).forEach(driver => {
-      if (driver.tripCount > maxTrips) {
-        maxTrips = driver.tripCount;
-        mostActive = driver;
-      }
-    });
+   const mostActive = Object.values(driverStats)
+    .sort((a, b) => b.tripCount - a.tripCount)[0];
 
     // Identify the rash driver by highest average driving speed
-    const rashDriver = Object.values(driverStats).reduce((fastest, driver) => {
-      const driverAverageSpeed = driver.totalSpeed / driver.tripCount;
-      const fastestAverageSpeed = fastest ? fastest.totalSpeed / fastest.tripCount : 0;
-      return driverAverageSpeed > fastestAverageSpeed ? driver : fastest;
-    }, null);
+   const rashDriver = Object.values(driverStats)
+    .sort((a, b) =>
+        (b.totalSpeed / b.tripCount) -
+        (a.totalSpeed / a.tripCount)
+    )[0];
         
     // Update UI with top earner
+    // Verify ranking in browser console
+console.table(
+    Object.values(driverStats)
+        .map(driver => ({
+            Driver: driver.driverName,
+            Revenue: driver.totalRevenue,
+            Trips: driver.tripCount,
+            AvgSpeed: (driver.totalSpeed / driver.tripCount).toFixed(1)
+        }))
+        .sort((a, b) => b.Revenue - a.Revenue)
+);
+
+// Update UI with top earner
+if (topEarner) {
+    document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
+    document.getElementById("statTopEarnerID").innerText = topEarner.driverId;
+    document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toFixed(2);
+    document.getElementById("statTopEarnerCar").innerText = topEarner.carName || "Unknown";
+}
     if (topEarner) {
       document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
       document.getElementById("statTopEarnerID").innerText = topEarner.driverId;
@@ -4078,5 +4085,6 @@ function updateDashboardStats() {
 
 window.onload = updateDashboardStats;
 </script>
+
 </body>
 </html>
