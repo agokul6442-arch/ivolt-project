@@ -1093,29 +1093,12 @@
           <span class="company-badge-tag" id="activeCompanyCount">50 Vehicles Total</span>
         </div>
         <div class="brand-pills-bar">
-         <button class="brand-pill-btn active" data-company="all">
-    All (<span id="allCount">0</span>)
-</button>
-
-<button class="brand-pill-btn" data-company="Tata">
-    Tata (<span id="tataCount">0</span>)
-</button>
-
-<button class="brand-pill-btn" data-company="Mahindra">
-    Mahindra (<span id="mahindraCount">0</span>)
-</button>
-
-<button class="brand-pill-btn" data-company="Kia">
-    Kia (<span id="kiaCount">0</span>)
-</button>
-
-<button class="brand-pill-btn" data-company="MG">
-    MG Motor (<span id="mgCount">0</span>)
-</button>
-
-<button class="brand-pill-btn" data-company="Hyundai">
-    Hyundai (<span id="hyundaiCount">0</span>)
-</button>
+          <button class="brand-pill-btn active" data-company="all" onclick="setCompanyFilter('all')"><i class="fa-solid fa-globe"></i> All (50)</button>
+          <button class="brand-pill-btn" data-company="Tata" onclick="setCompanyFilter('Tata')"><i class="fa-solid fa-bolt"></i> Tata (11)</button>
+          <button class="brand-pill-btn" data-company="Mahindra" onclick="setCompanyFilter('Mahindra')"><i class="fa-solid fa-car"></i> Mahindra (10)</button>
+          <button class="brand-pill-btn" data-company="Kia" onclick="setCompanyFilter('Kia')"><i class="fa-solid fa-car-side"></i> Kia (10)</button>
+          <button class="brand-pill-btn" data-company="MG" onclick="setCompanyFilter('MG')"><i class="fa-solid fa-plug"></i> MG Motor (9)</button>
+          <button class="brand-pill-btn" data-company="Hyundai" onclick="setCompanyFilter('Hyundai')"><i class="fa-solid fa-charging-station"></i> Hyundai (10)</button>
         </div>
       </div>
 
@@ -1128,7 +1111,7 @@
               <div class="stat-icon-wrap"><i class="fa-solid fa-truck-fast"></i></div>
             </div>
             <div class="stat-body">
-              <span class="stat-number" id="statTotalFleet">0</span>
+              <span class="stat-number" id="statTotalFleet">50</span>
               <span class="stat-unit">Vehicles</span>
             </div>
             <div class="stat-sub">
@@ -1143,7 +1126,7 @@
               <div class="stat-icon-wrap"><i class="fa-solid fa-route"></i></div>
             </div>
             <div class="stat-body">
-              <span class="stat-number" id="statVehiclesMotion">0</span>
+              <span class="stat-number" id="statVehiclesMotion">32</span>
               <span class="stat-unit">Running</span>
             </div>
             <div class="stat-sub">
@@ -1158,7 +1141,7 @@
               <div class="stat-icon-wrap"><i class="fa-solid fa-warehouse"></i></div>
             </div>
             <div class="stat-body">
-              <span class="stat-number" id="statCarsWorking">0</span>
+              <span class="stat-number" id="statCarsWorking">18</span>
               <span class="stat-unit" id="statCarsWorkingUnit">Cars</span>
             </div>
             <div class="stat-sub">
@@ -1173,7 +1156,7 @@
               <div class="stat-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
             </div>
             <div class="stat-body">
-              <span class="stat-number" id="statCarsCharging">0</span>
+              <span class="stat-number" id="statCarsCharging">11</span>
               <span class="stat-unit">Cars</span>
             </div>
             <div class="stat-sub">
@@ -2739,68 +2722,12 @@
     }
 
     function latestVehicleRecords(vehicles) {
-      const vehicleGroups = new Map();
+      const latestByVehicle = new Map();
       vehicles.forEach(vehicle => {
         const registration = String(vehicle.Car_RegNo || '').trim();
-        if (!registration) return;
-        if (!vehicleGroups.has(registration)) {
-          vehicleGroups.set(registration, []);
-        }
-        vehicleGroups.get(registration).push(vehicle);
+        if (registration) latestByVehicle.set(registration, vehicle);
       });
-
-      const records = [];
-      vehicleGroups.forEach((rows, registration) => {
-        // Last recorded row has latest dynamic telemetry (Location, Driver, Speed, SOC, etc.)
-        const latest = { ...rows[rows.length - 1] };
-
-        // Aggregate financial and operational metrics across the vehicle's historical records
-        let totalChargingCost = 0;
-        let totalMaintenanceCost = 0;
-        let maxChargingPower = 0;
-        let totalChargingEnergy = 0;
-        let totalChargingDuration = 0;
-        let maxDailyRevenue = 0;
-        let nearbyStation = latest.Nearby_Charging_Station_ID || '';
-
-        rows.forEach(r => {
-          const chgCost = numberValue(r.Charging_Cost);
-          const mChgCost = numberValue(r.Monthly_Charging_Cost);
-          const maintCost = numberValue(r.Other_Maintenance_Cost);
-          const mMaintCost = numberValue(r.Monthly_Maintenance_Cost);
-          const rev = numberValue(r.Per_Day_Revenue);
-          const power = numberValue(r.Charging_Power_kW);
-          const energy = numberValue(r.Charging_Energy_kWh);
-          const dur = numberValue(r.Charging_Duration_min);
-
-          totalChargingCost += chgCost;
-          if (mChgCost > totalChargingCost) totalChargingCost = mChgCost;
-
-          totalMaintenanceCost += maintCost;
-          if (mMaintCost > totalMaintenanceCost) totalMaintenanceCost = mMaintCost;
-
-          if (rev > maxDailyRevenue) maxDailyRevenue = rev;
-          if (power > maxChargingPower) maxChargingPower = power;
-          totalChargingEnergy += energy;
-          totalChargingDuration += dur;
-          if (!nearbyStation && r.Nearby_Charging_Station_ID) nearbyStation = r.Nearby_Charging_Station_ID;
-        });
-
-        // Set realistic aggregated costs
-        latest.Charging_Cost = totalChargingCost || numberValue(latest.Charging_Cost) || 1250;
-        latest.Other_Maintenance_Cost = totalMaintenanceCost || numberValue(latest.Other_Maintenance_Cost) || 950;
-        latest.Monthly_Charging_Cost = latest.Charging_Cost;
-        latest.Monthly_Maintenance_Cost = latest.Other_Maintenance_Cost;
-        if (maxDailyRevenue > 0) latest.Per_Day_Revenue = maxDailyRevenue;
-        if (maxChargingPower > 0) latest.Charging_Power_kW = maxChargingPower;
-        if (totalChargingEnergy > 0) latest.Charging_Energy_kWh = totalChargingEnergy;
-        if (totalChargingDuration > 0) latest.Charging_Duration_min = totalChargingDuration;
-        if (nearbyStation) latest.Nearby_Charging_Station_ID = nearbyStation;
-
-        records.push(latest);
-      });
-
-      return records;
+      return Array.from(latestByVehicle.values());
     }
 
     function vehicleCompany(vehicle) {
@@ -2820,26 +2747,20 @@
       table('batteryTable', vehicle => {
         const status = String(vehicle.Charging_Status || 'Not charging').trim() || 'Not charging';
         const statusClass = status.toLowerCase().includes('charg') ? 'pill-blue' : 'pill-green';
-        const chgCost = numberValue(vehicle.Charging_Cost || vehicle.Monthly_Charging_Cost);
-        const power = numberValue(vehicle.Charging_Power_kW) || 50;
-        const duration = numberValue(vehicle.Charging_Duration_min) || 45;
-        const energy = numberValue(vehicle.Charging_Energy_kWh) || 28.5;
-        return `<td><strong>${escapeHtml(vehicle.Nearby_Charging_Station_ID || 'CS-SLM-01')}</strong></td>
+        return `<td><strong>${escapeHtml(vehicle.Nearby_Charging_Station_ID || '-')}</strong></td>
           <td>${escapeHtml(vehicle.Car_RegNo || '-')}</td>
           <td>${escapeHtml(vehicle.Car_Name || '-')} <span class="company-tag tag-${escapeHtml(vehicleCompany(vehicle).toLowerCase())}">${escapeHtml(vehicleCompany(vehicle))}</span></td>
           <td>${numberValue(vehicle.Battery_Capacity_kWh).toFixed(1)} kWh</td>
-          <td>${power.toFixed(1)} kW</td>
-          <td>${duration.toFixed(0)} min</td>
-          <td>${energy.toFixed(1)} kWh</td>
-          <td>₹${chgCost.toFixed(2)}</td>
+          <td>${numberValue(vehicle.Charging_Power_kW).toFixed(1)} kW</td>
+          <td>${numberValue(vehicle.Charging_Duration_min).toFixed(0)} min</td>
+          <td>${numberValue(vehicle.Charging_Energy_kWh).toFixed(1)} kWh</td>
+          <td>₹${numberValue(vehicle.Charging_Cost).toFixed(2)}</td>
           <td><span class="status-pill ${statusClass}">${escapeHtml(status)}</span></td>`;
       });
 
       table('financeTable', vehicle => {
-        const revenue = numberValue(vehicle.Per_Day_Revenue) || 18500;
-        const chgCost = numberValue(vehicle.Charging_Cost || vehicle.Monthly_Charging_Cost) || 1400;
-        const maintCost = numberValue(vehicle.Other_Maintenance_Cost || vehicle.Monthly_Maintenance_Cost) || 950;
-        const costs = chgCost + maintCost;
+        const revenue = numberValue(vehicle.Per_Day_Revenue);
+        const costs = numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost);
         const profit = revenue - costs;
         const margin = revenue ? Math.round(profit / revenue * 100) : 0;
         const profitClass = profit >= 0 ? 'pill-green' : 'pill-red';
@@ -2847,8 +2768,8 @@
           <td>${escapeHtml(vehicle.Car_Name || '-')} <span class="company-tag tag-${escapeHtml(vehicleCompany(vehicle).toLowerCase())}">${escapeHtml(vehicleCompany(vehicle))}</span></td>
           <td>${escapeHtml(vehicle.Driver_Name || '-')}</td>
           <td>₹${revenue.toFixed(2)}</td>
-          <td>₹${chgCost.toFixed(2)}</td>
-          <td>₹${maintCost.toFixed(2)}</td>
+          <td>₹${numberValue(vehicle.Charging_Cost).toFixed(2)}</td>
+          <td>₹${numberValue(vehicle.Other_Maintenance_Cost).toFixed(2)}</td>
           <td><strong style="color: ${profit >= 0 ? '#34d399' : '#f87171'};">₹${profit.toFixed(2)}</strong></td>
           <td><span class="status-pill ${profitClass}">${margin}% Margin</span></td>`;
       });
@@ -2867,17 +2788,16 @@
       });
 
       table('maintTable', vehicle => {
-        const working = String(vehicle.Working || 'Working').trim() || 'Working';
+        const working = String(vehicle.Working || 'Unknown').trim() || 'Unknown';
         const workingClass = working.toLowerCase() === 'working' ? 'pill-green' : 'pill-yellow';
-        const maintCost = numberValue(vehicle.Other_Maintenance_Cost || vehicle.Monthly_Maintenance_Cost);
-        return `<td><strong>${escapeHtml(vehicle.Observation_ID || 'WO-2026-081')}</strong></td>
+        return `<td><strong>${escapeHtml(vehicle.Observation_ID || '-')}</strong></td>
           <td>${escapeHtml(vehicle.Car_RegNo || '-')}</td>
           <td>${escapeHtml(vehicle.Car_Name || '-')} <span class="company-tag tag-${escapeHtml(vehicleCompany(vehicle).toLowerCase())}">${escapeHtml(vehicleCompany(vehicle))}</span></td>
           <td><span class="status-pill ${workingClass}">${escapeHtml(working)}</span></td>
-          <td>${escapeHtml(vehicle.Garage_Status && vehicle.Garage_Status !== 'No category' && vehicle.Garage_Status !== 'Not Presented' ? vehicle.Garage_Status : 'General Maintenance & Diagnostics')}</td>
-          <td>₹${maintCost.toFixed(2)}</td>
-          <td><span class="status-pill ${maintCost > 2000 ? 'pill-red' : maintCost > 1000 ? 'pill-yellow' : 'pill-green'}">${maintCost > 2000 ? 'High' : maintCost > 1000 ? 'Medium' : 'Low'}</span></td>
-          <td><span class="status-pill ${workingClass}">${working.toLowerCase() === 'working' ? 'Completed' : 'In Progress'}</span></td>`;
+          <td>${escapeHtml(vehicle.Garage_Status || 'No category')}</td>
+          <td>₹${numberValue(vehicle.Other_Maintenance_Cost).toFixed(2)}</td>
+          <td><span class="status-pill pill-blue">Dataset</span></td>
+          <td><span class="status-pill ${workingClass}">${escapeHtml(vehicle.Running_Status || '-')}</span></td>`;
       });
 
       // Cache live rendered rows for all tables and re-apply active sort if any
@@ -2982,9 +2902,6 @@
       const colors = ['#10b981', '#0ea5e9', '#f59e0b', '#f43f5e', '#8b5cf6'];
 
       function makeStats(name, records) {
-        const average = field =>
-  records.reduce((t, v) => t + numberValue(v[field]), 0) /
-  records.length;
         const fleet = records.length;
         const running = records.filter(vehicle => ['yes', 'running'].includes(String(vehicle.Running_Status).toLowerCase())).length;
         const charging = records.filter(vehicle => ['yes', 'charging'].includes(String(vehicle.Charging_Status).toLowerCase())).length;
@@ -3002,23 +2919,6 @@
         const modelLabels = Object.keys(modelGroups);
 
         return {
-          const avgSOH = average('SOH_Percentage');
-const avgSOC = average('SOC_Percentage');
-
-const totalChargingPower =
-records.reduce(
-(total, vehicle) =>
-total + numberValue(vehicle.Charging_Power_kW),
-0
-);
-
-const activeChargers =
-records.filter(
-vehicle => numberValue(vehicle.Charging_Power_kW) > 0
-).length;
-
-const batteryDegradation =
-(100 - avgSOH).toFixed(1);
           name,
           countText: `${fleet} Vehicles Total`,
           totalFleet: fleet,
@@ -3032,19 +2932,10 @@ const batteryDegradation =
           underMaintSub: `${Math.max(0, fleet - working)} Under Maintenance`,
           charging,
           chargingPct: `${fleet ? Math.round(charging / fleet * 100) : 0}% Fleet`,
-         bSoh: avgSOH.toFixed(1),
-
-bDeg: `${batteryDegradation}% Degradation`,
-
-bConsumption:
-average('Energy_Consumption_kWh_per_100km').toFixed(1),
-
-bTarget: `${avgSOC.toFixed(1)}% Avg SOC`,
-
-bChargers: activeChargers,
-
-bEnergyDelivered:
-`${totalChargingPower.toFixed(1)} kW`,
+          bSoh: average('SOH_Percentage').toFixed(1),
+          bDeg: 'Calculated from CSV snapshot',
+          bConsumption: average('Energy_Consumption_kWh_per_100km').toFixed(1),
+          bTarget: 'CSV fleet average',
           chargingSub: `${records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Power_kW), 0).toFixed(0)} kW Load`,
           working,
           workingSub: `${fleet ? Math.round(working / fleet * 100) : 0}% Fleet Operational`,
@@ -4053,59 +3944,6 @@ window.addEventListener('DOMContentLoaded', () => {
     cacheAllTableOriginalRows();
   })();
 });
-</script>
-<script>
-function updateDashboardStats() {
-
-    const rows = document.querySelectorAll("#overviewTable tbody tr");
-
-    let totalCars = 0;
-    let runningCars = 0;
-    let chargingCars = 0;
-    let garageCars = 0;
-
-    rows.forEach(row => {
-
-        if(row.style.display === "none") return;
-
-        totalCars++;
-
-        const status =
-            row.cells[8].innerText.trim().toLowerCase();
-
-        if(status.includes("running")) {
-            runningCars++;
-        }
-
-        if(status.includes("charging")) {
-            chargingCars++;
-        }
-
-        if(
-            status.includes("garage") ||
-            status.includes("maintenance")
-        ) {
-            garageCars++;
-        }
-    });
-
-    document.getElementById("statTotalFleet").textContent =
-        totalCars;
-
-    document.getElementById("statVehiclesMotion").textContent =
-        runningCars;
-
-    document.getElementById("statCarsWorking").textContent =
-        garageCars;
-
-    document.getElementById("statCarsCharging").textContent =
-        chargingCars;
-
-    document.getElementById("activeCompanyCount").textContent =
-        totalCars + " Vehicles Total";
-}
-
-window.onload = updateDashboardStats;
 </script>
 </body>
 </html>
