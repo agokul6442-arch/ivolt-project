@@ -2982,9 +2982,6 @@
       const colors = ['#10b981', '#0ea5e9', '#f59e0b', '#f43f5e', '#8b5cf6'];
 
       function makeStats(name, records) {
-        const average = field =>
-  records.reduce((t, v) => t + numberValue(v[field]), 0) /
-  records.length;
         const fleet = records.length;
         const running = records.filter(vehicle => ['yes', 'running'].includes(String(vehicle.Running_Status).toLowerCase())).length;
         const charging = records.filter(vehicle => ['yes', 'charging'].includes(String(vehicle.Charging_Status).toLowerCase())).length;
@@ -3002,23 +2999,6 @@
         const modelLabels = Object.keys(modelGroups);
 
         return {
-          const avgSOH = average('SOH_Percentage');
-const avgSOC = average('SOC_Percentage');
-
-const totalChargingPower =
-records.reduce(
-(total, vehicle) =>
-total + numberValue(vehicle.Charging_Power_kW),
-0
-);
-
-const activeChargers =
-records.filter(
-vehicle => numberValue(vehicle.Charging_Power_kW) > 0
-).length;
-
-const batteryDegradation =
-(100 - avgSOH).toFixed(1);
           name,
           countText: `${fleet} Vehicles Total`,
           totalFleet: fleet,
@@ -3032,19 +3012,10 @@ const batteryDegradation =
           underMaintSub: `${Math.max(0, fleet - working)} Under Maintenance`,
           charging,
           chargingPct: `${fleet ? Math.round(charging / fleet * 100) : 0}% Fleet`,
-         bSoh: avgSOH.toFixed(1),
-
-bDeg: `${batteryDegradation}% Degradation`,
-
-bConsumption:
-average('Energy_Consumption_kWh_per_100km').toFixed(1),
-
-bTarget: `${avgSOC.toFixed(1)}% Avg SOC`,
-
-bChargers: activeChargers,
-
-bEnergyDelivered:
-`${totalChargingPower.toFixed(1)} kW`,
+          bSoh: average('SOH_Percentage').toFixed(1),
+          bDeg: 'Calculated from CSV snapshot',
+          bConsumption: average('Energy_Consumption_kWh_per_100km').toFixed(1),
+          bTarget: 'CSV fleet average',
           chargingSub: `${records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Power_kW), 0).toFixed(0)} kW Load`,
           working,
           workingSub: `${fleet ? Math.round(working / fleet * 100) : 0}% Fleet Operational`,
