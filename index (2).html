@@ -3021,84 +3021,117 @@
     }
 
     let dashboardVehicles = [];
+    let dashboardRenderQueued = false;
 
-function clampSocVal(value) {
-    const val = parseFloat(value);
-    return isNaN(val) ? 100 : Math.min(100, Math.max(1, val));
-}
-
-async function loadVehicleData() {
-    try {
-        const response = await fetch("/api/vehicles");
-        const vehicles = await response.json();
-        dashboardVehicles = vehicles;
-        
-        const tbody = document.querySelector('#overviewTable tbody');
-        if (tbody && Array.isArray(vehicles) && vehicles.length) {
-            tbody.innerHTML = '';
-            const latestVehicles = latestVehicleRecords(vehicles);
-            latestVehicles.forEach(vehicle => {
-                const row = document.createElement('tr');
-                const company = vehicleCompany(vehicle);
-                row.setAttribute('data-company', company);
-                
-                const isRunning = ['yes', 'running'].includes(String(vehicle.Running_Status || '').toLowerCase());
-                const isCharging = ['yes', 'charging'].includes(String(vehicle.Charging_Status || '').toLowerCase()) || String(vehicle.Active_Station_Session || '').toLowerCase() === 'active' || numberValue(vehicle.Charging_Power_kW) > 0;
-                
-                let statusBadge = '<span class="status-pill pill-gray">Idle</span>';
-                if (isCharging) {
-                    statusBadge = '<span class="status-pill pill-blue">Charging</span>';
-                } else if (isRunning) {
-                    statusBadge = '<span class="status-pill pill-green">Running</span>';
-                }
-                
-                const socPercent = clampSocVal(vehicle.SOC_Percentage);
-                const socColor = socPercent > 60 ? '#10b981' : socPercent > 30 ? '#f59e0b' : '#ef4444';
-                const speed = numberValue(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh);
-                const feasibility = String(vehicle.Can_Reach_Destination_ML || 'Yes').trim() || 'Yes';
-                const feasibilityClass = ['yes', 'true', 'pass'].includes(feasibility.toLowerCase()) ? 'pill-green' : 'pill-yellow';
-                
-                row.innerHTML = `
-                    <td><strong>${escapeHtml(vehicle.Car_RegNo || '')}</strong></td>
-                    <td>${escapeHtml(vehicle.Car_Name || '')} <span class="company-tag tag-${escapeHtml(company.toLowerCase())}">${escapeHtml(company)}</span></td>
-                    <td>${escapeHtml(vehicle.Driver_Name || '')}</td>
-                    <td>${escapeHtml(vehicle.Location || '')}</td>
-                    <td>${escapeHtml(vehicle.Destination_Location || '')}</td>
-                    <td>${speed.toFixed(1)} km/h</td>
-                    <td>
-                        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: ${socPercent}%; background: ${socColor};"></div></div>
-                        ${socPercent.toFixed(1)}%
-                    </td>
-                    <td><span class="status-pill ${feasibilityClass}">${escapeHtml(feasibility)}</span></td>
-                    <td>${statusBadge}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-        
-        await loadDriverPerformanceStats(vehicles);
-        updateDashboardFromVehicles(vehicles);
-        updateChartsFromVehicles(vehicles);
-        cacheAllTableOriginalRows();
-    } catch (error) {
-        console.error('Error loading vehicle data:', error);
+    function clampSocVal(value) {
+        const val = parseFloat(value);
+        return isNaN(val) ? 100 : Math.min(100, Math.max(1, val));
     }
-}
+
+    function scheduleDashboardRender() {
+        if (dashboardRenderQueued) return;
+        dashboardRenderQueued = true;
+
+        requestAnimationFrame(() => {
+            dashboardRenderQueued = false;
+            const latestVehicles = latestVehicleRecords(dashboardVehicles || []);
+            if (!latestVehicles.length) return;
+
+            const stats = buildCompanyStats(latestVehicles);
+            if (stats && stats.length) {
+                setCompanyFilter(currentSelectedCompany || 'all');
+                updateChartsFromVehicles(latestVehicles);
+                renderDatasetTables(latestVehicles);
+                cacheAllTableOriginalRows();
+            }
+        });
+    }
+
+    async function loadVehicleData() {
+        try {
+            const response = await fetch("/api/vehicles");
+            const vehicles = await response.json();
+            dashboardVehicles = Array.isArray(vehicles) ? vehicles : [];
+
+            const tbody = document.querySelector('#overviewTable tbody');
+            if (tbody && dashboardVehicles.length) {
+                tbody.innerHTML = '';
+                const latestVehicles = latestVehicleRecords(dashboardVehicles).slice(0, 30);
+                latestVehicles.forEach(vehicle => {
+                    const row = document.createElement('tr');
+                    const company = vehicleCompany(vehicle);
+                    row.setAttribute('data-company', company);
+
+                    const isRunning = ['yes', 'running'].includes(String(vehicle.Running_Status || '').toLowerCase());
+                    const isCharging = ['yes', 'charging'].includes(String(vehicle.Charging_Status || '').toLowerCase()) || String(vehicle.Active_Station_Session || '').toLowerCase() === 'active' || numberValue(vehicle.Charging_Power_kW) > 0;
+
+                    let statusBadge = '<span class="status-pill pill-gray">Idle</span>';
+                    if (isCharging) {
+                        statusBadge = '<span class="status-pill pill-blue">Charging</span>';
+                    } else if (isRunning) {
+                        statusBadge = '<span class="status-pill pill-green">Running</span>';
+                    }
+
+                    const socPercent = clampSocVal(vehicle.SOC_Percentage);
+                    const socColor = socPercent > 60 ? '#10b981' : socPercent > 30 ? '#f59e0b' : '#ef4444';
+                    const speed = numberValue(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh);
+                    const feasibility = String(vehicle.Can_Reach_Destination_ML || 'Yes').trim() || 'Yes';
+                    const feasibilityClass = ['yes', 'true', 'pass'].includes(feasibility.toLowerCase()) ? 'pill-green' : 'pill-yellow';
+
+                    row.innerHTML = `
+                        <td><strong>${escapeHtml(vehicle.Car_RegNo || '')}</strong></td>
+                        <td>${escapeHtml(vehicle.Car_Name || '')} <span class="company-tag tag-${escapeHtml(company.toLowerCase())}">${escapeHtml(company)}</span></td>
+                        <td>${escapeHtml(vehicle.Driver_Name || '')}</td>
+                        <td>${escapeHtml(vehicle.Location || '')}</td>
+                        <td>${escapeHtml(vehicle.Destination_Location || '')}</td>
+                        <td>${speed.toFixed(1)} km/h</td>
+                        <td>
+                            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: ${socPercent}%; background: ${socColor};"></div></div>
+                            ${socPercent.toFixed(1)}%
+                        </td>
+                        <td><span class="status-pill ${feasibilityClass}">${escapeHtml(feasibility)}</span></td>
+                        <td>${statusBadge}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            await loadDriverPerformanceStats(dashboardVehicles);
+            scheduleDashboardRender();
+        } catch (error) {
+            console.error('Error loading vehicle data:', error);
+        }
+    }
 
 async function loadAdminData() {
     try {
         const response = await fetch("/api/admin");
         const data = await response.json();
-        if (data && data.totalCars) {
-            // Keep stats synchronized with CSV dataset
-            const revenueEl = document.getElementById("f-revenue");
-            if (revenueEl && data.totalRevenue) {
-                revenueEl.innerText = "₹" + data.totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
-            }
-        }
-    } catch (error) {
-        console.error('Error loading admin data:', error);
-    }
+            if (!data) return;
+
+            const totalCars = Number(data.totalCars || 0);
+            const workingCars = Number(data.workingCars || 0);
+            const chargingCars = Number(data.chargingCars || 0);
+            const runningCars = Number(data.runningCars || 0);
+            const totalRevenue = Number(data.totalRevenue || 0);
+
+            const setText = (id, value) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = value;
+            };
+
+            setText('statTotalFleet', totalCars);
+            setText('statCarsWorking', workingCars);
+            setText('statCarsCharging', chargingCars);
+            setText('statVehiclesMotion', runningCars);
+            setText('f-revenue', `₹${totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
+            setText('f-profit', `₹${totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
+
+            if (totalCars) {
+                setText('statFleetCoverage', `${Math.round((workingCars / totalCars) * 100)}% Coverage`);
+                setText('statWorkingPct', `${Math.round((workingCars / totalCars) * 100)}%`);
+                setText('statChargingPct', `${Math.round((chargingCars / totalCars) * 100)}% Fleet`);
+                setText('statMotionPct', `${Math.round((runningCars / totalCars) * 100)}% Fleet`);
 }
 
 // Calculate and display driver performance stats
@@ -3198,8 +3231,12 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
 // Load data when page is ready
 window.addEventListener('DOMContentLoaded', async () => {
   initCharts();
-  await loadVehicleData();
-  await loadAdminData();
+  setCompanyFilter('all');
+  await Promise.all([
+    loadVehicleData(),
+    loadAdminData()
+  ]);
+  scheduleDashboardRender();
 });
 </script>
 </body>
