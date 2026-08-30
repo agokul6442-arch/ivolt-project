@@ -51,10 +51,6 @@ try:
 except Exception:
     pass
 
-# Safe loading of Dataset with fast optimization
-df = load_csv_fast(CSV_FILE)
-LATEST_VEHICLE_DF = pd.DataFrame()
-
 # Safe loading of ML Model
 try:
     range_model = joblib.load(MODEL_FILE)
@@ -62,22 +58,28 @@ except Exception as e:
     print(f"Warning: Could not load model {MODEL_FILE}. Error: {e}")
     range_model = None
 
+# Function to get fresh CSV data from disk (dynamic)
+def get_csv_dataframe():
+    """Load CSV fresh from disk every time it's called."""
+    return load_csv_fast(CSV_FILE)
 
-def refresh_latest_vehicle_df():
-    global LATEST_VEHICLE_DF
-    if df.empty:
-        LATEST_VEHICLE_DF = df.copy()
-        return LATEST_VEHICLE_DF
 
-    latest = df.copy()
+def refresh_latest_vehicle_df(dataframe=None):
+    """Get latest vehicle records from dataframe (reloads from disk if needed)."""
+    if dataframe is None:
+        dataframe = get_csv_dataframe()
+    
+    if dataframe.empty:
+        return dataframe.copy()
+
+    latest = dataframe.copy()
     if "Observation_DateTime" in latest.columns:
         latest["_observation_time"] = pd.to_datetime(
             latest["Observation_DateTime"], dayfirst=True, errors="coerce"
         )
         latest = latest.sort_values("_observation_time")
     latest = latest.drop_duplicates(subset=["Car_RegNo"], keep="last") if "Car_RegNo" in latest.columns else latest
-    LATEST_VEHICLE_DF = latest.reset_index(drop=True)
-    return LATEST_VEHICLE_DF
+    return latest.reset_index(drop=True)
 
 
 def latest_vehicle_rows(dataframe):
@@ -101,22 +103,9 @@ def clamp_soc(value):
 
 
 def get_latest_vehicle_rows():
-    global LATEST_VEHICLE_DF
-    if df.empty:
-        return df.copy()
-
-    if LATEST_VEHICLE_DF.empty:
-        return refresh_latest_vehicle_df()
-
-    if "Car_RegNo" in df.columns:
-        expected_count = df["Car_RegNo"].nunique()
-        if len(LATEST_VEHICLE_DF) != expected_count:
-            return refresh_latest_vehicle_df()
-
-    return LATEST_VEHICLE_DF
-
-
-LATEST_VEHICLE_DF = refresh_latest_vehicle_df()
+    """Get latest vehicle rows by reloading CSV from disk."""
+    dataframe = get_csv_dataframe()
+    return refresh_latest_vehicle_df(dataframe)
 
 
 # ==========================
@@ -140,7 +129,8 @@ def static_page(page):
 # ==========================
 @app.route("/api/admin")
 def admin_dashboard():
-    if df.empty:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty:
         return jsonify({
             "totalCars": 0,
             "workingCars": 0,
@@ -149,24 +139,24 @@ def admin_dashboard():
             "totalRevenue": 0
         })
 
-    vehicle_rows = latest_vehicle_rows(df)
+    vehicle_rows = latest_vehicle_rows(dataframe)
     total_cars = len(vehicle_rows)
 
     charging_cars = len(
         vehicle_rows[vehicle_rows["Charging_Status"].astype(str).str.lower().isin(["yes", "charging"])]
-    ) if "Charging_Status" in df.columns else 0
+    ) if "Charging_Status" in dataframe.columns else 0
 
     running_cars = len(
         vehicle_rows[vehicle_rows["Running_Status"].astype(str).str.lower().isin(["yes", "running"])]
-    ) if "Running_Status" in df.columns else 0
+    ) if "Running_Status" in dataframe.columns else 0
 
     working_cars = len(
         vehicle_rows[vehicle_rows["Working"].astype(str).str.lower() == "working"]
-    ) if "Working" in df.columns else running_cars + charging_cars
+    ) if "Working" in dataframe.columns else running_cars + charging_cars
 
     total_revenue = (
         float(vehicle_rows["Per_Day_Revenue"].sum())
-        if "Per_Day_Revenue" in df.columns
+        if "Per_Day_Revenue" in dataframe.columns
         else 0
     )
 
@@ -184,28 +174,31 @@ def admin_dashboard():
 # ==========================
 @app.route("/api/vehicles")
 def vehicles():
-    if df.empty:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty:
         return jsonify([])
-    latest = get_latest_vehicle_rows()
+    latest = refresh_latest_vehicle_df(dataframe)
     return jsonify(latest.fillna("").to_dict(orient="records"))
 
 
 @app.route("/api/drivers")
 def drivers():
-    if df.empty or "Driver_Name" not in df.columns:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty or "Driver_Name" not in dataframe.columns:
         return jsonify([])
 
-    updated_df = get_latest_vehicle_rows()
+    updated_df = refresh_latest_vehicle_df(dataframe)
     drivers_list = updated_df["Driver_Name"].dropna().unique().tolist()
     return jsonify(drivers_list)
 
 
 @app.route("/api/vehicle/<reg_no>")
 def vehicle_details(reg_no):
-    if df.empty or "Car_RegNo" not in df.columns:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty or "Car_RegNo" not in dataframe.columns:
         return jsonify({"error": "Car_RegNo column not found"})
 
-    vehicle = df[df["Car_RegNo"].astype(str).str.upper() == reg_no.upper()]
+    vehicle = dataframe[dataframe["Car_RegNo"].astype(str).str.upper() == reg_no.upper()]
 
     if vehicle.empty:
         return jsonify({"error": "Vehicle not found"})
@@ -218,10 +211,11 @@ def vehicle_details(reg_no):
 
 @app.route("/api/driver/<reg_no>")
 def driver_dashboard(reg_no):
-    if df.empty or "Car_RegNo" not in df.columns:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty or "Car_RegNo" not in dataframe.columns:
         return jsonify({"error": "Car_RegNo column not found"})
 
-    vehicle = df[df["Car_RegNo"].astype(str).str.upper() == reg_no.upper()]
+    vehicle = dataframe[dataframe["Car_RegNo"].astype(str).str.upper() == reg_no.upper()]
 
     if vehicle.empty:
         return jsonify({"error": "Vehicle not found"})
@@ -249,10 +243,11 @@ def driver_dashboard(reg_no):
 # ==========================
 @app.route("/api/revenue")
 def revenue():
-    if df.empty or "Per_Day_Revenue" not in df.columns:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty or "Per_Day_Revenue" not in dataframe.columns:
         return jsonify([])
 
-    latest = get_latest_vehicle_rows()
+    latest = refresh_latest_vehicle_df(dataframe)
     revenue_data = [
         {"vehicle": row.get("Car_Name", ""), "revenue": row.get("Per_Day_Revenue", 0)}
         for _, row in latest.iterrows()
@@ -262,10 +257,11 @@ def revenue():
 
 @app.route("/api/soc")
 def soc_chart():
-    if df.empty:
+    dataframe = get_csv_dataframe()
+    if dataframe.empty:
         return jsonify([])
 
-    latest = get_latest_vehicle_rows()
+    latest = refresh_latest_vehicle_df(dataframe)
     chart = [
         {"vehicle": row.get("Car_Name", ""), "soc": clamp_soc(row.get("SOC_Percentage", 0))}
         for _, row in latest.iterrows()
@@ -315,8 +311,6 @@ def admin_login():
 
 @app.route("/api/register", methods=["POST"])
 def register_driver():
-    global df
-
     data = request.get_json(silent=True) or {}
     required_fields = [
         "fullName", "age", "experience", "email", "phone",
@@ -329,6 +323,8 @@ def register_driver():
     if data.get("password") != data.get("confirmPassword"):
         return jsonify({"success": False, "message": "Passwords do not match."}), 400
 
+    # Load fresh CSV
+    df = get_csv_dataframe()
     license_number = str(data["license"]).strip()
     phone_number = str(data["phone"]).strip()
     car_registration = str(data["carRegistration"]).strip().upper()
@@ -377,7 +373,6 @@ def register_driver():
 
     df = pd.concat([df, pd.DataFrame([new_record])], ignore_index=True)
     df.to_csv(CSV_FILE, index=False)
-    refresh_latest_vehicle_df()
 
     return jsonify({
         "success": True,
@@ -392,6 +387,8 @@ def login():
     username = data.get("username")
     password = data.get("password")
 
+    # Load fresh CSV
+    df = get_csv_dataframe()
     if df.empty:
         return jsonify({"success": False})
 
@@ -413,6 +410,8 @@ def login():
 
 @app.route("/api/driverdetails/<driver_id>")
 def driver_details(driver_id):
+    # Load fresh CSV
+    df = get_csv_dataframe()
     if df.empty:
         return jsonify({"error": "Driver not found"})
 
