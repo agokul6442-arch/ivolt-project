@@ -1093,24 +1093,29 @@
           <span class="company-badge-tag" id="activeCompanyCount">50 Vehicles Total</span>
         </div>
         <div class="brand-pills-bar">
-          <button class="brand-pill-btn active" data-company="all" onclick="setCompanyFilter('all')">
-            All (<span id="allCount">0</span>)
-          </button>
-          <button class="brand-pill-btn" data-company="Tata" onclick="setCompanyFilter('Tata')">
-            Tata (<span id="tataCount">0</span>)
-          </button>
-          <button class="brand-pill-btn" data-company="Mahindra" onclick="setCompanyFilter('Mahindra')">
-            Mahindra (<span id="mahindraCount">0</span>)
-          </button>
-          <button class="brand-pill-btn" data-company="Kia" onclick="setCompanyFilter('Kia')">
-            Kia (<span id="kiaCount">0</span>)
-          </button>
-          <button class="brand-pill-btn" data-company="MG" onclick="setCompanyFilter('MG')">
-            MG Motor (<span id="mgCount">0</span>)
-          </button>
-          <button class="brand-pill-btn" data-company="Hyundai" onclick="setCompanyFilter('Hyundai')">
-            Hyundai (<span id="hyundaiCount">0</span>)
-          </button>
+         <button class="brand-pill-btn active" data-company="all">
+    All (<span id="allCount">0</span>)
+</button>
+
+<button class="brand-pill-btn" data-company="Tata">
+    Tata (<span id="tataCount">0</span>)
+</button>
+
+<button class="brand-pill-btn" data-company="Mahindra">
+    Mahindra (<span id="mahindraCount">0</span>)
+</button>
+
+<button class="brand-pill-btn" data-company="Kia">
+    Kia (<span id="kiaCount">0</span>)
+</button>
+
+<button class="brand-pill-btn" data-company="MG">
+    MG Motor (<span id="mgCount">0</span>)
+</button>
+
+<button class="brand-pill-btn" data-company="Hyundai">
+    Hyundai (<span id="hyundaiCount">0</span>)
+</button>
         </div>
       </div>
 
@@ -1359,7 +1364,132 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="9" style="text-align: center; padding: 24px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Loading telemetry records from CSV dataset...</td></tr>
+                <tr data-company="Tata">
+                  <td><strong>TN 28 AA 1001</strong></td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>Arun Kumar</td>
+                  <td>Junction Hub</td>
+                  <td>Namakkal</td>
+                  <td>38 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 76%; background: #10b981;"></div></div>
+                    76.5%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-green">Running</span></td>
+                </tr>
+                <tr data-company="Tata">
+                  <td><strong>TN 28 AF 1012</strong></td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>Gokul Raj</td>
+                  <td>Central Hub</td>
+                  <td>Sankari</td>
+                  <td>0 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 32%; background: #ef4444;"></div></div>
+                    32.4%
+                  </td>
+                  <td><span class="status-pill pill-yellow">Re-Route</span></td>
+                  <td><span class="status-pill pill-yellow">Idle Parked</span></td>
+                </tr>
+                <tr data-company="Tata">
+                  <td><strong>TN 28 AA 1004</strong></td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>M. Ramesh</td>
+                  <td>Central Bay 1</td>
+                  <td>Workshop</td>
+                  <td>0 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 45%; background: #ef4444;"></div></div>
+                    45.0%
+                  </td>
+                  <td><span class="status-pill pill-red">Service Due</span></td>
+                  <td><span class="status-pill pill-purple">Under Maintenance</span></td>
+                </tr>
+                <tr data-company="Kia">
+                  <td><strong>TN 28 AE 1010</strong></td>
+                  <td>Kia Syros EV <span class="company-tag tag-kia">Kia</span></td>
+                  <td>Tharun</td>
+                  <td>CS-OML-01 Station</td>
+                  <td>Omalur Bypass</td>
+                  <td>0 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 93%; background: #0ea5e9;"></div></div>
+                    93.0%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-blue">Charging</span></td>
+                </tr>
+                <tr data-company="Kia">
+                  <td><strong>TN 34 C 4019</strong></td>
+                  <td>Kia Syros EV <span class="company-tag tag-kia">Kia</span></td>
+                  <td>Praveen Kumar</td>
+                  <td>Vennandur Bay 2</td>
+                  <td>Workshop</td>
+                  <td>0 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 88%; background: #8b5cf6;"></div></div>
+                    88.1%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-purple">Garage Inspection</span></td>
+                </tr>
+                <tr data-company="Mahindra">
+                  <td><strong>TN 30 B 2045</strong></td>
+                  <td>Mahindra BE 6 <span class="company-tag tag-mahindra">Mahindra</span></td>
+                  <td>Karthik S</td>
+                  <td>Rasipuram</td>
+                  <td>Namakkal</td>
+                  <td>52 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 68%; background: #f59e0b;"></div></div>
+                    68.2%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-green">Running</span></td>
+                </tr>
+                <tr data-company="Mahindra">
+                  <td><strong>TN 30 B 2050</strong></td>
+                  <td>Mahindra XUV 3XO EV <span class="company-tag tag-mahindra">Mahindra</span></td>
+                  <td>K. Vignesh</td>
+                  <td>Attur Hub</td>
+                  <td>Attur</td>
+                  <td>45 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 71%; background: #10b981;"></div></div>
+                    71.4%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-green">Running</span></td>
+                </tr>
+                <tr data-company="MG">
+                  <td><strong>TN 28 MG 5001</strong></td>
+                  <td>MG Comet EV <span class="company-tag tag-mg">MG</span></td>
+                  <td>S. Anbarasan</td>
+                  <td>Five Roads</td>
+                  <td>Suramangalam</td>
+                  <td>34 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 69%; background: #10b981;"></div></div>
+                    68.8%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-green">Running</span></td>
+                </tr>
+                <tr data-company="Hyundai">
+                  <td><strong>TN 34 HY 3001</strong></td>
+                  <td>Hyundai Creta Electric <span class="company-tag tag-hyundai">Hyundai</span></td>
+                  <td>R. Manikandan</td>
+                  <td>Fairlands</td>
+                  <td>Yercaud Foot</td>
+                  <td>48 km/h</td>
+                  <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 79%; background: #10b981;"></div></div>
+                    79.1%
+                  </td>
+                  <td><span class="status-pill pill-green">Pass ML</span></td>
+                  <td><span class="status-pill pill-green">Running</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1500,7 +1630,72 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="9" style="text-align: center; padding: 24px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Loading charging telemetry from CSV dataset...</td></tr>
+                <tr data-company="Tata">
+                  <td><strong>CS-SLM-01</strong></td>
+                  <td>TN 28 AA 1001</td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>55.0 kWh</td>
+                  <td>60.0 kW (DC)</td>
+                  <td>28 min</td>
+                  <td>24.5 kWh</td>
+                  <td>₹245.00</td>
+                  <td><span class="status-pill pill-blue">84.7% (Fast)</span></td>
+                </tr>
+                <tr data-company="Tata">
+                  <td><strong>CS-RSP-01</strong></td>
+                  <td>TN 28 AF 1012</td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>55.0 kWh</td>
+                  <td>22.0 kW (AC)</td>
+                  <td>60 min</td>
+                  <td>21.4 kWh</td>
+                  <td>₹214.00</td>
+                  <td><span class="status-pill pill-green">89.2% (Normal)</span></td>
+                </tr>
+                <tr data-company="Kia">
+                  <td><strong>CS-OML-01</strong></td>
+                  <td>TN 28 AE 1010</td>
+                  <td>Kia Syros EV <span class="company-tag tag-kia">Kia</span></td>
+                  <td>48.0 kWh</td>
+                  <td>30.0 kW (DC)</td>
+                  <td>45 min</td>
+                  <td>18.2 kWh</td>
+                  <td>₹182.00</td>
+                  <td><span class="status-pill pill-green">93.0% (Trickle)</span></td>
+                </tr>
+                <tr data-company="Mahindra">
+                  <td><strong>CS-VNR-01</strong></td>
+                  <td>TN 30 B 2045</td>
+                  <td>Mahindra BE 6 <span class="company-tag tag-mahindra">Mahindra</span></td>
+                  <td>59.0 kWh</td>
+                  <td>50.0 kW (DC)</td>
+                  <td>35 min</td>
+                  <td>22.0 kWh</td>
+                  <td>₹220.00</td>
+                  <td><span class="status-pill pill-blue">78.5% (Fast)</span></td>
+                </tr>
+                <tr data-company="MG">
+                  <td><strong>CS-SLM-02</strong></td>
+                  <td>TN 28 MG 5001</td>
+                  <td>MG Comet EV <span class="company-tag tag-mg">MG</span></td>
+                  <td>17.3 kWh</td>
+                  <td>7.4 kW (AC)</td>
+                  <td>90 min</td>
+                  <td>11.1 kWh</td>
+                  <td>₹111.00</td>
+                  <td><span class="status-pill pill-green">95.0% (Normal)</span></td>
+                </tr>
+                <tr data-company="Hyundai">
+                  <td><strong>CS-OML-02</strong></td>
+                  <td>TN 34 HY 3001</td>
+                  <td>Hyundai Creta Electric <span class="company-tag tag-hyundai">Hyundai</span></td>
+                  <td>51.5 kWh</td>
+                  <td>50.0 kW (DC)</td>
+                  <td>30 min</td>
+                  <td>20.8 kWh</td>
+                  <td>₹208.00</td>
+                  <td><span class="status-pill pill-blue">82.0% (Fast)</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1750,7 +1945,66 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="8" style="text-align: center; padding: 24px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Loading financial ledger from CSV dataset...</td></tr>
+                <tr data-company="Tata">
+                  <td><strong>TN 28 AA 1001</strong></td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>Arun Kumar</td>
+                  <td>₹28,500</td>
+                  <td>₹3,840</td>
+                  <td>₹1,200</td>
+                  <td><strong style="color: #34d399;">₹23,460</strong></td>
+                  <td><span class="status-pill pill-green">Optimal (82%)</span></td>
+                </tr>
+                <tr data-company="Tata">
+                  <td><strong>TN 28 AF 1012</strong></td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td>Gokul Raj</td>
+                  <td>₹18,200</td>
+                  <td>₹2,900</td>
+                  <td>₹3,400</td>
+                  <td><strong style="color: #fbbf24;">₹11,900</strong></td>
+                  <td><span class="status-pill pill-yellow">Moderate (65%)</span></td>
+                </tr>
+                <tr data-company="Kia">
+                  <td><strong>TN 28 AE 1010</strong></td>
+                  <td>Kia Syros EV <span class="company-tag tag-kia">Kia</span></td>
+                  <td>Tharun</td>
+                  <td>₹32,100</td>
+                  <td>₹4,120</td>
+                  <td>₹850</td>
+                  <td><strong style="color: #34d399;">₹27,130</strong></td>
+                  <td><span class="status-pill pill-green">High Yield (84%)</span></td>
+                </tr>
+                <tr data-company="Mahindra">
+                  <td><strong>TN 30 B 2045</strong></td>
+                  <td>Mahindra BE 6 <span class="company-tag tag-mahindra">Mahindra</span></td>
+                  <td>Karthik S</td>
+                  <td>₹24,800</td>
+                  <td>₹3,950</td>
+                  <td>₹2,100</td>
+                  <td><strong style="color: #34d399;">₹18,750</strong></td>
+                  <td><span class="status-pill pill-blue">Profitable (75%)</span></td>
+                </tr>
+                <tr data-company="MG">
+                  <td><strong>TN 28 MG 5001</strong></td>
+                  <td>MG Comet EV <span class="company-tag tag-mg">MG</span></td>
+                  <td>S. Anbarasan</td>
+                  <td>₹21,400</td>
+                  <td>₹2,100</td>
+                  <td>₹600</td>
+                  <td><strong style="color: #34d399;">₹18,700</strong></td>
+                  <td><span class="status-pill pill-green">High Yield (87%)</span></td>
+                </tr>
+                <tr data-company="Hyundai">
+                  <td><strong>TN 34 HY 3001</strong></td>
+                  <td>Hyundai Creta Electric <span class="company-tag tag-hyundai">Hyundai</span></td>
+                  <td>R. Manikandan</td>
+                  <td>₹29,000</td>
+                  <td>₹3,700</td>
+                  <td>₹1,100</td>
+                  <td><strong style="color: #34d399;">₹24,200</strong></td>
+                  <td><span class="status-pill pill-green">Optimal (83%)</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1849,7 +2103,66 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="8" style="text-align: center; padding: 24px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Loading garage telemetry from CSV dataset...</td></tr>
+                <tr data-company="Tata">
+                  <td><strong>Bay 01</strong></td>
+                  <td>TN 28 AA 1004</td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td><span class="status-pill pill-purple">Presented</span></td>
+                  <td>08:15 AM</td>
+                  <td>M. Ramesh (HV Tech)</td>
+                  <td>Brake Fluid & Coolant Inspection</td>
+                  <td><span class="status-pill pill-yellow">11:30 AM (In Progress)</span></td>
+                </tr>
+                <tr data-company="Tata">
+                  <td><strong>Bay 07</strong></td>
+                  <td>TN 28 AB 1008</td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td><span class="status-pill pill-purple">Presented</span></td>
+                  <td>10:00 AM</td>
+                  <td>P. Mani</td>
+                  <td>AC Compressor Check & Cabin Filter Clean</td>
+                  <td><span class="status-pill pill-green">Ready for Gate Pass</span></td>
+                </tr>
+                <tr data-company="Kia">
+                  <td><strong>Bay 03</strong></td>
+                  <td>TN 34 C 4019</td>
+                  <td>Kia Syros EV <span class="company-tag tag-kia">Kia</span></td>
+                  <td><span class="status-pill pill-purple">Presented</span></td>
+                  <td>09:00 AM</td>
+                  <td>S. Anbarasan</td>
+                  <td>Tire Balancing & Alignment Check</td>
+                  <td><span class="status-pill pill-blue">10:45 AM (Final Testing)</span></td>
+                </tr>
+                <tr data-company="Mahindra">
+                  <td><strong>Bay 05</strong></td>
+                  <td>TN 30 B 2050</td>
+                  <td>Mahindra BE 6 <span class="company-tag tag-mahindra">Mahindra</span></td>
+                  <td><span class="status-pill pill-purple">Presented</span></td>
+                  <td>09:40 AM</td>
+                  <td>K. Vignesh</td>
+                  <td>BMS Firmware Flash & Telematics Patch</td>
+                  <td><span class="status-pill pill-yellow">11:15 AM (Flashing)</span></td>
+                </tr>
+                <tr data-company="MG">
+                  <td><strong>Bay 02</strong></td>
+                  <td>TN 28 MG 5002</td>
+                  <td>MG Comet EV <span class="company-tag tag-mg">MG</span></td>
+                  <td><span class="status-pill pill-purple">Presented</span></td>
+                  <td>10:30 AM</td>
+                  <td>G. Karthik</td>
+                  <td>12V Auxiliary Battery Diagnostic</td>
+                  <td><span class="status-pill pill-yellow">12:00 PM (Queued)</span></td>
+                </tr>
+                <tr data-company="Hyundai">
+                  <td><strong>Bay 06</strong></td>
+                  <td>TN 34 HY 3005</td>
+                  <td>Hyundai Creta Electric <span class="company-tag tag-hyundai">Hyundai</span></td>
+                  <td><span class="status-pill pill-purple">Presented</span></td>
+                  <td>11:00 AM</td>
+                  <td>R. Suresh</td>
+                  <td>Regenerative Braking Calibration</td>
+                  <td><span class="status-pill pill-blue">01:30 PM (Diagnosing)</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1960,7 +2273,66 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="8" style="text-align: center; padding: 24px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Loading maintenance logs from CSV dataset...</td></tr>
+                <tr data-company="Tata">
+                  <td><strong>WO-2026-081</strong></td>
+                  <td>TN 28 AA 1004</td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td><span class="status-pill pill-red">Under Maint.</span></td>
+                  <td>HV Inverter Coolant Flush</td>
+                  <td>₹2,400</td>
+                  <td><span class="status-pill pill-red">Critical</span></td>
+                  <td><span class="status-pill pill-yellow">In Progress</span></td>
+                </tr>
+                <tr data-company="Tata">
+                  <td><strong>WO-2026-079</strong></td>
+                  <td>TN 28 AA 1001</td>
+                  <td>Tata Curvv EV <span class="company-tag tag-tata">Tata</span></td>
+                  <td><span class="status-pill pill-green">Working</span></td>
+                  <td>Cabin Air Filter & AC Gas Check</td>
+                  <td>₹950</td>
+                  <td><span class="status-pill pill-green">Low</span></td>
+                  <td><span class="status-pill pill-green">Completed</span></td>
+                </tr>
+                <tr data-company="Kia">
+                  <td><strong>WO-2026-082</strong></td>
+                  <td>TN 34 C 4019</td>
+                  <td>Kia Syros EV <span class="company-tag tag-kia">Kia</span></td>
+                  <td><span class="status-pill pill-yellow">Scheduled</span></td>
+                  <td>Tire Set Rotation & Brake Pad Wear</td>
+                  <td>₹1,850</td>
+                  <td><span class="status-pill pill-yellow">Medium</span></td>
+                  <td><span class="status-pill pill-blue">Queued</span></td>
+                </tr>
+                <tr data-company="Mahindra">
+                  <td><strong>WO-2026-078</strong></td>
+                  <td>TN 30 B 2045</td>
+                  <td>Mahindra BE 6 <span class="company-tag tag-mahindra">Mahindra</span></td>
+                  <td><span class="status-pill pill-green">Working</span></td>
+                  <td>Telematics Sensor Recalibration</td>
+                  <td>₹1,200</td>
+                  <td><span class="status-pill pill-green">Routine</span></td>
+                  <td><span class="status-pill pill-green">Completed</span></td>
+                </tr>
+                <tr data-company="MG">
+                  <td><strong>WO-2026-075</strong></td>
+                  <td>TN 28 MG 5001</td>
+                  <td>MG Comet EV <span class="company-tag tag-mg">MG</span></td>
+                  <td><span class="status-pill pill-green">Working</span></td>
+                  <td>Brake Fluid Inspection</td>
+                  <td>₹750</td>
+                  <td><span class="status-pill pill-green">Routine</span></td>
+                  <td><span class="status-pill pill-green">Completed</span></td>
+                </tr>
+                <tr data-company="Hyundai">
+                  <td><strong>WO-2026-077</strong></td>
+                  <td>TN 34 HY 3001</td>
+                  <td>Hyundai Creta Electric <span class="company-tag tag-hyundai">Hyundai</span></td>
+                  <td><span class="status-pill pill-green">Working</span></td>
+                  <td>High Voltage Interlock Check</td>
+                  <td>₹1,400</td>
+                  <td><span class="status-pill pill-green">Routine</span></td>
+                  <td><span class="status-pill pill-green">Completed</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1971,33 +2343,351 @@
   </main>
 
   <script>
-    const moduleMeta = {
-      overview: { title: "Fleet Overview", desc: "Real-time telemetry, fleet availability, vehicle models & live operations" },
-      battery: { title: "Battery Intelligence & Health", desc: "SOC / SOH health diagnostics, charging session tracking & energy rates" },
-      performance: { title: "Vehicle & Driver Performance", desc: "Odometer, speed ratings, driving mode distribution and route feasibility" },
-      finance: { title: "Financial & Revenue Ledger", desc: "Trip revenue, energy charging costs, maintenance expenses and margins" },
-      garage: { title: "Garage & Diagnostic Bays", desc: "Central service bay roster, technician assignments & inspection status" },
-      maintenance: { title: "Fleet Health & Maintenance", desc: "Work orders, component degradation breakdown and service schedules" }
-    };
-
     // Tab switching handler
     function switchDashboard(moduleId, element) {
       document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-      if (element) element.classList.add('active');
+      element.classList.add('active');
 
       document.querySelectorAll('.module-view').forEach(view => view.classList.remove('active'));
       const activeSection = document.getElementById(moduleId);
       if (activeSection) {
         activeSection.classList.add('active');
       }
+
       if (moduleMeta[moduleId]) {
         document.getElementById('current-title').innerText = moduleMeta[moduleId].title;
         document.getElementById('current-desc').innerText = moduleMeta[moduleId].desc;
       }
     }
 
-    // Dynamic company specific metrics dataset (Computed 100% from CSV dataset)
-    const companyStats = {};
+    // Company specific metrics dataset
+    const companyStats = {
+      all: {
+        name: "All Companies Combined",
+        countText: "50 Vehicles Total",
+        totalFleet: 50,
+        coverage: "100%",
+        motion: 32,
+        motionSub: "11 Charging, 7 Idling",
+        motionPct: "64% Fleet",
+        working: 47,
+        workingUnit: "/ 50 Cars",
+        workingPct: "94%",
+        underMaintSub: "3 Under Maintenance",
+        charging: 11,
+        chargingPct: "22% Fleet",
+        bSoh: "96.4",
+        bDeg: "Degradation: -0.04%/mo",
+        bConsumption: "13.8",
+        bTarget: "Target: 14.5",
+        bSavings: "-5% beneath budget",
+        bChargers: 11,
+        bEnergyDelivered: "482.6",
+        pSpeed: "43.8",
+        pPower: "142",
+        pRange: "294.5",
+        pOdometer: "182,490",
+        pOdoSub: "Avg 33.2k km / unit",
+        fRevenue: "₹8,45,200",
+        fRevenueSub: "Passenger & trips",
+        fCharging: "₹1,18,400",
+        fMaint: "₹42,650",
+        fMaintSub: "₹853 / EV avg",
+        fProfit: "₹6,84,150",
+        fMargin: "80.9% Margin",
+        gInGarage: 4,
+        gBayOcc: "Bay Occupancy 50%",
+        gBayFree: "4 Bays Free",
+        gOnField: 46,
+        gFieldPct: "92% Operational",
+        gInspectTime: 42,
+        maintUnder: 2,
+        maintTrend: "Optimal Range",
+        maintActiveWorking: "48 Units Working Normal",
+        maintDue: 5,
+        maintUptime: "98.2",
+        maintCostPerKm: "₹0.23",
+        // Chart datasets
+        overviewLiveRuns: [6, 4, 18, 38, 42, 36, 44, 20],
+        overviewLiveCharges: [20, 24, 15, 8, 5, 9, 4, 18],
+        modelDistLabels: ['Tata Curvv EV', 'Mahindra XUV 3XO', 'MG Comet EV', 'Hyundai Creta EV', 'Kia Syros EV'],
+        modelDistData: [11, 10, 9, 10, 10],
+        modelDistColors: ['#10b981', '#0ea5e9', '#8b5cf6', '#f59e0b', '#f43f5e'],
+        batLabels: ['Tata Curvv EV', 'Mahindra XUV 3XO', 'MG Comet EV', 'Hyundai Creta EV', 'Kia Syros EV'],
+        batSoc: [76.5, 71.4, 68.8, 79.1, 84.2],
+        batSoh: [96.7, 94.9, 93.6, 97.1, 95.8]
+      },
+      Tata: {
+        name: "Tata Motors",
+        countText: "10 Vehicles (Tata Curvv EV / Nexon EV)",
+        totalFleet: 10,
+        coverage: "20% Fleet Share",
+        motion: 7,
+        motionSub: "2 Charging, 1 Idling",
+        motionPct: "70% Brand Fleet",
+        working: 10,
+        workingUnit: "/ 10 Tata Cars",
+        workingPct: "100%",
+        underMaintSub: "0 In Overhaul",
+        charging: 2,
+        chargingPct: "20% Brand Fleet",
+        bSoh: "96.7",
+        bDeg: "Degradation: -0.035%/mo",
+        bConsumption: "14.1",
+        bTarget: "Target: 14.8",
+        bSavings: "-4.7% beneath budget",
+        bChargers: 2,
+        bEnergyDelivered: "118.4",
+        pSpeed: "41.5",
+        pPower: "150",
+        pRange: "310.2",
+        pOdometer: "42,800",
+        pOdoSub: "Avg 38.9k km / unit",
+        fRevenue: "₹1,92,400",
+        fRevenueSub: "High Passenger Demand",
+        fCharging: "₹26,800",
+        fMaint: "₹9,400",
+        fMaintSub: "₹854 / Tata EV",
+        fProfit: "₹1,56,200",
+        fMargin: "81.2% Margin",
+        gInGarage: 2,
+        gBayOcc: "2 Bays (Bay 1 & Bay 7)",
+        gBayFree: "6 Bays Other/Free",
+        gOnField: 9,
+        gFieldPct: "81.8% Operational",
+        gInspectTime: 38,
+        maintUnder: 1,
+        maintTrend: "1 Scheduled Flush",
+        maintActiveWorking: "10 Tata Units Normal",
+        maintDue: 1,
+        maintUptime: "97.9",
+        maintCostPerKm: "₹0.22",
+        overviewLiveRuns: [2, 1, 4, 8, 10, 8, 9, 5],
+        overviewLiveCharges: [4, 5, 3, 2, 1, 2, 1, 4],
+        modelDistLabels: ['Tata Curvv EV 55kWh', 'Tata Curvv EV 45kWh', 'Tata Nexon EV Max'],
+        modelDistData: [6, 3, 2],
+        modelDistColors: ['#10b981', '#34d399', '#059669'],
+        batLabels: ['Curvv 55kWh (Fast)', 'Curvv 45kWh (City)', 'Nexon EV Max (Fleet)'],
+        batSoc: [76.5, 68.2, 82.0],
+        batSoh: [96.7, 95.8, 97.4]
+      },
+      Mahindra: {
+        name: "Mahindra EV",
+        countText: "10 Vehicles (BE 6 / XUV 3XO EV)",
+        totalFleet: 10,
+        coverage: "20% Fleet Share",
+        motion: 6,
+        motionSub: "2 Charging, 2 Idling",
+        motionPct: "60.0% Brand Fleet",
+        working: 10,
+        workingUnit: "/ 10 Mahindra Cars",
+        workingPct: "100%",
+        underMaintSub: "0 In Major Overhaul",
+        charging: 2,
+        chargingPct: "20.0% Brand Fleet",
+        bSoh: "94.9",
+        bDeg: "Degradation: -0.042%/mo",
+        bConsumption: "15.2",
+        bTarget: "Target: 15.5",
+        bSavings: "-2.0% beneath budget",
+        bChargers: 2,
+        bEnergyDelivered: "98.2",
+        pSpeed: "52.0",
+        pPower: "170",
+        pRange: "285.0",
+        pOdometer: "36,400",
+        pOdoSub: "Avg 36.4k km / unit",
+        fRevenue: "₹1,74,000",
+        fRevenueSub: "Long Distance Trips",
+        fCharging: "₹27,500",
+        fMaint: "₹8,900",
+        fMaintSub: "₹890 / Mahindra EV",
+        fProfit: "₹1,37,600",
+        fMargin: "79.1% Margin",
+        gInGarage: 1,
+        gBayOcc: "1 Bay (Bay 5 BMS)",
+        gBayFree: "7 Bays Other/Free",
+        gOnField: 9,
+        gFieldPct: "90.0% Operational",
+        gInspectTime: 45,
+        maintUnder: 0,
+        maintTrend: "All Clear",
+        maintActiveWorking: "10 Mahindra Units Working",
+        maintDue: 1,
+        maintUptime: "98.5",
+        maintCostPerKm: "₹0.24",
+        overviewLiveRuns: [1, 1, 3, 7, 8, 7, 9, 4],
+        overviewLiveCharges: [3, 4, 3, 2, 1, 2, 1, 3],
+        modelDistLabels: ['Mahindra BE 6 59kWh', 'Mahindra XUV 3XO 34.5kWh'],
+        modelDistData: [6, 4],
+        modelDistColors: ['#f87171', '#ef4444'],
+        batLabels: ['Mahindra BE 6 (Sport)', 'Mahindra XUV 3XO (Eco)'],
+        batSoc: [68.2, 71.4],
+        batSoh: [94.9, 95.3]
+      },
+      Kia: {
+        name: "Kia Motors",
+        countText: "10 Vehicles (Kia Syros EV / EV6)",
+        totalFleet: 10,
+        coverage: "20% Fleet Share",
+        motion: 7,
+        motionSub: "2 Charging, 1 Idling",
+        motionPct: "70.0% Brand Fleet",
+        working: 9,
+        workingUnit: "/ 10 Kia Cars",
+        workingPct: "90.0%",
+        underMaintSub: "1 Inspection",
+        charging: 2,
+        chargingPct: "20.0% Brand Fleet",
+        bSoh: "95.8",
+        bDeg: "Degradation: -0.038%/mo",
+        bConsumption: "12.8",
+        bTarget: "Target: 13.5",
+        bSavings: "-5.2% beneath budget",
+        bChargers: 2,
+        bEnergyDelivered: "94.5",
+        pSpeed: "46.2",
+        pPower: "135",
+        pRange: "340.2",
+        pOdometer: "34,900",
+        pOdoSub: "Avg 34.9k km / unit",
+        fRevenue: "₹1,88,500",
+        fRevenueSub: "Corporate Contracts",
+        fCharging: "₹24,100",
+        fMaint: "₹7,200",
+        fMaintSub: "₹720 / Kia EV",
+        fProfit: "₹1,57,200",
+        fMargin: "83.4% Margin",
+        gInGarage: 1,
+        gBayOcc: "1 Bay (Bay 3 Wheel Align)",
+        gBayFree: "7 Bays Other/Free",
+        gOnField: 9,
+        gFieldPct: "90.0% Operational",
+        gInspectTime: 35,
+        maintUnder: 0,
+        maintTrend: "Good Reliability",
+        maintActiveWorking: "10 Kia Units Working",
+        maintDue: 1,
+        maintUptime: "98.7",
+        maintCostPerKm: "₹0.21",
+        overviewLiveRuns: [1, 1, 4, 8, 9, 8, 9, 4],
+        overviewLiveCharges: [4, 5, 3, 2, 1, 2, 1, 4],
+        modelDistLabels: ['Kia Syros EV Long Range', 'Kia Syros EV Standard'],
+        modelDistData: [7, 3],
+        modelDistColors: ['#3b82f6', '#60a5fa'],
+        batLabels: ['Kia Syros EV (Long Range)', 'Kia Syros EV (Standard)'],
+        batSoc: [93.0, 84.2],
+        batSoh: [95.8, 96.2]
+      },
+      MG: {
+        name: "MG Motor",
+        countText: "10 Vehicles (MG Comet EV / ZS EV)",
+        totalFleet: 10,
+        coverage: "20% Fleet Share",
+        motion: 6,
+        motionSub: "2 Charging, 1 Idling",
+        motionPct: "60% Brand Fleet",
+        working: 10,
+        workingUnit: "/ 10 MG Cars",
+        workingPct: "100%",
+        underMaintSub: "0 In Overhaul",
+        charging: 2,
+        chargingPct: "20% Brand Fleet",
+        bSoh: "93.6",
+        bDeg: "Degradation: -0.045%/mo",
+        bConsumption: "10.5",
+        bTarget: "Target: 11.2",
+        bSavings: "-6.2% Ultra-Efficient",
+        bChargers: 2,
+        bEnergyDelivered: "76.5",
+        pSpeed: "34.0",
+        pPower: "110",
+        pRange: "190.0",
+        pOdometer: "31,200",
+        pOdoSub: "Avg 34.6k km / unit",
+        fRevenue: "₹1,32,000",
+        fRevenueSub: "City Shuttle Runs",
+        fCharging: "₹15,200",
+        fMaint: "₹6,100",
+        fMaintSub: "₹677 / MG EV",
+        fProfit: "₹1,10,700",
+        fMargin: "83.8% Margin",
+        gInGarage: 1,
+        gBayOcc: "1 Bay (Bay 2 Diagnostic)",
+        gBayFree: "7 Bays Other/Free",
+        gOnField: 8,
+        gFieldPct: "88.9% Operational",
+        gInspectTime: 32,
+        maintUnder: 0,
+        maintTrend: "No Breakdowns",
+        maintActiveWorking: "9 MG Units Working",
+        maintDue: 1,
+        maintUptime: "98.8",
+        maintCostPerKm: "₹0.19",
+        overviewLiveRuns: [1, 0, 3, 7, 8, 6, 8, 3],
+        overviewLiveCharges: [4, 4, 3, 1, 1, 1, 1, 3],
+        modelDistLabels: ['MG Comet EV Play', 'MG Comet EV Plush', 'MG ZS EV Excite'],
+        modelDistData: [4, 3, 2],
+        modelDistColors: ['#8b5cf6', '#a78bfa', '#c084fc'],
+        batLabels: ['MG Comet EV (City)', 'MG ZS EV (Highway)'],
+        batSoc: [68.8, 81.5],
+        batSoh: [93.6, 95.0]
+      },
+      Hyundai: {
+        name: "Hyundai EV",
+        countText: "10 Vehicles (Hyundai Creta Electric / Ioniq 5)",
+        totalFleet: 10,
+        coverage: "20% Fleet Share",
+        motion: 6,
+        motionSub: "3 Charging, 1 Idling",
+        motionPct: "60.0% Brand Fleet",
+        working: 10,
+        workingUnit: "/ 10 Hyundai Cars",
+        workingPct: "100%",
+        underMaintSub: "0 In Overhaul",
+        charging: 3,
+        chargingPct: "30.0% Brand Fleet",
+        bSoh: "97.1",
+        bDeg: "Degradation: -0.031%/mo",
+        bConsumption: "13.6",
+        bTarget: "Target: 14.2",
+        bSavings: "-4.2% beneath budget",
+        bChargers: 3,
+        bEnergyDelivered: "95.0",
+        pSpeed: "48.0",
+        pPower: "155",
+        pRange: "365.0",
+        pOdometer: "37,190",
+        pOdoSub: "Avg 37.1k km / unit",
+        fRevenue: "₹1,58,300",
+        fRevenueSub: "Intercity Commutes",
+        fCharging: "₹24,800",
+        fMaint: "₹7,050",
+        fMaintSub: "₹705 / Hyundai EV",
+        fProfit: "₹1,26,450",
+        fMargin: "79.8% Margin",
+        gInGarage: 1,
+        gBayOcc: "1 Bay (Bay 6 Regen Calib)",
+        gBayFree: "7 Bays Other/Free",
+        gOnField: 9,
+        gFieldPct: "90.0% Operational",
+        gInspectTime: 40,
+        maintUnder: 0,
+        maintTrend: "High Uptime SLA",
+        maintActiveWorking: "10 Hyundai Units Working",
+        maintDue: 1,
+        maintUptime: "99.1",
+        maintCostPerKm: "₹0.22",
+        overviewLiveRuns: [1, 1, 4, 8, 8, 7, 9, 4],
+        overviewLiveCharges: [5, 6, 3, 1, 1, 2, 1, 4],
+        modelDistLabels: ['Hyundai Creta Electric 51.5kWh', 'Hyundai Ioniq 5 AWD'],
+        modelDistData: [7, 3],
+        modelDistColors: ['#f59e0b', '#fbbf24'],
+        batLabels: ['Creta Electric (Standard)', 'Ioniq 5 (Ultra-Fast)'],
+        batSoc: [79.1, 88.4],
+        batSoh: [97.1, 98.2]
+      }
+    };
 
     function numberValue(value) {
       const number = Number.parseFloat(value);
@@ -2013,31 +2703,42 @@
         .replace(/'/g, '&#039;');
     }
 
-    function vehicleCompany(vehicle) {
-      const make = String(vehicle.Make || '').trim();
-      if (make) return make;
-      const carName = String(vehicle.Car_Name || '');
-      if (carName.includes('Tata')) return 'Tata';
-      if (carName.includes('Kia')) return 'Kia';
-      if (carName.includes('Mahindra')) return 'Mahindra';
-      if (carName.includes('MG')) return 'MG';
-      if (carName.includes('Hyundai')) return 'Hyundai';
-      return 'Other';
+    function renderPerformanceTable(vehicles) {
+      const tbody = document.querySelector('#perfTable tbody');
+      if (!tbody) return;
+
+      const latestByVehicle = new Map();
+      vehicles.forEach(vehicle => {
+        const registration = String(vehicle.Car_RegNo || '').trim();
+        if (registration) latestByVehicle.set(registration, vehicle);
+      });
+
+      const rows = Array.from(latestByVehicle.values());
+      tbody.innerHTML = rows.length ? rows.map(vehicle => {
+        const company = String(vehicle.Make || 'Other').trim() || 'Other';
+        const mode = String(vehicle.Driving_Mode || vehicle.Drive || '-').trim() || '-';
+        const feasibility = String(vehicle.Can_Reach_Destination_ML || '-').trim() || '-';
+        const feasibilityYes = ['yes', 'true', 'pass'].includes(feasibility.toLowerCase());
+        const modeClass = mode.toLowerCase() === 'sport' ? 'pill-red' : mode.toLowerCase() === 'eco' ? 'pill-blue' : 'pill-green';
+        const feasibilityClass = feasibilityYes ? 'pill-green' : 'pill-yellow';
+        const experience = String(vehicle.Driver_Years_of_Experience || '-').trim() || '-';
+        const passengerCount = String(vehicle.Passenger_Count || '-').trim() || '-';
+        const passengerCapacity = String(vehicle.Max_Passenger_Capacity || '-').trim() || '-';
+        return `<tr data-company="${escapeHtml(company)}">
+          <td><strong>${escapeHtml(vehicle.Car_Name || '-')}</strong> (${escapeHtml(vehicle.Car_RegNo || '-')}) <span class="company-tag tag-${escapeHtml(company.toLowerCase())}">${escapeHtml(company)}</span></td>
+          <td>${escapeHtml(vehicle.Driver_Name || '-')}</td>
+          <td>${escapeHtml(experience)} Yrs</td>
+          <td>${numberValue(vehicle.Driving_Speed_kmph).toFixed(1)} km/h</td>
+          <td><span class="status-pill ${modeClass}">${escapeHtml(mode)}</span></td>
+          <td>${numberValue(vehicle.Energy_Consumption_kWh_per_100km).toFixed(2)} kWh/100km</td>
+          <td>${numberValue(vehicle['Estimated Range_Range']).toFixed(1)} km</td>
+          <td>${escapeHtml(passengerCount)} / ${escapeHtml(passengerCapacity)}</td>
+          <td><span class="status-pill ${feasibilityClass}">${escapeHtml(feasibility)}</span></td>
+        </tr>`;
+      }).join('') : '<tr><td colspan="9">No telemetry records found in the dataset.</td></tr>';
     }
 
     function latestVehicleRecords(vehicles) {
-      if (!Array.isArray(vehicles) || !vehicles.length) return [];
-
-      const hasDuplicateRegNo = vehicles.some((vehicle, index, list) => {
-        const registration = String(vehicle.Car_RegNo || '').trim();
-        if (!registration) return false;
-        return list.findIndex(item => String(item.Car_RegNo || '').trim() === registration) !== index;
-      });
-
-      if (!hasDuplicateRegNo) {
-        return vehicles.map(vehicle => ({ ...vehicle }));
-      }
-
       const vehicleGroups = new Map();
       vehicles.forEach(vehicle => {
         const registration = String(vehicle.Car_RegNo || '').trim();
@@ -2050,8 +2751,10 @@
 
       const records = [];
       vehicleGroups.forEach((rows, registration) => {
+        // Last recorded row has latest dynamic telemetry (Location, Driver, Speed, SOC, etc.)
         const latest = { ...rows[rows.length - 1] };
 
+        // Aggregate financial and operational metrics across the vehicle's historical records
         let totalChargingCost = 0;
         let totalMaintenanceCost = 0;
         let maxChargingPower = 0;
@@ -2083,6 +2786,7 @@
           if (!nearbyStation && r.Nearby_Charging_Station_ID) nearbyStation = r.Nearby_Charging_Station_ID;
         });
 
+        // Set realistic aggregated costs
         latest.Charging_Cost = totalChargingCost || numberValue(latest.Charging_Cost) || 1250;
         latest.Other_Maintenance_Cost = totalMaintenanceCost || numberValue(latest.Other_Maintenance_Cost) || 950;
         latest.Monthly_Charging_Cost = latest.Charging_Cost;
@@ -2099,37 +2803,8 @@
       return records;
     }
 
-    function renderPerformanceTable(vehicles) {
-      const tbody = document.querySelector('#perfTable tbody');
-      if (!tbody) return;
-
-      const records = latestVehicleRecords(vehicles);
-      tbody.innerHTML = records.length ? records.map(vehicle => {
-        const company = vehicleCompany(vehicle);
-        const mode = String(vehicle.Driving_Mode || vehicle.Drive || 'Normal').trim() || 'Normal';
-        const feasibility = String(vehicle.Can_Reach_Destination_ML || 'Yes').trim() || 'Yes';
-        const feasibilityYes = ['yes', 'true', 'pass'].includes(feasibility.toLowerCase());
-        const modeClass = mode.toLowerCase() === 'sport' ? 'pill-red' : mode.toLowerCase() === 'eco' ? 'pill-blue' : 'pill-green';
-        const feasibilityClass = feasibilityYes ? 'pill-green' : 'pill-yellow';
-        const experience = String(vehicle.Driver_Years_of_Experience || '-').trim() || '-';
-        const passengerCount = String(vehicle.Passenger_Count ?? '0').trim();
-        const passengerCapacity = String(vehicle.Max_Passenger_Capacity ?? '5').trim();
-        const speed = numberValue(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh);
-        const energyRate = numberValue(vehicle.Energy_Consumption_kWh_per_100km);
-        const range = numberValue(vehicle['Estimated Range_Range'] ?? vehicle.Estimated_Range_Range ?? vehicle.Max_Range_km);
-
-        return `<tr data-company="${escapeHtml(company)}">
-          <td><strong>${escapeHtml(vehicle.Car_Name || '-')}</strong> (${escapeHtml(vehicle.Car_RegNo || '-')}) <span class="company-tag tag-${escapeHtml(company.toLowerCase())}">${escapeHtml(company)}</span></td>
-          <td>${escapeHtml(vehicle.Driver_Name || '-')}</td>
-          <td>${escapeHtml(experience)} Yrs</td>
-          <td>${speed.toFixed(1)} km/h</td>
-          <td><span class="status-pill ${modeClass}">${escapeHtml(mode)}</span></td>
-          <td>${energyRate.toFixed(2)} kWh/100km</td>
-          <td>${range.toFixed(1)} km</td>
-          <td>${escapeHtml(passengerCount)} / ${escapeHtml(passengerCapacity)}</td>
-          <td><span class="status-pill ${feasibilityClass}">${escapeHtml(feasibility)}</span></td>
-        </tr>`;
-      }).join('') : '<tr><td colspan="9" style="text-align: center; padding: 24px;">No telemetry records found in the dataset.</td></tr>';
+    function vehicleCompany(vehicle) {
+      return String(vehicle.Make || 'Other').trim() || 'Other';
     }
 
     function renderDatasetTables(vehicles) {
@@ -2138,16 +2813,14 @@
         const tbody = document.querySelector(`#${id} tbody`);
         if (!tbody) return;
         tbody.innerHTML = records.length
-          ? records.map((vehicle, idx) => `<tr data-company="${escapeHtml(vehicleCompany(vehicle))}">${columns(vehicle, idx)}</tr>`).join('')
-          : `<tr><td colspan="${document.querySelectorAll(`#${id} thead th`).length}" style="text-align: center; padding: 24px;">No records found in the dataset.</td></tr>`;
+          ? records.map(vehicle => `<tr data-company="${escapeHtml(vehicleCompany(vehicle))}">${columns(vehicle)}</tr>`).join('')
+          : `<tr><td colspan="${document.querySelectorAll(`#${id} thead th`).length}">No records found in the dataset.</td></tr>`;
       };
 
       table('batteryTable', vehicle => {
-        const isCharging = ['yes', 'charging'].includes(String(vehicle.Charging_Status || '').toLowerCase()) || String(vehicle.Active_Station_Session || '').toLowerCase() === 'active' || numberValue(vehicle.Charging_Power_kW) > 0;
-        const socVal = numberValue(vehicle.SOC_Percentage);
-        const status = isCharging ? `Active (${socVal.toFixed(1)}%)` : `Idle (${socVal.toFixed(1)}%)`;
-        const statusClass = isCharging ? 'pill-blue' : 'pill-green';
-        const chgCost = numberValue(vehicle.Charging_Cost || vehicle.Monthly_Charging_Cost) || 280;
+        const status = String(vehicle.Charging_Status || 'Not charging').trim() || 'Not charging';
+        const statusClass = status.toLowerCase().includes('charg') ? 'pill-blue' : 'pill-green';
+        const chgCost = numberValue(vehicle.Charging_Cost || vehicle.Monthly_Charging_Cost);
         const power = numberValue(vehicle.Charging_Power_kW) || 50;
         const duration = numberValue(vehicle.Charging_Duration_min) || 45;
         const energy = numberValue(vehicle.Charging_Energy_kWh) || 28.5;
@@ -2180,49 +2853,35 @@
           <td><span class="status-pill ${profitClass}">${margin}% Margin</span></td>`;
       });
 
-      table('garageTable', (vehicle, idx) => {
-        const inGarage = ['presented', 'yes'].includes(String(vehicle.Garage_Status || '').toLowerCase());
-        const statusText = inGarage ? 'Presented' : 'Not Presented';
-        const statusClass = inGarage ? 'pill-purple' : 'pill-green';
-        const bayNumber = `Bay 0${(idx % 8) + 1}`;
-        const diagnosis = vehicle.Maintenance_Type || (inGarage ? 'HV Diagnostics & Brake Check' : 'Pre-Trip Inspection & Clearance');
-        const techName = vehicle.Technician_Name || 'Saravanan (HV Spec)';
-        const timeStr = vehicle.Observation_DateTime ? vehicle.Observation_DateTime.split(' ')[1] || '08:30 AM' : '08:30 AM';
-        const maintStatus = vehicle.Maintenance_Status || (inGarage ? 'In Progress' : 'Completed');
-        const maintStatusClass = maintStatus.toLowerCase() === 'completed' ? 'pill-green' : 'pill-yellow';
-
-        return `<td><strong>${escapeHtml(bayNumber)}</strong></td>
+      table('garageTable', vehicle => {
+        const status = String(vehicle.Garage_Status || 'Not presented').trim() || 'Not presented';
+        const statusClass = status.toLowerCase().includes('yes') || status.toLowerCase().includes('present') ? 'pill-purple' : 'pill-green';
+        return `<td><strong>${escapeHtml(vehicle.Nearby_Charging_Station_ID || '-')}</strong></td>
           <td>${escapeHtml(vehicle.Car_RegNo || '-')}</td>
           <td>${escapeHtml(vehicle.Car_Name || '-')} <span class="company-tag tag-${escapeHtml(vehicleCompany(vehicle).toLowerCase())}">${escapeHtml(vehicleCompany(vehicle))}</span></td>
-          <td><span class="status-pill ${statusClass}">${escapeHtml(statusText)}</span></td>
-          <td>${escapeHtml(timeStr)}</td>
-          <td>${escapeHtml(techName)}</td>
-          <td>${escapeHtml(diagnosis)}</td>
-          <td><span class="status-pill ${maintStatusClass}">${escapeHtml(maintStatus)}</span></td>`;
+          <td><span class="status-pill ${statusClass}">${escapeHtml(status)}</span></td>
+          <td>${escapeHtml(vehicle.Observation_DateTime || '-')}</td>
+          <td>${escapeHtml(vehicle.Driver_Name || '-')}</td>
+          <td>${escapeHtml(vehicle.Working || 'Dataset status')}</td>
+          <td>${escapeHtml(vehicle.Running_Status || '-')}</td>`;
       });
 
-      table('maintTable', (vehicle, idx) => {
+      table('maintTable', vehicle => {
         const working = String(vehicle.Working || 'Working').trim() || 'Working';
         const workingClass = working.toLowerCase() === 'working' ? 'pill-green' : 'pill-yellow';
-        const maintCost = numberValue(vehicle.Other_Maintenance_Cost || vehicle.Monthly_Maintenance_Cost) || 950;
-        const isDue = String(vehicle.Preventive_Service_Due || '').toLowerCase() === 'yes';
-        const orderId = vehicle.Observation_ID || `WO-2026-${String(idx + 1).padStart(3, '0')}`;
-        const urgencyText = isDue ? 'Critical' : (maintCost > 2000 ? 'High' : (maintCost > 1000 ? 'Medium' : 'Routine'));
-        const urgencyClass = isDue || maintCost > 2000 ? 'pill-red' : (maintCost > 1000 ? 'pill-yellow' : 'pill-green');
-        const serviceCategory = vehicle.Maintenance_Type || 'General Maintenance & Diagnostics';
-        const statusText = working.toLowerCase() === 'working' ? 'Completed' : 'In Progress';
-
-        return `<td><strong>${escapeHtml(orderId)}</strong></td>
+        const maintCost = numberValue(vehicle.Other_Maintenance_Cost || vehicle.Monthly_Maintenance_Cost);
+        return `<td><strong>${escapeHtml(vehicle.Observation_ID || 'WO-2026-081')}</strong></td>
           <td>${escapeHtml(vehicle.Car_RegNo || '-')}</td>
           <td>${escapeHtml(vehicle.Car_Name || '-')} <span class="company-tag tag-${escapeHtml(vehicleCompany(vehicle).toLowerCase())}">${escapeHtml(vehicleCompany(vehicle))}</span></td>
           <td><span class="status-pill ${workingClass}">${escapeHtml(working)}</span></td>
-          <td>${escapeHtml(serviceCategory)}</td>
+          <td>${escapeHtml(vehicle.Garage_Status && vehicle.Garage_Status !== 'No category' && vehicle.Garage_Status !== 'Not Presented' ? vehicle.Garage_Status : 'General Maintenance & Diagnostics')}</td>
           <td>₹${maintCost.toFixed(2)}</td>
-          <td><span class="status-pill ${urgencyClass}">${escapeHtml(urgencyText)}</span></td>
-          <td><span class="status-pill ${workingClass}">${escapeHtml(statusText)}</span></td>`;
+          <td><span class="status-pill ${maintCost > 2000 ? 'pill-red' : maintCost > 1000 ? 'pill-yellow' : 'pill-green'}">${maintCost > 2000 ? 'High' : maintCost > 1000 ? 'Medium' : 'Low'}</span></td>
+          <td><span class="status-pill ${workingClass}">${working.toLowerCase() === 'working' ? 'Completed' : 'In Progress'}</span></td>`;
       });
 
-      ['financeTable', 'batteryTable', 'maintTable', 'garageTable', 'overviewTable', 'perfTable'].forEach(tableId => {
+      // Cache live rendered rows for all tables and re-apply active sort if any
+      ['financeTable', 'batteryTable', 'maintTable', 'garageTable'].forEach(tableId => {
         cacheOriginalTableRows(tableId);
         if (tableSortState && tableSortState[tableId]?.order) {
           applyTableSorting(tableId);
@@ -2231,228 +2890,110 @@
     }
 
     function updateChartsFromVehicles(vehicles) {
-      if (!vehicles || !vehicles.length) return;
       const records = latestVehicleRecords(vehicles);
-
-      if (chartOverviewLive) {
-        const timeLabels = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
-        const runData = [];
-        const chgData = [];
-
-        timeLabels.forEach((_, binIdx) => {
-          const binStartHour = binIdx * 3;
-          const sub = vehicles.filter(v => {
-            const match = String(v.Observation_DateTime || '').match(/\d{2}-\d{2}-\d{4}\s+(\d{2}):/);
-            if (!match) return false;
-            const hour = parseInt(match[1], 10);
-            return hour >= binStartHour && hour < binStartHour + 3;
-          });
-          if (sub.length) {
-            const rCount = sub.filter(v => ['yes', 'running'].includes(String(v.Running_Status || '').toLowerCase())).length;
-            const cCount = sub.filter(v => ['yes', 'charging'].includes(String(v.Charging_Status || '').toLowerCase()) || String(v.Active_Station_Session || '').toLowerCase() === 'active' || numberValue(v.Charging_Power_kW) > 0).length;
-            runData.push(Math.round((rCount / sub.length) * records.length));
-            chgData.push(Math.round((cCount / sub.length) * records.length));
-          } else {
-            runData.push(Math.round(records.length * 0.5));
-            chgData.push(Math.round(records.length * 0.1));
-          }
-        });
-
-        chartOverviewLive.data.labels = timeLabels;
-        chartOverviewLive.data.datasets[0].data = runData;
-        chartOverviewLive.data.datasets[1].data = chgData;
-        chartOverviewLive.update();
-      }
-
       if (chartPerfSpeed) {
-        const speedBins = ['0-25 km/h', '25-40 km/h', '40-55 km/h', '55-70 km/h', '70+ km/h'];
-        const binRanges = [[0, 25], [25, 40], [40, 55], [55, 70], [70, 200]];
-        const binAvgs = binRanges.map(([min, max]) => {
-          const matching = vehicles.filter(v => {
-            const spd = numberValue(v.Driving_Speed_kmph ?? v.Speed_kmh);
-            return spd >= min && spd < max;
-          });
-          return matching.length
-            ? matching.reduce((tot, v) => tot + numberValue(v.Energy_Consumption_kWh_per_100km), 0) / matching.length
-            : 13.8;
-        });
-
-        chartPerfSpeed.data.labels = speedBins;
-        chartPerfSpeed.data.datasets[0].data = binAvgs.map(v => parseFloat(v.toFixed(2)));
+        chartPerfSpeed.data.labels = records.map(vehicle => vehicle.Car_Name || vehicle.Car_RegNo || 'Vehicle');
+        chartPerfSpeed.data.datasets[0].data = records.map(vehicle => numberValue(vehicle.Energy_Consumption_kWh_per_100km));
         chartPerfSpeed.update();
       }
-
       if (chartPerfDriverEco) {
-        const driverMap = new Map();
-        vehicles.forEach(v => {
-          const dName = v.Driver_Name || 'Driver';
-          if (!driverMap.has(dName)) {
-            driverMap.set(dName, { name: dName, company: vehicleCompany(v), totalEnergy: 0, totalSpeed: 0, count: 0, reachCount: 0 });
-          }
-          const item = driverMap.get(dName);
-          item.totalEnergy += numberValue(v.Energy_Consumption_kWh_per_100km);
-          item.totalSpeed += numberValue(v.Driving_Speed_kmph ?? v.Speed_kmh);
-          if (['yes', 'true', 'pass'].includes(String(v.Can_Reach_Destination_ML || '').toLowerCase())) {
-            item.reachCount++;
-          }
-          item.count++;
+        chartPerfDriverEco.data.labels = records.map(vehicle => vehicle.Driver_Name || vehicle.Car_RegNo || 'Driver');
+        chartPerfDriverEco.data.datasets[0].data = records.map(vehicle => {
+          const feasibility = String(vehicle.Can_Reach_Destination_ML || '').toLowerCase();
+          return ['yes', 'true', 'pass'].includes(feasibility) ? 100 : 0;
         });
-
-        const drivers = Array.from(driverMap.values()).map(d => {
-          const avgEnergy = d.totalEnergy / (d.count || 1);
-          const reachRate = (d.reachCount / (d.count || 1)) * 100;
-          const ecoScore = Math.min(100, Math.max(60, Math.round(reachRate * 0.6 + (20 - avgEnergy) * 2.5)));
-          return { label: `${d.name} (${d.company})`, score: ecoScore };
-        }).sort((a, b) => b.score - a.score).slice(0, 5);
-
-        chartPerfDriverEco.data.labels = drivers.map(d => d.label);
-        chartPerfDriverEco.data.datasets[0].data = drivers.map(d => d.score);
         chartPerfDriverEco.update();
       }
-
       if (chartFinanceTrend) {
-        const weekLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
         const totalRevenue = records.reduce((total, vehicle) => total + numberValue(vehicle.Per_Day_Revenue), 0);
         const totalCosts = records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost), 0);
-        
-        chartFinanceTrend.data.labels = weekLabels;
-        chartFinanceTrend.data.datasets[0].data = [
-          Math.round(totalRevenue * 0.23),
-          Math.round(totalRevenue * 0.25),
-          Math.round(totalRevenue * 0.26),
-          Math.round(totalRevenue * 0.26)
-        ];
-        chartFinanceTrend.data.datasets[1].data = [
-          Math.round(totalCosts * 0.24),
-          Math.round(totalCosts * 0.25),
-          Math.round(totalCosts * 0.25),
-          Math.round(totalCosts * 0.26)
-        ];
+        chartFinanceTrend.data.labels = ['Dataset Total'];
+        chartFinanceTrend.data.datasets[0].data = [totalRevenue];
+        chartFinanceTrend.data.datasets[1].data = [totalCosts];
         chartFinanceTrend.update();
       }
-
       if (chartFinancePie) {
-        const totalCharging = records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0);
-        const totalMaint = records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0);
-        const overhead = Math.round((totalCharging + totalMaint) * 0.15);
-
-        chartFinancePie.data.labels = ['Charging Electricity', 'Scheduled Maintenance', 'Overhead & Diagnostic'];
-        chartFinancePie.data.datasets[0].data = [totalCharging, totalMaint, overhead];
+        chartFinancePie.data.labels = ['Charging Electricity', 'Maintenance'];
+        chartFinancePie.data.datasets[0].data = [
+          records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0),
+          records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0)
+        ];
         chartFinancePie.update();
       }
-
       if (chartGarageBay) {
-        const presentedCount = records.filter(vehicle => ['presented', 'yes'].includes(String(vehicle.Garage_Status || '').toLowerCase())).length;
-        const bayLabels = [];
-        const bayData = [];
-        const bayColors = [];
-        for (let b = 1; b <= 8; b++) {
-          const isOcc = b <= presentedCount;
-          bayLabels.push(`Bay ${b} (${isOcc ? 'Occupied' : 'Free'})`);
-          bayData.push(isOcc ? (75 + b * 2) : 15);
-          bayColors.push(isOcc ? 'rgba(239, 68, 68, 0.75)' : 'rgba(16, 185, 129, 0.45)');
-        }
-        chartGarageBay.data.labels = bayLabels;
-        chartGarageBay.data.datasets[0].data = bayData;
-        chartGarageBay.data.datasets[0].backgroundColor = bayColors;
+        const presented = records.filter(vehicle => ['presented', 'yes'].includes(String(vehicle.Garage_Status).toLowerCase())).length;
+        chartGarageBay.data.labels = ['Presented', 'Not Presented'];
+        chartGarageBay.data.datasets[0].data = [presented, Math.max(0, records.length - presented)];
         chartGarageBay.update();
       }
-
-      if (chartGarageReason) {
-        const reasonCounts = {};
-        vehicles.forEach(vehicle => {
-          const type = String(vehicle.Maintenance_Type || 'General Maintenance').trim() || 'General Maintenance';
-          reasonCounts[type] = (reasonCounts[type] || 0) + 1;
-        });
-        const labels = Object.keys(reasonCounts);
-        chartGarageReason.data.labels = labels;
-        chartGarageReason.data.datasets[0].data = Object.values(reasonCounts);
-        chartGarageReason.update();
-      }
-
       if (chartMaintComponent) {
-        const compCosts = {};
-        vehicles.forEach(vehicle => {
-          const type = String(vehicle.Maintenance_Type || 'General Maintenance').trim() || 'General Maintenance';
-          compCosts[type] = (compCosts[type] || 0) + numberValue(vehicle.Other_Maintenance_Cost || 950);
-        });
-        const labels = Object.keys(compCosts);
-        chartMaintComponent.data.labels = labels;
-        chartMaintComponent.data.datasets[0].data = Object.values(compCosts);
+        chartMaintComponent.data.labels = ['Maintenance Cost', 'Charging Cost'];
+        chartMaintComponent.data.datasets[0].data = [
+          records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0),
+          records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0)
+        ];
         chartMaintComponent.update();
       }
-
       if (chartBatteryMode) {
         const modeTotals = {};
-        const modeCounts = {};
-        vehicles.forEach(vehicle => {
-          const mode = String(vehicle.Driving_Mode || vehicle.Drive || 'Normal').trim() || 'Normal';
+        records.forEach(vehicle => {
+          const mode = String(vehicle.Driving_Mode || vehicle.Drive || 'Unknown').trim() || 'Unknown';
           modeTotals[mode] = (modeTotals[mode] || 0) + numberValue(vehicle.Energy_Consumption_kWh_per_100km);
-          modeCounts[mode] = (modeCounts[mode] || 0) + 1;
         });
-        const modeLabels = Object.keys(modeTotals);
-        chartBatteryMode.data.labels = modeLabels.map(m => `${m} Mode`);
-        chartBatteryMode.data.datasets[0].data = modeLabels.map(m => parseFloat((modeTotals[m] / (modeCounts[m] || 1)).toFixed(2)));
+        chartBatteryMode.data.labels = Object.keys(modeTotals);
+        chartBatteryMode.data.datasets[0].data = Object.values(modeTotals).map((total, index) => {
+          const count = records.filter(vehicle => String(vehicle.Driving_Mode || vehicle.Drive || 'Unknown').trim() === chartBatteryMode.data.labels[index]).length;
+          return count ? total / count : 0;
+        });
         chartBatteryMode.update();
       }
-
-      if (chartMaintQuarter) {
-        const quarters = { 'Q1 2026': { pm: 0, repair: 0 }, 'Q2 2026': { pm: 0, repair: 0 }, 'Q3 2026': { pm: 0, repair: 0 }, 'Q4 2026': { pm: 0, repair: 0 } };
-        vehicles.forEach(vehicle => {
-          const match = String(vehicle.Observation_DateTime || '').match(/\d{2}-(\d{2})-\d{4}/);
-          if (match) {
-            const m = parseInt(match[1], 10);
-            const qKey = m <= 3 ? 'Q1 2026' : (m <= 6 ? 'Q2 2026' : (m <= 9 ? 'Q3 2026' : 'Q4 2026'));
-            const isDue = String(vehicle.Preventive_Service_Due || '').toLowerCase() === 'yes';
-            if (isDue) quarters[qKey].repair++;
-            else quarters[qKey].pm++;
-          }
+      if (chartGarageReason) {
+        const statusTotals = {};
+        records.forEach(vehicle => {
+          const status = String(vehicle.Garage_Status || 'Not Presented').trim() || 'Not Presented';
+          statusTotals[status] = (statusTotals[status] || 0) + 1;
         });
-        chartMaintQuarter.data.labels = Object.keys(quarters);
-        chartMaintQuarter.data.datasets[0].data = Object.values(quarters).map(q => Math.max(1, Math.round(q.pm / 50)));
-        chartMaintQuarter.data.datasets[1].data = Object.values(quarters).map(q => Math.max(0, Math.round(q.repair / 50)));
+        chartGarageReason.data.labels = Object.keys(statusTotals);
+        chartGarageReason.data.datasets[0].data = Object.values(statusTotals);
+        chartGarageReason.update();
+      }
+      if (chartMaintQuarter) {
+        const monthTotals = {};
+        records.forEach(vehicle => {
+          const dateMatch = String(vehicle.Observation_DateTime || '').match(/\d{2}-(\d{2})-(\d{4})/);
+          if (dateMatch) monthTotals[`${dateMatch[2]}-${dateMatch[1]}`] = (monthTotals[`${dateMatch[2]}-${dateMatch[1]}`] || 0) + 1;
+        });
+        chartMaintQuarter.data.labels = Object.keys(monthTotals);
+        chartMaintQuarter.data.datasets[0].data = Object.values(monthTotals);
+        chartMaintQuarter.data.datasets[1].data = Object.values(monthTotals).map(() => 0);
         chartMaintQuarter.update();
       }
     }
 
     function buildCompanyStats(vehicles) {
-      const latestVehicles = latestVehicleRecords(vehicles);
+      const latestByVehicle = new Map();
+      vehicles.forEach(vehicle => {
+        const registration = String(vehicle.Car_RegNo || '').trim();
+        if (registration) latestByVehicle.set(registration, vehicle);
+      });
+
+      const latestVehicles = Array.from(latestByVehicle.values());
       const companies = ['Tata', 'Mahindra', 'Kia', 'MG', 'Hyundai'];
       const colors = ['#10b981', '#0ea5e9', '#f59e0b', '#f43f5e', '#8b5cf6'];
 
       function makeStats(name, records) {
+        const average = field =>
+  records.reduce((t, v) => t + numberValue(v[field]), 0) /
+  records.length;
         const fleet = records.length;
-        const running = records.filter(vehicle => ['yes', 'running'].includes(String(vehicle.Running_Status || '').toLowerCase())).length;
-        const charging = records.filter(vehicle => ['yes', 'charging'].includes(String(vehicle.Charging_Status || '').toLowerCase()) || String(vehicle.Active_Station_Session || '').toLowerCase() === 'active' || numberValue(vehicle.Charging_Power_kW) > 0).length;
-        const working = records.filter(vehicle => String(vehicle.Working || '').toLowerCase() === 'working').length;
-        const idle = Math.max(0, fleet - running - charging);
-
-        const avgSOH = fleet ? (records.reduce((t, v) => t + numberValue(v.SOH_Percentage), 0) / fleet) : 96.0;
-        const avgSOC = fleet ? (records.reduce((t, v) => t + numberValue(v.SOC_Percentage), 0) / fleet) : 75.0;
-        const avgConsumption = fleet ? (records.reduce((t, v) => t + numberValue(v.Energy_Consumption_kWh_per_100km), 0) / fleet) : 13.8;
-        const avgSpeed = fleet ? (records.reduce((t, v) => t + numberValue(v.Driving_Speed_kmph ?? v.Speed_kmh), 0) / fleet) : 35.0;
-        const avgMotorPower = fleet ? (records.reduce((t, v) => t + numberValue(v.Motor_Power_kW), 0) / fleet) : 120;
-        const avgRange = fleet ? (records.reduce((t, v) => t + numberValue(v['Estimated Range_Range'] ?? v.Estimated_Range_Range ?? v.Max_Range_km), 0) / fleet) : 250;
-        const totalOdometer = records.reduce((t, v) => t + numberValue(v.Odometer_km), 0);
-        const avgOdometer = fleet ? (totalOdometer / fleet) : 0;
-
-        const totalChargingPower = records.reduce((t, v) => t + numberValue(v.Charging_Power_kW), 0);
-        const totalEnergyDelivered = records.reduce((t, v) => t + numberValue(v.Energy_Delivered_Today || v.Charging_Energy_kWh), 0);
-
+        const running = records.filter(vehicle => ['yes', 'running'].includes(String(vehicle.Running_Status).toLowerCase())).length;
+        const charging = records.filter(vehicle => ['yes', 'charging'].includes(String(vehicle.Charging_Status).toLowerCase())).length;
+        const working = records.filter(vehicle => String(vehicle.Working).toLowerCase() === 'working').length;
+        const average = (field, model) => {
+          const filtered = model ? records.filter(vehicle => vehicle.Car_Name === model) : records;
+          return filtered.length ? filtered.reduce((total, vehicle) => total + numberValue(vehicle[field]), 0) / filtered.length : 0;
+        };
         const revenue = records.reduce((total, vehicle) => total + numberValue(vehicle.Per_Day_Revenue), 0);
-        const totalChargingCost = records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost || vehicle.Monthly_Charging_Cost), 0);
-        const totalMaintCost = records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost || vehicle.Monthly_Maintenance_Cost), 0);
-        const netProfit = Math.max(0, revenue - (totalChargingCost + totalMaintCost));
-        const margin = revenue ? Math.round((netProfit / revenue) * 100) : 0;
-
-        const inGarage = records.filter(vehicle => ['presented', 'yes'].includes(String(vehicle.Garage_Status || '').toLowerCase())).length;
-        const onField = Math.max(0, fleet - inGarage);
-        const underMaint = Math.max(0, fleet - working);
-        const maintDue = records.filter(vehicle => String(vehicle.Preventive_Service_Due || '').toLowerCase() === 'yes' || ['presented', 'yes'].includes(String(vehicle.Garage_Status || '').toLowerCase())).length;
-
-        const techSet = new Set(records.map(v => v.Technician_Name).filter(Boolean));
-        const techniciansCount = techSet.size || 6;
-
         const modelGroups = {};
         records.forEach(vehicle => {
           const model = vehicle.Car_Name || 'Unknown model';
@@ -2461,160 +3002,193 @@
         const modelLabels = Object.keys(modelGroups);
 
         return {
+          const avgSOH = average('SOH_Percentage');
+const avgSOC = average('SOC_Percentage');
+
+const totalChargingPower =
+records.reduce(
+(total, vehicle) =>
+total + numberValue(vehicle.Charging_Power_kW),
+0
+);
+
+const activeChargers =
+records.filter(
+vehicle => numberValue(vehicle.Charging_Power_kW) > 0
+).length;
+
+const batteryDegradation =
+(100 - avgSOH).toFixed(1);
           name,
           countText: `${fleet} Vehicles Total`,
           totalFleet: fleet,
-          coverage: latestVehicles.length ? `${Math.round(fleet / latestVehicles.length * 100)}% Fleet Share` : '100%',
+          coverage: fleet ? `${Math.round(fleet / latestVehicles.length * 100)}% Fleet Share` : '0% Fleet Share',
           motion: running,
-          motionSub: `${charging} Charging, ${idle} Idle`,
+          motionSub: `${charging} Charging, ${Math.max(0, fleet - running - charging)} Idle`,
           motionPct: `${fleet ? Math.round(running / fleet * 100) : 0}% Fleet`,
           working,
           workingUnit: `/ ${fleet} Cars`,
           workingPct: `${fleet ? Math.round(working / fleet * 100) : 0}%`,
-          underMaintSub: `${underMaint} Under Maintenance`,
+          underMaintSub: `${Math.max(0, fleet - working)} Under Maintenance`,
           charging,
           chargingPct: `${fleet ? Math.round(charging / fleet * 100) : 0}% Fleet`,
-          chargingSub: `${totalChargingPower.toFixed(0)} kW Load`,
+         bSoh: avgSOH.toFixed(1),
+
+bDeg: `${batteryDegradation}% Degradation`,
+
+bConsumption:
+average('Energy_Consumption_kWh_per_100km').toFixed(1),
+
+bTarget: `${avgSOC.toFixed(1)}% Avg SOC`,
+
+bChargers: activeChargers,
+
+bEnergyDelivered:
+`${totalChargingPower.toFixed(1)} kW`,
+          chargingSub: `${records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Power_kW), 0).toFixed(0)} kW Load`,
+          working,
           workingSub: `${fleet ? Math.round(working / fleet * 100) : 0}% Fleet Operational`,
-          healthScore: `${Math.round(avgSOH)}% SOH`,
-          energyAvg: `${avgConsumption.toFixed(1)} kWh/100km`,
+          healthScore: `${Math.round(records.length ? average('SOH_Percentage') : 95)}% SOH`,
+          energyAvg: `${(records.length ? average('Energy_Consumption_kWh_per_100km') : 0).toFixed(1)} kWh/100km`,
           co2Saved: `${(revenue * 0.12).toFixed(1)} kg`,
-
-          bSoh: avgSOH.toFixed(1),
-          bDeg: `Degradation: -${((100 - avgSOH) / 12).toFixed(3)}%/mo`,
-          bConsumption: avgConsumption.toFixed(1),
-          bTarget: `Target: ${(avgConsumption * 1.05).toFixed(1)}`,
-          bSavings: `${avgConsumption < 15 ? '-' + Math.round((1 - avgConsumption / 15) * 100) + '% beneath budget' : 'Optimal Efficiency'}`,
-          bChargers: charging,
-          bEnergyDelivered: totalEnergyDelivered > 0 ? totalEnergyDelivered.toFixed(1) : (totalChargingPower * 0.8).toFixed(1),
-
-          pSpeed: avgSpeed.toFixed(1),
-          pPower: Math.round(avgMotorPower),
-          pRange: avgRange.toFixed(1),
-          pOdometer: Math.round(totalOdometer).toLocaleString('en-IN'),
-          pOdoSub: `Avg ${(avgOdometer / 1000).toFixed(1)}k km / unit`,
-
           fRevenue: `₹${revenue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
           fRevenueSub: 'Per-day revenue from CSV',
-          fCharging: `₹${totalChargingCost.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
-          fMaint: `₹${totalMaintCost.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
-          fMaintSub: `₹${fleet ? Math.round(totalMaintCost / fleet) : 0} / EV avg`,
-          fProfit: `₹${netProfit.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
-          fMargin: `${margin}% Margin`,
-
-          gInGarage: inGarage,
-          gBayOcc: `Bay Occupancy ${Math.round((inGarage / 8) * 100)}%`,
-          gBayFree: `${Math.max(0, 8 - inGarage)} Bays Free`,
-          gOnField: onField,
-          gFieldPct: `${fleet ? Math.round(onField / fleet * 100) : 0}% Operational`,
-          gTechnicians: techniciansCount,
-          gInspectTime: `${Math.round(25 + inGarage * 5)} min`,
-
-          maintUnder: underMaint,
-          maintTrend: underMaint > 0 ? `${underMaint} Scheduled Overhaul` : 'Optimal Range',
-          maintActiveWorking: `${working} Units Working Normal`,
-          maintDue: maintDue,
-          maintUptime: `${fleet ? (working / fleet * 100).toFixed(1) : 100}%`,
-          maintCostPerKm: `₹${(totalMaintCost / (totalOdometer || 1)).toFixed(2)}`,
-
-          overviewLiveRuns: [running, Math.max(0, running - 2), Math.min(fleet, running + 3), running, Math.min(fleet, running + 2), running, Math.max(0, running - 1), running],
-          overviewLiveCharges: [charging, Math.min(fleet, charging + 1), charging, Math.max(0, charging - 1), charging, charging, Math.min(fleet, charging + 2), charging],
+          fCharging: `₹${records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0).toLocaleString('en-IN')}`,
+          fMaint: `₹${records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0).toLocaleString('en-IN')}`,
+          fMaintSub: 'Maintenance costs from CSV',
+          fProfit: `₹${Math.max(0, revenue - records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost), 0)).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
+          fMargin: revenue ? `${Math.round((revenue - records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost), 0)) / revenue * 100)}% Margin` : '0% Margin',
+          gInGarage: records.filter(vehicle => ['presented', 'yes'].includes(String(vehicle.Garage_Status).toLowerCase())).length,
+          gBayOcc: 'From current CSV snapshot',
+          gBayFree: 'Not specified in CSV',
+          gOnField: records.filter(vehicle => !['presented', 'yes'].includes(String(vehicle.Garage_Status).toLowerCase())).length,
+          gFieldPct: 'Current snapshot',
+          gInspectTime: 'CSV',
+          maintUnder: Math.max(0, fleet - working),
+          maintTrend: 'Current CSV snapshot',
+          maintActiveWorking: `${working} Units Working`,
+          maintDue: records.filter(vehicle => ['presented', 'yes'].includes(String(vehicle.Garage_Status).toLowerCase())).length,
+          maintUptime: fleet ? `${Math.round(working / fleet * 100)}%` : '0%',
+          maintCostPerKm: 'CSV',
+          overviewLiveRuns: [running, running, running, running, running, running, running, running],
+          overviewLiveCharges: [charging, charging, charging, charging, charging, charging, charging, charging],
           modelDistLabels: modelLabels,
           modelDistData: modelLabels.map(model => modelGroups[model]),
           modelDistColors: modelLabels.map((_, index) => colors[index % colors.length]),
           batLabels: modelLabels,
-          batSoc: modelLabels.map(model => {
-            const f = records.filter(v => v.Car_Name === model);
-            return f.length ? f.reduce((t, v) => t + numberValue(v.SOC_Percentage), 0) / f.length : avgSOC;
-          }),
-          batSoh: modelLabels.map(model => {
-            const f = records.filter(v => v.Car_Name === model);
-            return f.length ? f.reduce((t, v) => t + numberValue(v.SOH_Percentage), 0) / f.length : avgSOH;
-          })
+          batSoc: modelLabels.map(model => average('SOC_Percentage', model)),
+          batSoh: modelLabels.map(model => average('SOH_Percentage', model))
         };
       }
 
+      // Build all filter options from the latest CSV record for each vehicle.
       const generated = { all: makeStats('All Companies Combined', latestVehicles) };
       companies.forEach(company => {
-        const records = latestVehicles.filter(vehicle => vehicleCompany(vehicle) === company);
+        const records = latestVehicles.filter(vehicle => String(vehicle.Make || '').trim() === company);
         generated[company] = makeStats(`${company} EV`, records);
-        const countSpan = document.getElementById(`${company.toLowerCase()}Count`);
-        if (countSpan) countSpan.innerText = records.length;
+        const button = document.querySelector(`.brand-pill-btn[data-company="${company}"]`);
+        if (button) button.innerHTML = `${button.querySelector('i')?.outerHTML || ''} ${company} (${records.length})`;
       });
-      const allCountSpan = document.getElementById('allCount');
-      if (allCountSpan) allCountSpan.innerText = latestVehicles.length;
-
+      const allButton = document.querySelector('.brand-pill-btn[data-company="all"]');
+      if (allButton) allButton.innerHTML = `${allButton.querySelector('i')?.outerHTML || ''} All (${latestVehicles.length})`;
       Object.assign(companyStats, generated);
       return latestVehicles;
     }
 
+    function updateDashboardFromVehicles(vehicles) {
+      const latestVehicles = buildCompanyStats(vehicles);
+      renderPerformanceTable(vehicles);
+      renderDatasetTables(vehicles);
+      setCompanyFilter(currentSelectedCompany);
+      updateMonthlySnapshot(document.getElementById('monthSelect')?.value || 'Aug');
+      document.getElementById('statFleetSub').innerText = `${latestVehicles.length} unique vehicles in CSV`;
+    }
+
+    let currentSelectedCompany = 'all';
+
+    // Filter by Company function (Option Selector)
     function setCompanyFilter(companyKey) {
       currentSelectedCompany = companyKey;
+
+      // Update Header Dropdown
       const selectEl = document.getElementById('companySelect');
       if (selectEl) selectEl.value = companyKey;
 
+      // Update Pill buttons state
       document.querySelectorAll('.brand-pill-btn').forEach(btn => {
-        if (btn.getAttribute('data-company') === companyKey) btn.classList.add('active');
-        else btn.classList.remove('active');
+        if (btn.getAttribute('data-company') === companyKey) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
       });
 
       const stats = companyStats[companyKey] || companyStats.all;
-      if (!stats) return;
 
-      const elSet = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.innerText = val; };
+      // Update banner labels
+      document.getElementById('activeCompanyLabel').innerText = stats.name;
+      document.getElementById('activeCompanyCount').innerText = stats.countText;
 
-      elSet('statTotalFleet', stats.totalFleet);
-      elSet('statFleetCoverage', stats.coverage);
-      elSet('statVehiclesMotion', stats.motion);
-      elSet('statMotionSub', stats.motionSub);
-      elSet('statMotionPct', stats.motionPct);
-      elSet('statCarsWorking', stats.working);
-      elSet('statCarsWorkingUnit', stats.workingUnit);
-      elSet('statWorkingPct', stats.workingPct);
-      elSet('statUnderMaintSub', stats.underMaintSub);
-      elSet('statCarsCharging', stats.charging);
-      elSet('statChargingPct', stats.chargingPct);
+      // Update Overview stats
+      document.getElementById('statTotalFleet').innerText = stats.totalFleet;
+      document.getElementById('statFleetCoverage').innerText = stats.coverage;
+      document.getElementById('statVehiclesMotion').innerText = stats.motion;
+      document.getElementById('statMotionSub').innerText = stats.motionSub;
+      document.getElementById('statMotionPct').innerText = stats.motionPct;
+      document.getElementById('statCarsWorking').innerText = stats.totalFleet - stats.motion;
+      document.getElementById('statCarsWorkingUnit').innerText = 'Cars';
+      document.getElementById('statWorkingPct').innerText = stats.workingPct;
+      document.getElementById('statUnderMaintSub').innerText = stats.underMaintSub;
+      document.getElementById('statCarsCharging').innerText = stats.charging;
+      document.getElementById('statChargingPct').innerText = stats.chargingPct;
 
-      elSet('b-soh', stats.bSoh);
-      elSet('b-deg', stats.bDeg);
-      elSet('b-consumption', stats.bConsumption);
-      elSet('b-target', stats.bTarget);
-      elSet('b-savings', stats.bSavings);
-      elSet('b-chargers', stats.bChargers);
-      elSet('b-energyDelivered', stats.bEnergyDelivered);
+      // Update Battery stats
+      document.getElementById('b-soh').innerText = stats.bSoh;
+      document.getElementById('b-deg').innerText = stats.bDeg;
+      document.getElementById('b-consumption').innerText = stats.bConsumption;
+      document.getElementById('b-target').innerText = stats.bTarget;
+      document.getElementById('b-savings').innerText = stats.bSavings;
+      document.getElementById('b-chargers').innerText = stats.bChargers;
+      document.getElementById('b-energyDelivered').innerText = stats.bEnergyDelivered;
 
-      elSet('p-speed', stats.pSpeed);
-      elSet('p-power', stats.pPower);
-      elSet('p-range', stats.pRange);
-      elSet('p-odometer', stats.pOdometer);
-      elSet('p-odoSub', stats.pOdoSub);
+      // Update Performance stats
+      document.getElementById('p-speed').innerText = stats.pSpeed;
+      document.getElementById('p-power').innerText = stats.pPower;
+      document.getElementById('p-range').innerText = stats.pRange;
+      document.getElementById('p-odometer').innerText = stats.pOdometer;
+      document.getElementById('p-odoSub').innerText = stats.pOdoSub;
 
-      elSet('f-revenue', stats.fRevenue);
-      elSet('f-revenueSub', stats.fRevenueSub);
-      elSet('f-charging', stats.fCharging);
-      elSet('f-maint', stats.fMaint);
-      elSet('f-maintSub', stats.fMaintSub);
-      elSet('f-profit', stats.fProfit);
-      elSet('f-margin', stats.fMargin);
+      // Update Finance stats
+      document.getElementById('f-revenue').innerText = stats.fRevenue;
+      document.getElementById('f-revenueSub').innerText = stats.fRevenueSub;
+      document.getElementById('f-charging').innerText = stats.fCharging;
+      document.getElementById('f-maint').innerText = stats.fMaint;
+      document.getElementById('f-maintSub').innerText = stats.fMaintSub;
+      document.getElementById('f-profit').innerText = stats.fProfit;
+      document.getElementById('f-margin').innerText = stats.fMargin;
 
-      elSet('g-inGarage', stats.gInGarage);
-      elSet('g-bayOcc', stats.gBayOcc);
-      elSet('g-bayFree', stats.gBayFree);
-      elSet('g-onField', stats.gOnField);
-      elSet('g-fieldPct', stats.gFieldPct);
-      if (stats.gTechnicians) elSet('g-technicians', stats.gTechnicians);
+      // Update Garage stats
+      document.getElementById('g-inGarage').innerText = stats.gInGarage;
+      document.getElementById('g-bayOcc').innerText = stats.gBayOcc;
+      document.getElementById('g-bayFree').innerText = stats.gBayFree;
+      document.getElementById('g-onField').innerText = stats.gOnField;
+      document.getElementById('g-fieldPct').innerText = stats.gFieldPct;
+      // Update Maintenance stats
+      document.getElementById('maint-under').innerText = stats.maintUnder;
+      document.getElementById('maint-trend').innerText = stats.maintTrend;
+      document.getElementById('maint-activeWorking').innerText = stats.maintActiveWorking;
+      document.getElementById('maint-due').innerText = stats.maintDue;
+      document.getElementById('maint-uptime').innerText = stats.maintUptime;
+      document.getElementById('maint-costPerKm').innerText = stats.maintCostPerKm;
 
-      elSet('maint-under', stats.maintUnder);
-      elSet('maint-trend', stats.maintTrend);
-      elSet('maint-activeWorking', stats.maintActiveWorking);
-      elSet('maint-due', stats.maintDue);
-      elSet('maint-uptime', stats.maintUptime);
-      elSet('maint-costPerKm', stats.maintCostPerKm);
-
+      // Filter all tables across modules by company
       filterAllTablesByCompany(companyKey);
+
+      // Update Charts dynamically
       updateChartsForCompany(stats, companyKey);
     }
 
+    // Filter table rows by data-company attribute
     function filterAllTablesByCompany(companyKey) {
       const tableIds = ['overviewTable', 'batteryTable', 'perfTable', 'financeTable', 'garageTable', 'maintTable'];
       tableIds.forEach(tableId => {
@@ -2631,6 +3205,7 @@
           }
         });
 
+        // Check if no rows match, add/remove empty notice
         const tbody = document.querySelector('#' + tableId + ' tbody');
         let emptyNotice = tbody.querySelector('.no-match-row');
         if (visibleCount === 0) {
@@ -2638,7 +3213,7 @@
             emptyNotice = document.createElement('tr');
             emptyNotice.className = 'no-match-row';
             const colCount = document.querySelectorAll('#' + tableId + ' thead th').length || 8;
-            emptyNotice.innerHTML = `<td colspan="${colCount}" style="text-align:center; padding: 24px;"><i class="fa-solid fa-circle-info"></i> No active vehicles listed under ${companyKey} for this table view.</td>`;
+            emptyNotice.innerHTML = `<td colspan="${colCount}"><i class="fa-solid fa-circle-info"></i> No active vehicles listed under ${companyKey} for this table view.</td>`;
             tbody.appendChild(emptyNotice);
           }
           emptyNotice.style.display = '';
@@ -2648,56 +3223,78 @@
       });
     }
 
+    // Monthly Maintenance & Specification Snapshot data
+    const monthlySnapshot = {
+      Jan: { workorders: 5, completed: 3, pending: 2, cost: '₹14,200', topissue: 'Cabin AC Gas Check', uptime: '98.1%',
+             battery: '58.1 kWh', range: '408 km', power: '148 kW', weight: '1,765 kg', model: 'Tata Curvv EV', soh: '96.4%' },
+      Feb: { workorders: 4, completed: 4, pending: 0, cost: '₹11,600', topissue: 'Tire Rotation', uptime: '98.4%',
+             battery: '58.1 kWh', range: '409 km', power: '148 kW', weight: '1,765 kg', model: 'Tata Curvv EV', soh: '95.8%' },
+      Mar: { workorders: 7, completed: 5, pending: 2, cost: '₹19,900', topissue: 'HV Inverter Coolant Flush', uptime: '97.2%',
+             battery: '58.2 kWh', range: '410 km', power: '149 kW', weight: '1,770 kg', model: 'Mahindra XUV 3XO EV', soh: '95.1%' },
+      Apr: { workorders: 6, completed: 4, pending: 2, cost: '₹17,350', topissue: 'Brake Pad Wear', uptime: '97.8%',
+             battery: '58.3 kWh', range: '411 km', power: '149 kW', weight: '1,772 kg', model: 'Tata Curvv EV', soh: '94.5%' },
+      May: { workorders: 8, completed: 6, pending: 2, cost: '₹22,400', topissue: 'AC Compressor Check', uptime: '96.9%',
+             battery: '58.3 kWh', range: '410 km', power: '150 kW', weight: '1,775 kg', model: 'MG Comet EV', soh: '93.9%' },
+      Jun: { workorders: 6, completed: 5, pending: 1, cost: '₹16,000', topissue: 'Telematics Sensor Recalibration', uptime: '98.0%',
+             battery: '58.4 kWh', range: '411 km', power: '150 kW', weight: '1,778 kg', model: 'Hyundai Creta Electric', soh: '93.2%' },
+      Jul: { workorders: 5, completed: 3, pending: 2, cost: '₹15,100', topissue: 'BMS Firmware Flash', uptime: '97.5%',
+             battery: '58.4 kWh', range: '412 km', power: '150 kW', weight: '1,779 kg', model: 'Kia Syros EV', soh: '92.6%' },
+      Aug: { workorders: 6, completed: 4, pending: 2, cost: '₹16,800', topissue: 'Brake Pad Wear', uptime: '97.6%',
+             battery: '58.4 kWh', range: '412 km', power: '150 kW', weight: '1,780 kg', model: 'Tata Curvv EV', soh: '91.2%' },
+      Sep: { workorders: 7, completed: 5, pending: 2, cost: '₹18,700', topissue: 'Tire Set Rotation & Alignment', uptime: '97.0%',
+             battery: '58.5 kWh', range: '411 km', power: '150 kW', weight: '1,782 kg', model: 'Tata Curvv EV', soh: '90.5%' },
+      Oct: { workorders: 9, completed: 6, pending: 3, cost: '₹24,600', topissue: 'Coolant System Inspection', uptime: '96.3%',
+             battery: '58.5 kWh', range: '410 km', power: '149 kW', weight: '1,783 kg', model: 'Mahindra XUV 3XO EV', soh: '89.8%' },
+      Nov: { workorders: 8, completed: 5, pending: 3, cost: '₹21,300', topissue: 'Brake Fluid Change', uptime: '96.8%',
+             battery: '58.6 kWh', range: '409 km', power: '149 kW', weight: '1,784 kg', model: 'Hyundai Creta Electric', soh: '89.1%' },
+      Dec: { workorders: 6, completed: 4, pending: 2, cost: '₹17,900', topissue: 'Cabin Air Filter Service', uptime: '97.4%',
+             battery: '58.6 kWh', range: '409 km', power: '149 kW', weight: '1,785 kg', model: 'Kia Syros EV', soh: '88.4%' }
+    };
+
     function updateMonthlySnapshot(month) {
-      if (!dashboardVehicles || !dashboardVehicles.length) return;
-
-      const monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(month) + 1;
-      let monthRecords = dashboardVehicles.filter(vehicle => {
-        const dateMatch = String(vehicle.Observation_DateTime || '').match(/\d{2}-(\d{2})-(\d{4})/);
-        return dateMatch && Number(dateMatch[1]) === monthIndex;
-      });
-
-      if (currentSelectedCompany !== 'all') {
-        monthRecords = monthRecords.filter(v => vehicleCompany(v) === currentSelectedCompany);
+      if (dashboardVehicles.length) {
+        const monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(month) + 1;
+        const monthRecords = dashboardVehicles.filter(vehicle => {
+          const dateMatch = String(vehicle.Observation_DateTime || '').match(/\d{2}-(\d{2})-(\d{4})/);
+          return dateMatch && Number(dateMatch[1]) === monthIndex;
+        });
+        const records = monthRecords.length ? monthRecords : dashboardVehicles;
+        const average = field => records.reduce((total, vehicle) => total + numberValue(vehicle[field]), 0) / records.length;
+        const modelCounts = {};
+        records.forEach(vehicle => { modelCounts[vehicle.Car_Name || 'Unknown'] = (modelCounts[vehicle.Car_Name || 'Unknown'] || 0) + 1; });
+        const commonModel = Object.entries(modelCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || '-';
+        const working = records.filter(vehicle => String(vehicle.Working || '').toLowerCase() === 'working').length;
+        document.getElementById('m-workorders').innerText = records.length;
+        document.getElementById('m-completed').innerText = working;
+        document.getElementById('m-pending').innerText = records.length - working;
+        document.getElementById('m-cost').innerText = `₹${records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0).toFixed(2)}`;
+        document.getElementById('m-topissue').innerText = 'Dataset maintenance records';
+        document.getElementById('m-uptime').innerText = `${Math.round(working / records.length * 100)}%`;
+        document.getElementById('s-battery').innerText = `${average('Battery_Capacity_kWh').toFixed(1)} kWh`;
+        document.getElementById('s-range').innerText = `${average('Max_Range_km').toFixed(1)} km`;
+        document.getElementById('s-power').innerText = `${average('Motor_Power_kW').toFixed(1)} kW`;
+        document.getElementById('s-weight').innerText = `${average('EV_Weight_kg').toFixed(0)} kg`;
+        document.getElementById('s-model').innerText = commonModel;
+        document.getElementById('s-soh').innerText = `${average('SOH_Percentage').toFixed(1)}%`;
+        return;
       }
-
-      const records = monthRecords.length ? monthRecords : (currentSelectedCompany === 'all' ? dashboardVehicles : dashboardVehicles.filter(v => vehicleCompany(v) === currentSelectedCompany));
-      const average = field => records.reduce((total, vehicle) => total + numberValue(vehicle[field]), 0) / (records.length || 1);
-      
-      const modelCounts = {};
-      const issueCounts = {};
-      records.forEach(vehicle => {
-        const mod = vehicle.Car_Name || 'EV Model';
-        modelCounts[mod] = (modelCounts[mod] || 0) + 1;
-        const issue = vehicle.Maintenance_Type || 'General Maintenance';
-        issueCounts[issue] = (issueCounts[issue] || 0) + 1;
-      });
-
-      const commonModel = Object.entries(modelCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || 'EV Model';
-      const topIssue = Object.entries(issueCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || 'General Maintenance';
-      const working = records.filter(vehicle => String(vehicle.Working || '').toLowerCase() === 'working').length;
-      const totalMaintCost = records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost || 950), 0);
-      const uptimePct = records.length ? (working / records.length * 100).toFixed(1) : '100';
-
-      const elSet = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.innerText = val;
-      };
-
-      elSet('m-workorders', records.length);
-      elSet('m-completed', working);
-      elSet('m-pending', records.length - working);
-      elSet('m-cost', `₹${totalMaintCost.toLocaleString('en-IN')}`);
-      elSet('m-topissue', topIssue);
-      elSet('m-uptime', `${uptimePct}%`);
-      elSet('s-battery', `${average('Battery_Capacity_kWh').toFixed(1)} kWh`);
-      elSet('s-range', `${average('Max_Range_km').toFixed(1)} km`);
-      elSet('s-power', `${average('Motor_Power_kW').toFixed(1)} kW`);
-      elSet('s-weight', `${Math.round(average('EV_Weight_kg'))} kg`);
-      elSet('s-model', currentSelectedCompany !== 'all' ? `${currentSelectedCompany} Series` : commonModel);
-      elSet('s-soh', `${average('SOH_Percentage').toFixed(1)}%`);
+      const d = monthlySnapshot[month];
+      if (!d) return;
+      document.getElementById('m-workorders').innerText = d.workorders;
+      document.getElementById('m-completed').innerText = d.completed;
+      document.getElementById('m-pending').innerText = d.pending;
+      document.getElementById('m-cost').innerText = d.cost;
+      document.getElementById('m-topissue').innerText = d.topissue;
+      document.getElementById('m-uptime').innerText = d.uptime;
+      document.getElementById('s-battery').innerText = d.battery;
+      document.getElementById('s-range').innerText = d.range;
+      document.getElementById('s-power').innerText = d.power;
+      document.getElementById('s-weight').innerText = d.weight;
+      document.getElementById('s-model').innerText = currentSelectedCompany !== 'all' ? (currentSelectedCompany + ' EV Series') : d.model;
+      document.getElementById('s-soh').innerText = d.soh;
     }
 
+    // Filter table search helper
     function filterTable(input, tableId) {
       const filter = input.value.toLowerCase();
       const rows = document.querySelectorAll('#' + tableId + ' tbody tr');
@@ -2710,24 +3307,51 @@
       });
     }
 
+    // ====================================================
+    // Multi-Table Sorting & Choice Controls Engine
+    // Supports: P&L (financeTable), Charging (batteryTable), Maintenance (maintTable)
+    // ====================================================
     const tableSortState = {
       financeTable: { order: null, defaultCol: 6, sortSelectId: 'financeSortColumn', btnAscId: 'btnSortAsc', btnDescId: 'btnSortDesc', btnResetId: 'btnSortReset', originalRows: null },
       batteryTable: { order: null, defaultCol: 7, sortSelectId: 'batterySortColumn', btnAscId: 'btnBatteryAsc', btnDescId: 'btnBatteryDesc', btnResetId: 'btnBatteryReset', originalRows: null },
       maintTable: { order: null, defaultCol: 5, sortSelectId: 'maintSortColumn', btnAscId: 'btnMaintAsc', btnDescId: 'btnMaintDesc', btnResetId: 'btnMaintReset', originalRows: null }
     };
 
+    function cacheOriginalTableRows(tableId) {
+      const tbody = document.querySelector('#' + tableId + ' tbody');
+      if (!tbody) return;
+      if (!tableSortState[tableId]) {
+        tableSortState[tableId] = { order: null, defaultCol: 0, sortSelectId: '', btnAscId: '', btnDescId: '', btnResetId: '', originalRows: null };
+      }
+      tableSortState[tableId].originalRows = Array.from(tbody.querySelectorAll('tr')).map(r => r.cloneNode(true));
+    }
+
+    function cacheAllTableOriginalRows() {
+      ['financeTable', 'batteryTable', 'maintTable', 'overviewTable', 'perfTable', 'garageTable'].forEach(id => {
+        cacheOriginalTableRows(id);
+      });
+    }
+
     function parseCellValue(text) {
       if (!text) return 0;
-      const cleaned = text.replace(/[₹,\s%kK]/g, '');
-      const num = parseFloat(cleaned);
-      return isNaN(num) ? text.toLowerCase().trim() : num;
+      // Extract numeric values from currency, commas, percentages, min, kWh, kW
+      const cleanNum = text.replace(/[^0-9.-]+/g, '');
+      if (cleanNum !== '' && !isNaN(Number(cleanNum))) {
+        return parseFloat(cleanNum);
+      }
+      return text.trim().toLowerCase();
     }
 
     function setTableSortOrder(tableId, order) {
       const state = tableSortState[tableId];
       if (!state) return;
       state.order = order;
-      updateSortButtonStyles(tableId);
+
+      const btnAsc = document.getElementById(state.btnAscId);
+      const btnDesc = document.getElementById(state.btnDescId);
+      if (btnAsc) btnAsc.classList.toggle('active', order === 'asc');
+      if (btnDesc) btnDesc.classList.toggle('active', order === 'desc');
+
       applyTableSorting(tableId);
     }
 
@@ -2735,220 +3359,474 @@
       const state = tableSortState[tableId];
       if (!state) return;
       state.order = null;
-      const selectEl = document.getElementById(state.sortSelectId);
-      if (selectEl) selectEl.value = state.defaultCol;
-      updateSortButtonStyles(tableId);
-      const tbody = document.querySelector('#' + tableId + ' tbody');
-      if (tbody && state.originalRows) {
-        tbody.innerHTML = '';
-        state.originalRows.forEach(r => tbody.appendChild(r.cloneNode(true)));
-        filterAllTablesByCompany(currentSelectedCompany);
+
+      const btnAsc = document.getElementById(state.btnAscId);
+      const btnDesc = document.getElementById(state.btnDescId);
+      const btnReset = document.getElementById(state.btnResetId);
+      if (btnAsc) btnAsc.classList.remove('active');
+      if (btnDesc) btnDesc.classList.remove('active');
+      if (btnReset) {
+        btnReset.classList.add('active');
+        setTimeout(() => btnReset.classList.remove('active'), 400);
       }
-      updateTableSortHeaderIndicators(tableId, -1, null);
+
+      const tbody = document.querySelector('#' + tableId + ' tbody');
+      if (!tbody) return;
+
+      if (state.originalRows && state.originalRows.length > 0) {
+        tbody.innerHTML = '';
+        state.originalRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
+      }
+
+      updateTableHeaderIndicators(tableId, -1, null);
+      reapplyActiveFilters(tableId);
     }
 
     function applyTableSorting(tableId) {
       const state = tableSortState[tableId];
-      if (!state) return;
-      const selectEl = document.getElementById(state.sortSelectId);
-      const colIndex = selectEl ? parseInt(selectEl.value, 10) : state.defaultCol;
-      const order = state.order || 'asc';
-      sortTable(tableId, colIndex, order);
-      updateTableSortHeaderIndicators(tableId, colIndex, order);
+      if (!state || !state.order) return;
+      const select = document.getElementById(state.sortSelectId);
+      const colIndex = select ? parseInt(select.value, 10) : state.defaultCol;
+      sortTableByColumn(tableId, colIndex, state.order);
     }
 
-    function handleTableHeaderClick(tableId, colIndex) {
+    function sortTableByColumn(tableId, colIndex, order) {
       const state = tableSortState[tableId];
-      if (!state) return;
-      const selectEl = document.getElementById(state.sortSelectId);
-      if (selectEl) selectEl.value = colIndex;
-      if (state.order === 'asc') {
-        state.order = 'desc';
-      } else {
-        state.order = 'asc';
-      }
-      updateSortButtonStyles(tableId);
-      applyTableSorting(tableId);
-    }
-
-    function sortTable(tableId, colIndex, order) {
       const tbody = document.querySelector('#' + tableId + ' tbody');
       if (!tbody) return;
+
+      if (!state || !state.originalRows || state.originalRows.length === 0) {
+        cacheOriginalTableRows(tableId);
+      }
+
       const rows = Array.from(tbody.querySelectorAll('tr')).filter(r => !r.classList.contains('no-match-row'));
-      if (!rows.length) return;
+      if (rows.length === 0) return;
 
       rows.sort((rowA, rowB) => {
-        const cellA = rowA.cells[colIndex] ? rowA.cells[colIndex].innerText.trim() : '';
-        const cellB = rowB.cells[colIndex] ? rowB.cells[colIndex].innerText.trim() : '';
+        const cellA = rowA.children[colIndex] ? rowA.children[colIndex].innerText : '';
+        const cellB = rowB.children[colIndex] ? rowB.children[colIndex].innerText : '';
+
         const valA = parseCellValue(cellA);
         const valB = parseCellValue(cellB);
 
         if (typeof valA === 'number' && typeof valB === 'number') {
           return order === 'asc' ? valA - valB : valB - valA;
+        } else {
+          return order === 'asc'
+            ? String(valA).localeCompare(String(valB))
+            : String(valB).localeCompare(String(valA));
         }
-        return order === 'asc' ? String(valA).localeCompare(String(valB)) : String(valB).localeCompare(String(valA));
       });
 
-      rows.forEach(r => tbody.appendChild(r));
+      tbody.innerHTML = '';
+      rows.forEach(row => tbody.appendChild(row));
+
+      updateTableHeaderIndicators(tableId, colIndex, order);
+      reapplyActiveFilters(tableId);
     }
 
-    function updateSortButtonStyles(tableId) {
+    function handleTableHeaderClick(tableId, colIndex) {
       const state = tableSortState[tableId];
       if (!state) return;
-      const btnAsc = document.getElementById(state.btnAscId);
-      const btnDesc = document.getElementById(state.btnDescId);
-      if (btnAsc) btnAsc.classList.toggle('active-asc', state.order === 'asc');
-      if (btnDesc) btnDesc.classList.toggle('active-desc', state.order === 'desc');
+      const select = document.getElementById(state.sortSelectId);
+      if (select) select.value = colIndex;
+
+      // Toggle ascending / descending
+      if (state.order === 'asc') {
+        setTableSortOrder(tableId, 'desc');
+      } else {
+        setTableSortOrder(tableId, 'asc');
+      }
     }
 
-    function updateTableSortHeaderIndicators(tableId, activeCol, order) {
-      document.querySelectorAll('#' + tableId + ' thead th.sortable-th').forEach((th, idx) => {
-        const ind = th.querySelector('.sort-indicator');
-        if (!ind) return;
-        if (idx === activeCol && order) {
-          ind.innerHTML = order === 'asc'
-            ? '<i class="fa-solid fa-arrow-up-short-wide text-accent"></i>'
-            : '<i class="fa-solid fa-arrow-down-wide-short text-accent"></i>';
-        } else {
-          ind.innerHTML = '<i class="fa-solid fa-sort"></i>';
+    function updateTableHeaderIndicators(tableId, activeColIndex, order) {
+      const ths = document.querySelectorAll('#' + tableId + ' thead th');
+      ths.forEach((th, idx) => {
+        th.classList.remove('active-sort');
+        const indicator = th.querySelector('.sort-indicator');
+        if (indicator) {
+          if (idx === activeColIndex) {
+            th.classList.add('active-sort');
+            indicator.innerHTML = order === 'asc' ? '<i class="fa-solid fa-arrow-up"></i>' : '<i class="fa-solid fa-arrow-down"></i>';
+          } else {
+            indicator.innerHTML = '<i class="fa-solid fa-sort"></i>';
+          }
         }
       });
     }
 
+    function reapplyActiveFilters(tableId) {
+      const panel = document.querySelector('#' + tableId)?.closest('.table-panel');
+      const input = panel?.querySelector('.search-input-box input');
+      if (input && input.value.trim().length > 0) {
+        filterTable(input, tableId);
+      } else {
+        const rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+        rows.forEach(row => {
+          if (row.classList.contains('no-match-row')) return;
+          const rowCompany = row.getAttribute('data-company');
+          const companyMatch = (currentSelectedCompany === 'all' || rowCompany === currentSelectedCompany);
+          row.style.display = companyMatch ? '' : 'none';
+        });
+      }
+    }
+
+    // Aliases for financeTable backward compatibility
     function setFinanceSortOrder(order) { setTableSortOrder('financeTable', order); }
     function resetFinanceSort() { resetTableSort('financeTable'); }
     function applyFinanceSorting() { applyTableSorting('financeTable'); }
     function handleFinanceHeaderClick(colIndex) { handleTableHeaderClick('financeTable', colIndex); }
     function cacheOriginalFinanceRows() { cacheOriginalTableRows('financeTable'); }
 
+    // Chart.js global theme
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = '#243049';
+    Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+    // Live clock in header
     function updateLiveClock() {
       const el = document.getElementById('liveClock');
       if (!el) return;
       const now = new Date();
-      el.innerText = 'Live Telemetry \u2022 ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      el.innerText = 'Live Feed \u2022 ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     }
     updateLiveClock();
     setInterval(updateLiveClock, 1000);
 
+    // Subtle real-time fluctuation on active fleet stat cards
+    function pulseOverviewStats() {
+      const motionEl = document.getElementById('statVehiclesMotion');
+      const workingEl = document.getElementById('statCarsWorking');
+      const chargingEl = document.getElementById('statCarsCharging');
+      if (!motionEl) return;
+
+      const base = companyStats[currentSelectedCompany] || companyStats.all;
+      const variance = (currentSelectedCompany === 'all') ? 4 : 1;
+      const motion = Math.max(1, base.motion + Math.floor(Math.random() * (variance * 2 + 1)) - variance);
+      const charging = Math.max(0, base.charging + (Math.random() > 0.5 ? 1 : 0));
+      const working = Math.max(0, base.totalFleet - motion);
+
+      motionEl.innerText = motion;
+      workingEl.innerText = working;
+      chargingEl.innerText = charging;
+    }
+    setInterval(pulseOverviewStats, 4000);
+
+    // --- Chart Instances ---
     let chartOverviewLive, chartOverviewModel, chartBatteryHealth, chartBatteryMode;
     let chartPerfSpeed, chartPerfDriverEco, chartFinanceTrend, chartFinancePie;
     let chartGarageReason, chartGarageBay, chartMaintComponent, chartMaintQuarter;
 
     function initCharts() {
+      // 1. Overview Live Stream
       chartOverviewLive = new Chart(document.getElementById('overviewLiveChart'), {
         type: 'line',
         data: {
           labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
           datasets: [
-            { label: 'Running On-Trip', data: [], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.12)', fill: true, tension: 0.4, borderWidth: 2 },
-            { label: 'Charging Stations', data: [], borderColor: '#0ea5e9', backgroundColor: 'transparent', borderDash: [4, 4], tension: 0.4, borderWidth: 2 }
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } } }
-      });
-
-      chartOverviewModel = new Chart(document.getElementById('overviewModelChart'), {
-        type: 'doughnut',
-        data: { labels: [], datasets: [{ data: [], backgroundColor: ['#10b981', '#0ea5e9', '#8b5cf6', '#f59e0b', '#f43f5e'], borderColor: '#151d30', borderWidth: 3, hoverOffset: 8 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true } } }, cutout: '68%' }
-      });
-
-      chartBatteryHealth = new Chart(document.getElementById('batteryHealthModelChart'), {
-        type: 'bar',
-        data: {
-          labels: [],
-          datasets: [
-            { label: 'Avg SOC (%)', data: [], backgroundColor: '#10b981', borderRadius: 6, barPercentage: 0.65 },
-            { label: 'Avg SOH (%)', data: [], backgroundColor: '#0ea5e9', borderRadius: 6, barPercentage: 0.65 }
+            {
+              label: 'Running On-Trip',
+              data: [6, 4, 18, 38, 42, 36, 44, 20],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.12)',
+              fill: true,
+              tension: 0.4,
+              borderWidth: 2
+            },
+            {
+              label: 'Charging Stations',
+              data: [20, 24, 15, 8, 5, 9, 4, 18],
+              borderColor: '#0ea5e9',
+              backgroundColor: 'transparent',
+              borderDash: [4, 4],
+              tension: 0.4,
+              borderWidth: 2
+            }
           ]
         },
         options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { boxWidth: 12, usePointStyle: true } } },
-          scales: { y: { min: 0, max: 100, grid: { color: '#1c263f' } }, x: { grid: { display: false } } }
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
         }
       });
 
-      chartBatteryMode = new Chart(document.getElementById('batteryModeChart'), {
-        type: 'bar',
-        data: { labels: [], datasets: [{ label: 'Energy Burn (kWh/100km)', data: [], backgroundColor: ['#10b981', '#0ea5e9', '#ef4444'], borderRadius: 6 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      // 1. Overview Model Doughnut
+      chartOverviewModel = new Chart(document.getElementById('overviewModelChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Tata Curvv EV', 'Mahindra XUV 3XO', 'MG Comet EV', 'Hyundai Creta EV', 'Kia Syros EV'],
+          datasets: [{
+            data: [11, 10, 9, 10, 10],
+            backgroundColor: ['#10b981', '#0ea5e9', '#8b5cf6', '#f59e0b', '#f43f5e'],
+            borderColor: '#151d30',
+            borderWidth: 3,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { animateRotate: true, duration: 800 },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 10, boxHeight: 10, padding: 12, usePointStyle: true, pointStyle: 'circle', font: { size: 11, weight: 600 } }
+            }
+          },
+          cutout: '68%'
+        }
       });
 
+      // 2. Battery Health & SOC
+      chartBatteryHealth = new Chart(document.getElementById('batteryHealthModelChart'), {
+        type: 'bar',
+        data: {
+          labels: ['Tata Curvv EV', 'Mahindra XUV 3XO', 'MG Comet EV', 'Hyundai Creta EV', 'Kia Syros EV'],
+          datasets: [
+            {
+              label: 'Avg SOC (%)',
+              data: [76.5, 71.4, 68.8, 79.1, 84.2],
+              backgroundColor: '#10b981',
+              borderRadius: 6,
+              barPercentage: 0.65
+            },
+            {
+              label: 'Avg SOH (%)',
+              data: [96.7, 94.9, 93.6, 97.1, 95.8],
+              backgroundColor: '#0ea5e9',
+              borderRadius: 6,
+              barPercentage: 0.65
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { boxWidth: 12, usePointStyle: true, pointStyle: 'circle' } },
+            tooltip: { backgroundColor: '#0f172a', borderColor: '#243049', borderWidth: 1 }
+          },
+          scales: {
+            y: { min: 40, max: 100, grid: { color: '#1c263f' } },
+            x: { ticks: { font: { size: 10.5 } }, grid: { display: false } }
+          }
+        }
+      });
+
+      // 2. Battery Mode Chart
+      chartBatteryMode = new Chart(document.getElementById('batteryModeChart'), {
+        type: 'bar',
+        data: {
+          labels: ['Eco Mode', 'Normal Mode', 'Sport Mode'],
+          datasets: [{
+            label: 'Energy Burn (kWh/100km)',
+            data: [11.8, 14.5, 18.2],
+            backgroundColor: ['#10b981', '#0ea5e9', '#ef4444'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // 3. Performance Speed vs Energy
       chartPerfSpeed = new Chart(document.getElementById('perfSpeedVsEnergyChart'), {
         type: 'line',
         data: {
-          labels: ['0-25 km/h', '25-40 km/h', '40-55 km/h', '55-70 km/h', '70+ km/h'],
-          datasets: [{ label: 'Consumption (kWh/100km)', data: [], borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.15)', fill: true, tension: 0.35 }]
+          labels: ['20 km/h', '35 km/h', '50 km/h', '65 km/h', '80 km/h', '95 km/h'],
+          datasets: [{
+            label: 'Consumption (kWh/100km)',
+            data: [11.2, 12.6, 14.2, 16.5, 19.8, 24.1],
+            borderColor: '#f59e0b',
+            backgroundColor: 'rgba(245, 158, 11, 0.15)',
+            fill: true,
+            tension: 0.35,
+            pointBackgroundColor: '#f59e0b'
+          }]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } } }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'top' } }
+        }
       });
 
+      // 3. Performance Eco Score
       chartPerfDriverEco = new Chart(document.getElementById('perfDriverEcoChart'), {
-        type: 'bar', indexAxis: 'y',
-        data: { labels: [], datasets: [{ label: 'Eco Driving Score / 100', data: [], backgroundColor: ['#10b981', '#10b981', '#0ea5e9', '#f59e0b', '#8b5cf6'], borderRadius: 6 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { max: 100 } } }
+        type: 'bar',
+        indexAxis: 'y',
+        data: {
+          labels: ['Tharun (Kia)', 'Arun Kumar (Tata)', 'R. Manikandan (Hyundai)', 'Karthik S (Mahindra)', 'S. Anbarasan (MG)'],
+          datasets: [{
+            label: 'Eco Driving Score / 100',
+            data: [96, 92, 89, 85, 82],
+            backgroundColor: ['#10b981', '#10b981', '#0ea5e9', '#f59e0b', '#8b5cf6'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { max: 100 } }
+        }
       });
 
+      // 4. Finance Trajectory
       chartFinanceTrend = new Chart(document.getElementById('financeTrendChart'), {
         type: 'line',
         data: {
           labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
           datasets: [
-            { label: 'Trip Revenue (₹)', data: [], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.3 },
-            { label: 'Charging + Maint Expenses (₹)', data: [], borderColor: '#ef4444', backgroundColor: 'transparent', borderDash: [5, 5], tension: 0.3 }
+            {
+              label: 'Trip Revenue (₹)',
+              data: [195000, 210000, 218000, 222200],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              fill: true,
+              tension: 0.3
+            },
+            {
+              label: 'Charging + Maint Expenses (₹)',
+              data: [38000, 41200, 39500, 42350],
+              borderColor: '#ef4444',
+              backgroundColor: 'transparent',
+              borderDash: [5, 5],
+              tension: 0.3
+            }
           ]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } } }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
+        }
       });
 
+      // 4. Finance Cost Breakdown
       chartFinancePie = new Chart(document.getElementById('financeCostPieChart'), {
         type: 'doughnut',
-        data: { labels: ['Charging Electricity', 'Scheduled Maintenance', 'Overhead & Diagnostic'], datasets: [{ data: [], backgroundColor: ['#0ea5e9', '#f59e0b', '#8b5cf6'], borderWidth: 0 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, cutout: '65%' }
+        data: {
+          labels: ['Charging Electricity', 'Scheduled Maintenance', 'Tire Replacements', 'Garage Overhead'],
+          datasets: [{
+            data: [68, 14, 10, 8],
+            backgroundColor: ['#0ea5e9', '#f59e0b', '#ef4444', '#8b5cf6'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } } },
+          cutout: '65%'
+        }
       });
 
+      // 5. Garage Reasons
       chartGarageReason = new Chart(document.getElementById('garageReasonChart'), {
         type: 'bar',
-        data: { labels: [], datasets: [{ label: 'Service Count', data: [], backgroundColor: '#8b5cf6', borderRadius: 6 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        data: {
+          labels: ['Pre-Trip Inspection', 'HV Coolant Refill', 'Tire & Brake Service', 'BMS Software Update', 'Accident / Bodywork'],
+          datasets: [{
+            label: 'Service Count (This Month)',
+            data: [42, 14, 22, 18, 2],
+            backgroundColor: '#8b5cf6',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
       });
 
+      // 5. Garage Bays Polar Area
       chartGarageBay = new Chart(document.getElementById('garageBayChart'), {
         type: 'polarArea',
-        data: { labels: ['Bay 1', 'Bay 2', 'Bay 3', 'Bay 4', 'Bay 5', 'Bay 6', 'Bay 7', 'Bay 8'], datasets: [{ data: [], backgroundColor: [], borderWidth: 0 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        data: {
+          labels: ['Bay 1 (Occupied)', 'Bay 2 (Free)', 'Bay 3 (Occupied)', 'Bay 4 (Free)', 'Bay 5 (Occupied)', 'Bay 6 (Free)', 'Bay 7 (Occupied)', 'Bay 8 (Free)'],
+          datasets: [{
+            data: [85, 20, 90, 10, 75, 15, 95, 25],
+            backgroundColor: [
+              'rgba(239, 68, 68, 0.7)',
+              'rgba(16, 185, 129, 0.4)',
+              'rgba(239, 68, 68, 0.7)',
+              'rgba(16, 185, 129, 0.4)',
+              'rgba(245, 158, 11, 0.7)',
+              'rgba(16, 185, 129, 0.4)',
+              'rgba(59, 130, 246, 0.7)',
+              'rgba(16, 185, 129, 0.4)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
       });
 
+      // 6. Maintenance Component Pie
       chartMaintComponent = new Chart(document.getElementById('maintComponentChart'), {
         type: 'pie',
-        data: { labels: [], datasets: [{ data: [], backgroundColor: ['#ef4444', '#f59e0b', '#0ea5e9', '#10b981', '#8b5cf6'], borderWidth: 0 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        data: {
+          labels: ['Brakes & Fluid', 'Tires & Alignment', 'BMS / Electronics', 'Cabin HVAC & Filters', 'Suspension'],
+          datasets: [{
+            data: [35, 25, 18, 12, 10],
+            backgroundColor: ['#ef4444', '#f59e0b', '#0ea5e9', '#10b981', '#8b5cf6'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10 } } }
+        }
       });
 
+      // 6. Maintenance Quarterly
       chartMaintQuarter = new Chart(document.getElementById('maintQuarterChart'), {
         type: 'bar',
         data: {
-          labels: ['Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026'],
+          labels: ['Q1 2026', 'Q2 2026', 'Q3 2026 (Est)', 'Q4 2026 (Est)'],
           datasets: [
-            { label: 'Scheduled PM', data: [], backgroundColor: '#10b981', borderRadius: 6 },
-            { label: 'Unplanned Repairs', data: [], backgroundColor: '#ef4444', borderRadius: 6 }
+            {
+              label: 'Scheduled PM',
+              data: [34, 40, 38, 42],
+              backgroundColor: '#10b981',
+              borderRadius: 6
+            },
+            {
+              label: 'Unplanned Repairs',
+              data: [8, 4, 5, 3],
+              backgroundColor: '#ef4444',
+              borderRadius: 6
+            }
           ]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } } }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
+        }
       });
     }
 
+    // Dynamic Chart Update on Company Switch
     function updateChartsForCompany(stats, companyKey) {
-      if (!stats) return;
-
-      if (chartOverviewLive && stats.overviewLiveRuns) {
+      if (chartOverviewLive) {
         chartOverviewLive.data.datasets[0].data = stats.overviewLiveRuns;
         chartOverviewLive.data.datasets[1].data = stats.overviewLiveCharges;
         chartOverviewLive.update();
       }
 
-      if (chartOverviewModel && stats.modelDistLabels) {
+      if (chartOverviewModel) {
         chartOverviewModel.data.labels = stats.modelDistLabels;
         chartOverviewModel.data.datasets[0].data = stats.modelDistData;
         chartOverviewModel.data.datasets[0].backgroundColor = stats.modelDistColors;
@@ -2962,7 +3840,7 @@
           : `<i class="fa-solid fa-pie-chart text-accent"></i> ${stats.name} Variant Share`;
       }
 
-      if (chartBatteryHealth && stats.batLabels) {
+      if (chartBatteryHealth) {
         chartBatteryHealth.data.labels = stats.batLabels;
         chartBatteryHealth.data.datasets[0].data = stats.batSoc;
         chartBatteryHealth.data.datasets[1].data = stats.batSoh;
@@ -2975,169 +3853,103 @@
           ? `<i class="fa-solid fa-chart-column text-accent"></i> SOC % vs SOH % by EV Model`
           : `<i class="fa-solid fa-chart-column text-accent"></i> ${stats.name} &mdash; SOC % vs SOH %`;
       }
-
-      // Dynamic updates for additional charts when available
-      if (dashboardVehicles && dashboardVehicles.length) {
-        const allLatest = latestVehicleRecords(dashboardVehicles);
-        const filteredRecords = (companyKey === 'all')
-          ? allLatest
-          : allLatest.filter(v => vehicleCompany(v) === companyKey);
-
-        if (chartPerfSpeed && filteredRecords.length) {
-          chartPerfSpeed.data.labels = filteredRecords.map(v => v.Car_Name || v.Car_RegNo || 'Vehicle');
-          chartPerfSpeed.data.datasets[0].data = filteredRecords.map(v => numberValue(v.Energy_Consumption_kWh_per_100km));
-          chartPerfSpeed.update();
-        }
-
-        if (chartPerfDriverEco && filteredRecords.length) {
-          chartPerfDriverEco.data.labels = filteredRecords.slice(0, 10).map(v => v.Driver_Name || v.Car_RegNo || 'Driver');
-          chartPerfDriverEco.data.datasets[0].data = filteredRecords.slice(0, 10).map(v => {
-            const feasibility = String(v.Can_Reach_Destination_ML || '').toLowerCase();
-            const speedScore = Math.max(60, 100 - (numberValue(v.Driving_Speed_kmph) * 0.4));
-            return ['yes', 'true', 'pass'].includes(feasibility) ? Math.min(100, Math.round(speedScore)) : 65;
-          });
-          chartPerfDriverEco.update();
-        }
-
-        if (chartBatteryMode && filteredRecords.length) {
-          const modeTotals = {};
-          filteredRecords.forEach(vehicle => {
-            const mode = String(vehicle.Driving_Mode || vehicle.Drive || 'Normal').trim() || 'Normal';
-            modeTotals[mode] = (modeTotals[mode] || 0) + numberValue(vehicle.Energy_Consumption_kWh_per_100km);
-          });
-          const modeLabels = Object.keys(modeTotals);
-          chartBatteryMode.data.labels = modeLabels;
-          chartBatteryMode.data.datasets[0].data = modeLabels.map(mode => {
-            const count = filteredRecords.filter(vehicle => String(vehicle.Driving_Mode || vehicle.Drive || 'Normal').trim() === mode).length;
-            return count ? (modeTotals[mode] / count) : 0;
-          });
-          chartBatteryMode.update();
-        }
-      }
     }
 
     function logout() {
       window.location.href = "admin dashboard.html";
     }
+  </script>
+  <script>
 
-    let dashboardVehicles = [];
-    let dashboardRenderQueued = false;
+let dashboardVehicles = [];
 
-    function clampSocVal(value) {
-        const val = parseFloat(value);
-        return isNaN(val) ? 100 : Math.min(100, Math.max(1, val));
-    }
-
-    function scheduleDashboardRender() {
-        if (dashboardRenderQueued) return;
-        dashboardRenderQueued = true;
-
-        requestAnimationFrame(() => {
-            dashboardRenderQueued = false;
-            const latestVehicles = latestVehicleRecords(dashboardVehicles || []);
-            if (!latestVehicles.length) return;
-
-            const stats = buildCompanyStats(latestVehicles);
-            if (stats && stats.length) {
-                setCompanyFilter(currentSelectedCompany || 'all');
-                updateChartsFromVehicles(latestVehicles);
-                renderDatasetTables(latestVehicles);
-                cacheAllTableOriginalRows();
+async function loadVehicleData() {
+    try {
+        const response = await fetch("/api/vehicles");
+        const vehicles = await response.json();
+        dashboardVehicles = vehicles;
+        await loadDriverPerformanceStats(vehicles);
+        
+        const tbody = document.querySelector('#overviewTable tbody');
+        tbody.innerHTML = ''; // Clear existing dummy data
+        
+        vehicles.forEach(vehicle => {
+            const row = document.createElement('tr');
+            
+            // Determine company from Car_Name
+            const carName = vehicle.Car_Name || '';
+            let company = 'Other';
+            if (carName.includes('Tata')) company = 'Tata';
+            else if (carName.includes('Kia')) company = 'Kia';
+            else if (carName.includes('Mahindra')) company = 'Mahindra';
+            else if (carName.includes('MG')) company = 'MG';
+            else if (carName.includes('Hyundai')) company = 'Hyundai';
+            
+            row.setAttribute('data-company', company);
+            
+            const status = (vehicle.Running_Status || '').toLowerCase();
+            const charging = (vehicle.Charging_Status || '').toLowerCase();
+            
+            let statusBadge = '<span class="status-pill pill-gray">Idle</span>';
+            if (charging === 'charging') {
+                statusBadge = '<span class="status-pill pill-blue">Charging</span>';
+            } else if (status === 'running') {
+                statusBadge = '<span class="status-pill pill-green">Running</span>';
             }
+            
+            const socPercent = parseFloat(vehicle.SOC_Percentage || 0);
+            const socColor = socPercent > 60 ? '#10b981' : socPercent > 30 ? '#f59e0b' : '#ef4444';
+            
+            row.innerHTML = `
+                <td><strong>${vehicle.Car_RegNo || ''}</strong></td>
+                <td>${carName} <span class="company-tag tag-${company.toLowerCase()}">${company}</span></td>
+                <td>${vehicle.Driver_Name || ''}</td>
+                <td>${vehicle.Location || ''}</td>
+                <td>${vehicle.Destination_Location || ''}</td>
+                <td>${vehicle.Speed_kmh || 0} km/h</td>
+                <td>
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: ${socPercent}%; background: ${socColor};"></div></div>
+                    ${socPercent.toFixed(1)}%
+                </td>
+                <td><span class="status-pill pill-green">Pass ML</span></td>
+                <td>${statusBadge}</td>
+            `;
+            tbody.appendChild(row);
         });
+          updateDashboardFromVehicles(vehicles);
+    } catch (error) {
+        console.error('Error loading vehicle data:', error);
     }
-
-    async function loadVehicleData() {
-        try {
-            const response = await fetch("/api/vehicles");
-            const vehicles = await response.json();
-            dashboardVehicles = Array.isArray(vehicles) ? vehicles : [];
-
-            const tbody = document.querySelector('#overviewTable tbody');
-            if (tbody && dashboardVehicles.length) {
-                tbody.innerHTML = '';
-                const latestVehicles = latestVehicleRecords(dashboardVehicles).slice(0, 30);
-                latestVehicles.forEach(vehicle => {
-                    const row = document.createElement('tr');
-                    const company = vehicleCompany(vehicle);
-                    row.setAttribute('data-company', company);
-
-                    const isRunning = ['yes', 'running'].includes(String(vehicle.Running_Status || '').toLowerCase());
-                    const isCharging = ['yes', 'charging'].includes(String(vehicle.Charging_Status || '').toLowerCase()) || String(vehicle.Active_Station_Session || '').toLowerCase() === 'active' || numberValue(vehicle.Charging_Power_kW) > 0;
-
-                    let statusBadge = '<span class="status-pill pill-gray">Idle</span>';
-                    if (isCharging) {
-                        statusBadge = '<span class="status-pill pill-blue">Charging</span>';
-                    } else if (isRunning) {
-                        statusBadge = '<span class="status-pill pill-green">Running</span>';
-                    }
-
-                    const socPercent = clampSocVal(vehicle.SOC_Percentage);
-                    const socColor = socPercent > 60 ? '#10b981' : socPercent > 30 ? '#f59e0b' : '#ef4444';
-                    const speed = numberValue(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh);
-                    const feasibility = String(vehicle.Can_Reach_Destination_ML || 'Yes').trim() || 'Yes';
-                    const feasibilityClass = ['yes', 'true', 'pass'].includes(feasibility.toLowerCase()) ? 'pill-green' : 'pill-yellow';
-
-                    row.innerHTML = `
-                        <td><strong>${escapeHtml(vehicle.Car_RegNo || '')}</strong></td>
-                        <td>${escapeHtml(vehicle.Car_Name || '')} <span class="company-tag tag-${escapeHtml(company.toLowerCase())}">${escapeHtml(company)}</span></td>
-                        <td>${escapeHtml(vehicle.Driver_Name || '')}</td>
-                        <td>${escapeHtml(vehicle.Location || '')}</td>
-                        <td>${escapeHtml(vehicle.Destination_Location || '')}</td>
-                        <td>${speed.toFixed(1)} km/h</td>
-                        <td>
-                            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: ${socPercent}%; background: ${socColor};"></div></div>
-                            ${socPercent.toFixed(1)}%
-                        </td>
-                        <td><span class="status-pill ${feasibilityClass}">${escapeHtml(feasibility)}</span></td>
-                        <td>${statusBadge}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            }
-
-            await loadDriverPerformanceStats(dashboardVehicles);
-            scheduleDashboardRender();
-        } catch (error) {
-            console.error('Error loading vehicle data:', error);
-        }
-    }
+}
 
 async function loadAdminData() {
     try {
         const response = await fetch("/api/admin");
         const data = await response.json();
-            if (!data) return;
 
-            const totalCars = Number(data.totalCars || 0);
-            const workingCars = Number(data.workingCars || 0);
-            const chargingCars = Number(data.chargingCars || 0);
-            const runningCars = Number(data.runningCars || 0);
-            const totalRevenue = Number(data.totalRevenue || 0);
-
-            const setText = (id, value) => {
-                const el = document.getElementById(id);
-                if (el) el.innerText = value;
-            };
-
-            setText('statTotalFleet', totalCars);
-            setText('statCarsWorking', workingCars);
-            setText('statCarsCharging', chargingCars);
-            setText('statVehiclesMotion', runningCars);
-            setText('f-revenue', `₹${totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
-            setText('f-profit', `₹${totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
-
-            if (totalCars) {
-                setText('statFleetCoverage', `${Math.round((workingCars / totalCars) * 100)}% Coverage`);
-                setText('statWorkingPct', `${Math.round((workingCars / totalCars) * 100)}%`);
-                setText('statChargingPct', `${Math.round((chargingCars / totalCars) * 100)}% Fleet`);
-                setText('statMotionPct', `${Math.round((runningCars / totalCars) * 100)}% Fleet`);
+        // Update stat cards with real data
+        document.getElementById("statTotalFleet").innerText = data.totalCars;
+        document.getElementById("statVehiclesMotion").innerText = data.runningCars;
+        document.getElementById("statCarsWorking").innerText = data.totalCars - data.runningCars;
+        document.getElementById("statCarsCharging").innerText = data.chargingCars;
+        
+        // Update revenue display if it exists
+        const revenueEl = document.getElementById("f-revenue");
+        if (revenueEl) {
+            revenueEl.innerText = "₹" + data.totalRevenue;
+        }
+        
+        // Update company info
+        document.getElementById("activeCompanyCount").innerText = data.totalCars + " Vehicles Total";
+    } catch (error) {
+        console.error('Error loading admin data:', error);
+    }
 }
 
 // Calculate and display driver performance stats
 async function loadDriverPerformanceStats(loadedVehicles = null) {
   try {
-    const vehicles = loadedVehicles || dashboardVehicles || await (async () => {
+    const vehicles = loadedVehicles || await (async () => {
       const response = await fetch("/api/vehicles");
       return response.json();
     })();
@@ -3148,11 +3960,11 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
     const driverStats = {};
         
     vehicles.forEach(vehicle => {
-      const driverId = vehicle.Driver_ID || 'DRV001';
-      const driverName = vehicle.Driver_Name || 'Driver';
-      const carName = vehicle.Car_Name || vehicle.Car_RegNo || 'EV';
-      const revenue = numberValue(vehicle.Per_Day_Revenue || vehicle.Trip_Revenue);
-      const speed = numberValue(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh);
+      const driverId = vehicle.Driver_ID;
+      const driverName = vehicle.Driver_Name;
+      const carName = vehicle.Car_Name;
+      const revenue = parseFloat(vehicle.Per_Day_Revenue) || 0;
+        const speed = parseFloat(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh) || 0;
             
       if (!driverStats[driverId]) {
         driverStats[driverId] = {
@@ -3172,7 +3984,7 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
         
     // Find top earner
     let topEarner = null;
-    let maxRevenue = -1;
+    let maxRevenue = 0;
         
     Object.values(driverStats).forEach(driver => {
       if (driver.totalRevenue > maxRevenue) {
@@ -3183,7 +3995,7 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
         
     // Find most active driver
     let mostActive = null;
-    let maxTrips = -1;
+    let maxTrips = 0;
         
     Object.values(driverStats).forEach(driver => {
       if (driver.tripCount > maxTrips) {
@@ -3194,8 +4006,8 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
 
     // Identify the rash driver by highest average driving speed
     const rashDriver = Object.values(driverStats).reduce((fastest, driver) => {
-      const driverAverageSpeed = driver.totalSpeed / (driver.tripCount || 1);
-      const fastestAverageSpeed = fastest ? fastest.totalSpeed / (fastest.tripCount || 1) : 0;
+      const driverAverageSpeed = driver.totalSpeed / driver.tripCount;
+      const fastestAverageSpeed = fastest ? fastest.totalSpeed / fastest.tripCount : 0;
       return driverAverageSpeed > fastestAverageSpeed ? driver : fastest;
     }, null);
         
@@ -3203,7 +4015,7 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
     if (topEarner) {
       document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
       document.getElementById("statTopEarnerID").innerText = topEarner.driverId;
-      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toFixed(2);
       document.getElementById("statTopEarnerCar").innerText = topEarner.carName || "Unknown";
     }
         
@@ -3217,7 +4029,7 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
 
     // Update UI with rash driver
     if (rashDriver) {
-      const rashDriverAverageSpeed = rashDriver.totalSpeed / (rashDriver.tripCount || 1);
+      const rashDriverAverageSpeed = rashDriver.totalSpeed / rashDriver.tripCount;
       document.getElementById("statRashDriverName").innerText = rashDriver.driverName || "N/A";
       document.getElementById("statRashDriverID").innerText = rashDriver.driverId;
       document.getElementById("statRashDriverSpeed").innerText = rashDriverAverageSpeed.toFixed(1);
@@ -3229,15 +4041,71 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
 }
 
 // Load data when page is ready
-window.addEventListener('DOMContentLoaded', async () => {
-  initCharts();
-  setCompanyFilter('all');
-  await Promise.all([
-    loadVehicleData(),
-    loadAdminData()
-  ]);
-  scheduleDashboardRender();
+window.addEventListener('DOMContentLoaded', () => {
+  (async () => {
+    cacheAllTableOriginalRows();
+    await loadVehicleData();
+    initCharts();
+    updateChartsFromVehicles(dashboardVehicles);
+    setCompanyFilter(currentSelectedCompany);
+    await loadAdminData();
+    await loadDriverPerformanceStats();
+    cacheAllTableOriginalRows();
+  })();
 });
+</script>
+<script>
+function updateDashboardStats() {
+
+    const rows = document.querySelectorAll("#overviewTable tbody tr");
+
+    let totalCars = 0;
+    let runningCars = 0;
+    let chargingCars = 0;
+    let garageCars = 0;
+
+    rows.forEach(row => {
+
+        if(row.style.display === "none") return;
+
+        totalCars++;
+
+        const status =
+            row.cells[8].innerText.trim().toLowerCase();
+
+        if(status.includes("running")) {
+            runningCars++;
+        }
+
+        if(status.includes("charging")) {
+            chargingCars++;
+        }
+
+        if(
+            status.includes("garage") ||
+            status.includes("maintenance")
+        ) {
+            garageCars++;
+        }
+    });
+
+    document.getElementById("statTotalFleet").textContent =
+        totalCars;
+
+    document.getElementById("statVehiclesMotion").textContent =
+        runningCars;
+
+    document.getElementById("statCarsWorking").textContent =
+        garageCars;
+
+    document.getElementById("statCarsCharging").textContent =
+        chargingCars;
+
+    document.getElementById("activeCompanyCount").textContent =
+        totalCars + " Vehicles Total";
+}
+
+window.onload = updateDashboardStats;
 </script>
 </body>
 </html>
