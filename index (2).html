@@ -3945,7 +3945,7 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
         
     if (!vehicles || vehicles.length === 0) return;
         
-    // Group by driver to calculate totals using the same revenue logic as the finance summary.
+    // Group by driver and by company to calculate totals using the same revenue logic as the finance summary.
     const driverStats = {};
     const companyRevenueStats = {};
 
@@ -3977,8 +3977,8 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       driverStats[driverId].tripCount += 1;
       driverStats[driverId].totalSpeed += speed;
     });
-        
-    // Find top earner company
+
+    // Find top earning company
     let topEarnerCompany = null;
     let maxCompanyRevenue = 0;
     Object.values(companyRevenueStats).forEach(company => {
@@ -3988,10 +3988,10 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       }
     });
 
-    // Find top earner driver
+    // Find top earning driver
     let topEarner = null;
     let maxRevenue = 0;
-        
+
     Object.values(driverStats).forEach(driver => {
       if (driver.totalRevenue > maxRevenue) {
         maxRevenue = driver.totalRevenue;
@@ -4017,17 +4017,18 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       return driverAverageSpeed > fastestAverageSpeed ? driver : fastest;
     }, null);
         
-    // Update UI with top earning car company
-    if (topEarnerCompany) {
+    // Update UI with the top earning driver and keep the company in the subtitle.
+    if (topEarner) {
+      const topCompanyText = topEarnerCompany && topEarnerCompany.companyName ? topEarnerCompany.companyName : 'Vehicle Brand';
+      document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
+      document.getElementById("statTopEarnerID").innerText = topEarner.driverId || "Driver ID";
+      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toFixed(2);
+      document.getElementById("statTopEarnerCar").innerText = `${topCompanyText} • ${topEarner.carName || "Unknown"}`;
+    } else if (topEarnerCompany) {
       document.getElementById("statTopEarnerName").innerText = topEarnerCompany.companyName || "N/A";
       document.getElementById("statTopEarnerID").innerText = "Top Company";
       document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarnerCompany.totalRevenue.toFixed(2);
       document.getElementById("statTopEarnerCar").innerText = "Highest Revenue Brand";
-    } else if (topEarner) {
-      document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
-      document.getElementById("statTopEarnerID").innerText = topEarner.driverId;
-      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toFixed(2);
-      document.getElementById("statTopEarnerCar").innerText = topEarner.carName || "Unknown";
     }
         
     // Update UI with most active driver
