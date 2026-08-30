@@ -2694,6 +2694,16 @@
       return Number.isFinite(number) ? number : 0;
     }
 
+    function resolveMetric(vehicle, ...keys) {
+      for (const key of keys) {
+        const raw = vehicle?.[key];
+        if (raw === null || raw === undefined || raw === '') continue;
+        const parsed = Number.parseFloat(raw);
+        if (Number.isFinite(parsed)) return parsed;
+      }
+      return 0;
+    }
+
     function escapeHtml(value) {
       return String(value ?? '')
         .replace(/&/g, '&amp;')
@@ -2836,12 +2846,12 @@
       });
 
       table('financeTable', vehicle => {
-        const revenue = numberValue(vehicle.Per_Day_Revenue) || 18500;
-        const chgCost = numberValue(vehicle.Charging_Cost || vehicle.Monthly_Charging_Cost) || 1400;
-        const maintCost = numberValue(vehicle.Other_Maintenance_Cost || vehicle.Monthly_Maintenance_Cost) || 950;
+        const revenue = resolveMetric(vehicle, 'Per_Day_Revenue', 'Daily_Revenue', 'Trip_Revenue', 'Revenue') || 0;
+        const chgCost = resolveMetric(vehicle, 'Charging_Cost', 'Monthly_Charging_Cost', 'Charging_Expense', 'Electricity_Cost') || 0;
+        const maintCost = resolveMetric(vehicle, 'Other_Maintenance_Cost', 'Monthly_Maintenance_Cost', 'Maintenance_Expense', 'Service_Cost') || 0;
         const costs = chgCost + maintCost;
         const profit = revenue - costs;
-        const margin = revenue ? Math.round(profit / revenue * 100) : 0;
+        const margin = revenue ? Math.round((profit / revenue) * 100) : 0;
         const profitClass = profit >= 0 ? 'pill-green' : 'pill-red';
         return `<td><strong>${escapeHtml(vehicle.Car_RegNo || '-')}</strong></td>
           <td>${escapeHtml(vehicle.Car_Name || '-')} <span class="company-tag tag-${escapeHtml(vehicleCompany(vehicle).toLowerCase())}">${escapeHtml(vehicleCompany(vehicle))}</span></td>
@@ -3935,37 +3945,34 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
         
     if (!vehicles || vehicles.length === 0) return;
         
-    // Group by driver to calculate totals
+    // Group by driver to calculate totals using the same revenue logic as the finance summary.
     const driverStats = {};
     const companyRevenueStats = {};
-        
+
     vehicles.forEach(vehicle => {
-      const driverId = vehicle.Driver_ID;
-      const driverName = vehicle.Driver_Name;
-      const carName = vehicle.Car_Name;
+      const driverId = String(vehicle.Driver_ID || vehicle.Driver_Name || 'Unassigned').trim() || 'Unassigned';
+      const driverName = vehicle.Driver_Name || 'Unknown Driver';
+      const carName = vehicle.Car_Name || 'Unknown Vehicle';
       const companyName = String(vehicle.Make || vehicle.Company || 'Unknown').trim() || 'Unknown';
-      const revenue = parseFloat(vehicle.Per_Day_Revenue) || 0;
-      const speed = parseFloat(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh) || 0;
+      const revenue = resolveMetric(vehicle, 'Per_Day_Revenue', 'Daily_Revenue', 'Trip_Revenue', 'Revenue');
+      const speed = resolveMetric(vehicle, 'Driving_Speed_kmph', 'Speed_kmh', 'Avg_Speed_kmph', 'Driving_Speed');
 
       if (!companyRevenueStats[companyName]) {
-        companyRevenueStats[companyName] = {
-          companyName,
-          totalRevenue: 0
-        };
+        companyRevenueStats[companyName] = { companyName, totalRevenue: 0 };
       }
       companyRevenueStats[companyName].totalRevenue += revenue;
-            
+
       if (!driverStats[driverId]) {
         driverStats[driverId] = {
-          driverId: driverId,
-          driverName: driverName,
-          carName: carName,
+          driverId,
+          driverName,
+          carName,
           totalRevenue: 0,
           tripCount: 0,
           totalSpeed: 0
         };
       }
-            
+
       driverStats[driverId].totalRevenue += revenue;
       driverStats[driverId].tripCount += 1;
       driverStats[driverId].totalSpeed += speed;
