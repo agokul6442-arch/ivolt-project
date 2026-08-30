@@ -1201,6 +1201,21 @@
             </div>
           </div>
 
+          <div class="stat-card" style="--card-accent: #8b5cf6;">
+            <div class="stat-head">
+              <span class="stat-title">Highest Earning Company</span>
+              <div class="stat-icon-wrap"><i class="fa-solid fa-building"></i></div>
+            </div>
+            <div class="stat-body">
+              <span class="stat-number" id="statTopCompanyName">-</span>
+              <span class="stat-unit" id="statTopCompanyID">Company</span>
+            </div>
+            <div class="stat-sub">
+              <span class="badge-trend trend-up"><i class="fa-solid fa-money-bill"></i> <span id="statTopCompanyProfit">₹0</span></span>
+              <span id="statTopCompanyDetail">Top Profit Brand</span>
+            </div>
+          </div>
+
           <div class="stat-card" style="--card-accent: #ef4444;">
             <div class="stat-head">
               <span class="stat-title">Most Active Driver</span>
@@ -2704,6 +2719,23 @@
       return 0;
     }
 
+    function calculateNetProfit(revenue, chargingCost, maintenanceCost) {
+      return revenue - chargingCost - maintenanceCost;
+    }
+
+    function calculateMargin(revenue, profit) {
+      return revenue > 0 ? Math.round((profit / revenue) * 100) : 0;
+    }
+
+    function sumMetric(records, ...keys) {
+      return records.reduce((total, vehicle) => total + resolveMetric(vehicle, ...keys), 0);
+    }
+
+    function averageMetric(records, ...keys) {
+      if (!records.length) return 0;
+      return sumMetric(records, ...keys) / records.length;
+    }
+
     function escapeHtml(value) {
       return String(value ?? '')
         .replace(/&/g, '&amp;')
@@ -2915,19 +2947,20 @@
         chartPerfDriverEco.update();
       }
       if (chartFinanceTrend) {
-        const totalRevenue = records.reduce((total, vehicle) => total + numberValue(vehicle.Per_Day_Revenue), 0);
-        const totalCosts = records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost), 0);
+        const totalRevenue = sumMetric(records, 'Per_Day_Revenue', 'Daily_Revenue', 'Trip_Revenue', 'Revenue');
+        const totalChargingCost = sumMetric(records, 'Charging_Cost', 'Monthly_Charging_Cost', 'Charging_Expense', 'Electricity_Cost');
+        const totalMaintenanceCost = sumMetric(records, 'Other_Maintenance_Cost', 'Monthly_Maintenance_Cost', 'Maintenance_Expense', 'Service_Cost');
+        const totalCosts = totalChargingCost + totalMaintenanceCost;
         chartFinanceTrend.data.labels = ['Dataset Total'];
         chartFinanceTrend.data.datasets[0].data = [totalRevenue];
         chartFinanceTrend.data.datasets[1].data = [totalCosts];
         chartFinanceTrend.update();
       }
       if (chartFinancePie) {
+        const chargingCost = sumMetric(records, 'Charging_Cost', 'Monthly_Charging_Cost', 'Charging_Expense', 'Electricity_Cost');
+        const maintenanceCost = sumMetric(records, 'Other_Maintenance_Cost', 'Monthly_Maintenance_Cost', 'Maintenance_Expense', 'Service_Cost');
         chartFinancePie.data.labels = ['Charging Electricity', 'Maintenance'];
-        chartFinancePie.data.datasets[0].data = [
-          records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0),
-          records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0)
-        ];
+        chartFinancePie.data.datasets[0].data = [chargingCost, maintenanceCost];
         chartFinancePie.update();
       }
       if (chartGarageBay) {
@@ -2937,11 +2970,10 @@
         chartGarageBay.update();
       }
       if (chartMaintComponent) {
+        const maintenanceCost = sumMetric(records, 'Other_Maintenance_Cost', 'Monthly_Maintenance_Cost', 'Maintenance_Expense', 'Service_Cost');
+        const chargingCost = sumMetric(records, 'Charging_Cost', 'Monthly_Charging_Cost', 'Charging_Expense', 'Electricity_Cost');
         chartMaintComponent.data.labels = ['Maintenance Cost', 'Charging Cost'];
-        chartMaintComponent.data.datasets[0].data = [
-          records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0),
-          records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0)
-        ];
+        chartMaintComponent.data.datasets[0].data = [maintenanceCost, chargingCost];
         chartMaintComponent.update();
       }
       if (chartBatteryMode) {
@@ -3000,7 +3032,10 @@
           const filtered = model ? records.filter(vehicle => vehicle.Car_Name === model) : records;
           return filtered.length ? filtered.reduce((total, vehicle) => total + numberValue(vehicle[field]), 0) / filtered.length : 0;
         };
-        const revenue = records.reduce((total, vehicle) => total + numberValue(vehicle.Per_Day_Revenue), 0);
+        const revenue = sumMetric(records, 'Per_Day_Revenue', 'Daily_Revenue', 'Trip_Revenue', 'Revenue');
+        const chargingCost = sumMetric(records, 'Charging_Cost', 'Monthly_Charging_Cost', 'Charging_Expense', 'Electricity_Cost');
+        const maintenanceCost = sumMetric(records, 'Other_Maintenance_Cost', 'Monthly_Maintenance_Cost', 'Maintenance_Expense', 'Service_Cost');
+        const netProfit = calculateNetProfit(revenue, chargingCost, maintenanceCost);
         const modelGroups = {};
         records.forEach(vehicle => {
           const model = vehicle.Car_Name || 'Unknown model';
@@ -3042,11 +3077,11 @@
           co2Saved: `${(revenue * 0.12).toFixed(1)} kg`,
           fRevenue: `₹${revenue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
           fRevenueSub: 'Per-day revenue from CSV',
-          fCharging: `₹${records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost), 0).toLocaleString('en-IN')}`,
-          fMaint: `₹${records.reduce((total, vehicle) => total + numberValue(vehicle.Other_Maintenance_Cost), 0).toLocaleString('en-IN')}`,
+          fCharging: `₹${chargingCost.toLocaleString('en-IN')}`,
+          fMaint: `₹${maintenanceCost.toLocaleString('en-IN')}`,
           fMaintSub: 'Maintenance costs from CSV',
-          fProfit: `₹${Math.max(0, revenue - records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost), 0)).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
-          fMargin: revenue ? `${Math.round((revenue - records.reduce((total, vehicle) => total + numberValue(vehicle.Charging_Cost) + numberValue(vehicle.Other_Maintenance_Cost), 0)) / revenue * 100)}% Margin` : '0% Margin',
+          fProfit: `₹${Math.max(0, netProfit).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
+          fMargin: `${calculateMargin(revenue, netProfit)}% Margin`,
           gInGarage: records.filter(vehicle => ['presented', 'yes'].includes(String(vehicle.Garage_Status).toLowerCase())).length,
           gBayOcc: 'From current CSV snapshot',
           gBayFree: 'Not specified in CSV',
@@ -3945,7 +3980,7 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
         
     if (!vehicles || vehicles.length === 0) return;
         
-    // Group by driver and by company to calculate totals using the same revenue logic as the finance summary.
+    // Rank by net profit, not raw revenue, so the top earner matches actual earnings.
     const driverStats = {};
     const companyRevenueStats = {};
 
@@ -3955,46 +3990,49 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       const carName = vehicle.Car_Name || 'Unknown Vehicle';
       const companyName = String(vehicle.Make || vehicle.Company || 'Unknown').trim() || 'Unknown';
       const revenue = resolveMetric(vehicle, 'Per_Day_Revenue', 'Daily_Revenue', 'Trip_Revenue', 'Revenue');
+      const chargingCost = resolveMetric(vehicle, 'Charging_Cost', 'Monthly_Charging_Cost', 'Charging_Expense', 'Electricity_Cost');
+      const maintenanceCost = resolveMetric(vehicle, 'Other_Maintenance_Cost', 'Monthly_Maintenance_Cost', 'Maintenance_Expense', 'Service_Cost');
+      const netProfit = calculateNetProfit(revenue, chargingCost, maintenanceCost);
       const speed = resolveMetric(vehicle, 'Driving_Speed_kmph', 'Speed_kmh', 'Avg_Speed_kmph', 'Driving_Speed');
 
       if (!companyRevenueStats[companyName]) {
-        companyRevenueStats[companyName] = { companyName, totalRevenue: 0 };
+        companyRevenueStats[companyName] = { companyName, totalProfit: 0 };
       }
-      companyRevenueStats[companyName].totalRevenue += revenue;
+      companyRevenueStats[companyName].totalProfit += netProfit;
 
       if (!driverStats[driverId]) {
         driverStats[driverId] = {
           driverId,
           driverName,
           carName,
-          totalRevenue: 0,
+          totalProfit: 0,
           tripCount: 0,
           totalSpeed: 0
         };
       }
 
-      driverStats[driverId].totalRevenue += revenue;
+      driverStats[driverId].totalProfit += netProfit;
       driverStats[driverId].tripCount += 1;
       driverStats[driverId].totalSpeed += speed;
     });
 
-    // Find top earning company
+    // Find company with highest net profit
     let topEarnerCompany = null;
-    let maxCompanyRevenue = 0;
+    let maxCompanyProfit = 0;
     Object.values(companyRevenueStats).forEach(company => {
-      if (company.totalRevenue > maxCompanyRevenue) {
-        maxCompanyRevenue = company.totalRevenue;
+      if (company.totalProfit > maxCompanyProfit) {
+        maxCompanyProfit = company.totalProfit;
         topEarnerCompany = company;
       }
     });
 
-    // Find top earning driver
+    // Find driver with highest net profit
     let topEarner = null;
-    let maxRevenue = 0;
+    let maxProfit = 0;
 
     Object.values(driverStats).forEach(driver => {
-      if (driver.totalRevenue > maxRevenue) {
-        maxRevenue = driver.totalRevenue;
+      if (driver.totalProfit > maxProfit) {
+        maxProfit = driver.totalProfit;
         topEarner = driver;
       }
     });
@@ -4017,18 +4055,25 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       return driverAverageSpeed > fastestAverageSpeed ? driver : fastest;
     }, null);
         
-    // Update UI with the top earning driver and keep the company in the subtitle.
+    // Update UI with the driver having the highest net profit, not the raw revenue leader.
     if (topEarner) {
       const topCompanyText = topEarnerCompany && topEarnerCompany.companyName ? topEarnerCompany.companyName : 'Vehicle Brand';
       document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
       document.getElementById("statTopEarnerID").innerText = topEarner.driverId || "Driver ID";
-      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toFixed(2);
+      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalProfit.toFixed(2);
       document.getElementById("statTopEarnerCar").innerText = `${topCompanyText} • ${topEarner.carName || "Unknown"}`;
     } else if (topEarnerCompany) {
       document.getElementById("statTopEarnerName").innerText = topEarnerCompany.companyName || "N/A";
       document.getElementById("statTopEarnerID").innerText = "Top Company";
-      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarnerCompany.totalRevenue.toFixed(2);
-      document.getElementById("statTopEarnerCar").innerText = "Highest Revenue Brand";
+      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarnerCompany.totalProfit.toFixed(2);
+      document.getElementById("statTopEarnerCar").innerText = "Highest Profit Brand";
+    }
+
+    if (topEarnerCompany) {
+      document.getElementById("statTopCompanyName").innerText = topEarnerCompany.companyName || "N/A";
+      document.getElementById("statTopCompanyID").innerText = "Top Company";
+      document.getElementById("statTopCompanyProfit").innerText = "₹" + topEarnerCompany.totalProfit.toFixed(2);
+      document.getElementById("statTopCompanyDetail").innerText = "Highest Profit Brand";
     }
         
     // Update UI with most active driver
