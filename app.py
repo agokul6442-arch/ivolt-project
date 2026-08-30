@@ -13,6 +13,35 @@ PROJECT_DIR = Path(__file__).resolve().parent
 CSV_FILE = PROJECT_DIR / "EV-MODEL-DATASET20.csv"
 MODEL_FILE = PROJECT_DIR / "ridge_ev_range_model.pkl"
 
+# CSV loading with fast optimization
+def load_csv_fast(file_path):
+    """
+    Load CSV file with fast optimization.
+    Uses pandas efficient settings for quick data loading.
+    
+    Args:
+        file_path: Path to the CSV file
+    
+    Returns:
+        DataFrame if successful, empty DataFrame if fails
+    """
+    try:
+        # Optimized pandas reading - NO delays!
+        print(f"Loading CSV: {file_path}")
+        df = pd.read_csv(
+            file_path,
+            engine='c',              # Fast C engine
+            dtype={'Car_RegNo': str, 'Driver_ID': str}  # Specify dtypes to avoid inference
+        )
+        print(f"✓ CSV loaded in milliseconds: {len(df)} records")
+        return df
+    except FileNotFoundError:
+        print(f"✗ CSV file not found: {file_path}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"✗ Error loading CSV: {e}")
+        return pd.DataFrame()
+
 # Sklearn unpickling patch for legacy serialized column transformer lists
 try:
     import sklearn.compose._column_transformer as column_transformer
@@ -22,12 +51,9 @@ try:
 except Exception:
     pass
 
-# Safe loading of Dataset
-try:
-    df = pd.read_csv(CSV_FILE)
-except Exception as e:
-    print(f"Warning: Could not load dataset {CSV_FILE}. Error: {e}")
-    df = pd.DataFrame()
+# Safe loading of Dataset with fast optimization
+df = load_csv_fast(CSV_FILE)
+LATEST_VEHICLE_DF = pd.DataFrame()
 
 # Safe loading of ML Model
 try:
@@ -35,6 +61,23 @@ try:
 except Exception as e:
     print(f"Warning: Could not load model {MODEL_FILE}. Error: {e}")
     range_model = None
+
+
+def refresh_latest_vehicle_df():
+    global LATEST_VEHICLE_DF
+    if df.empty:
+        LATEST_VEHICLE_DF = df.copy()
+        return LATEST_VEHICLE_DF
+
+    latest = df.copy()
+    if "Observation_DateTime" in latest.columns:
+        latest["_observation_time"] = pd.to_datetime(
+            latest["Observation_DateTime"], dayfirst=True, errors="coerce"
+        )
+        latest = latest.sort_values("_observation_time")
+    latest = latest.drop_duplicates(subset=["Car_RegNo"], keep="last") if "Car_RegNo" in latest.columns else latest
+    LATEST_VEHICLE_DF = latest.reset_index(drop=True)
+    return LATEST_VEHICLE_DF
 
 
 def latest_vehicle_rows(dataframe):
@@ -48,6 +91,32 @@ def latest_vehicle_rows(dataframe):
         )
         latest = latest.sort_values("_observation_time")
     return latest.drop_duplicates(subset=["Car_RegNo"], keep="last")
+
+
+def clamp_soc(value):
+    try:
+        return min(100, max(1, float(value)))
+    except (TypeError, ValueError):
+        return 1
+
+
+def get_latest_vehicle_rows():
+    global LATEST_VEHICLE_DF
+    if df.empty:
+        return df.copy()
+
+    if LATEST_VEHICLE_DF.empty:
+        return refresh_latest_vehicle_df()
+
+    if "Car_RegNo" in df.columns:
+        expected_count = df["Car_RegNo"].nunique()
+        if len(LATEST_VEHICLE_DF) != expected_count:
+            return refresh_latest_vehicle_df()
+
+    return LATEST_VEHICLE_DF
+
+
+LATEST_VEHICLE_DF = refresh_latest_vehicle_df()
 
 
 # ==========================
@@ -117,7 +186,8 @@ def admin_dashboard():
 def vehicles():
     if df.empty:
         return jsonify([])
-    return jsonify(df.fillna("").to_dict(orient="records"))
+    latest = get_latest_vehicle_rows()
+    return jsonify(latest.fillna("").to_dict(orient="records"))
 
 
 @app.route("/api/drivers")
@@ -125,7 +195,8 @@ def drivers():
     if df.empty or "Driver_Name" not in df.columns:
         return jsonify([])
 
-    drivers_list = df["Driver_Name"].dropna().unique().tolist()
+    updated_df = get_latest_vehicle_rows()
+    drivers_list = updated_df["Driver_Name"].dropna().unique().tolist()
     return jsonify(drivers_list)
 
 
@@ -139,7 +210,10 @@ def vehicle_details(reg_no):
     if vehicle.empty:
         return jsonify({"error": "Vehicle not found"})
 
-    return jsonify(vehicle.iloc[0].fillna("").to_dict())
+    vehicle_data = vehicle.iloc[0].fillna("").to_dict()
+    if "SOC_Percentage" in vehicle_data:
+        vehicle_data["SOC_Percentage"] = clamp_soc(vehicle_data["SOC_Percentage"])
+    return jsonify(vehicle_data)
 
 
 @app.route("/api/driver/<reg_no>")
@@ -158,7 +232,7 @@ def driver_dashboard(reg_no):
         "registrationNumber": str(row.get("Car_RegNo", "")),
         "vehicleName": str(row.get("Car_Name", "")),
         "driverName": str(row.get("Driver_Name", "")),
-        "soc": float(row.get("SOC_Percentage", 0)),
+        "soc": clamp_soc(row.get("SOC_Percentage", 0)),
         "batteryCapacity": float(row.get("Battery_Capacity_kWh", 0)),
         "range": float(row.get("Estimated Range_Range", 0)),
         "chargingStatus": str(row.get("Charging_Status", "")),
@@ -178,9 +252,10 @@ def revenue():
     if df.empty or "Per_Day_Revenue" not in df.columns:
         return jsonify([])
 
+    latest = get_latest_vehicle_rows()
     revenue_data = [
         {"vehicle": row.get("Car_Name", ""), "revenue": row.get("Per_Day_Revenue", 0)}
-        for _, row in df.iterrows()
+        for _, row in latest.iterrows()
     ]
     return jsonify(revenue_data)
 
@@ -190,9 +265,10 @@ def soc_chart():
     if df.empty:
         return jsonify([])
 
+    latest = get_latest_vehicle_rows()
     chart = [
-        {"vehicle": row.get("Car_Name", ""), "soc": row.get("SOC_Percentage", 0)}
-        for _, row in df.iterrows()
+        {"vehicle": row.get("Car_Name", ""), "soc": clamp_soc(row.get("SOC_Percentage", 0))}
+        for _, row in latest.iterrows()
     ]
     return jsonify(chart)
 
@@ -301,6 +377,7 @@ def register_driver():
 
     df = pd.concat([df, pd.DataFrame([new_record])], ignore_index=True)
     df.to_csv(CSV_FILE, index=False)
+    refresh_latest_vehicle_df()
 
     return jsonify({
         "success": True,
@@ -344,7 +421,10 @@ def driver_details(driver_id):
     if user.empty:
         return jsonify({"error": "Driver not found"})
 
-    return jsonify(user.iloc[0].fillna("").to_dict())
+    driver_data = user.iloc[0].fillna("").to_dict()
+    if "SOC_Percentage" in driver_data:
+        driver_data["SOC_Percentage"] = clamp_soc(driver_data["SOC_Percentage"])
+    return jsonify(driver_data)
 
 
 # ==========================
