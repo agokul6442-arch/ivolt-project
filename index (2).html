@@ -3889,7 +3889,7 @@ let dashboardVehicles = [];
 
 async function loadVehicleData() {
     try {
-        const response = await fetch("/api/vehicles");
+        const response = await fetch("/api/vehicles", { cache: "no-store" });
         const vehicles = await response.json();
         dashboardVehicles = vehicles;
         await loadDriverPerformanceStats(vehicles);
@@ -3948,7 +3948,7 @@ async function loadVehicleData() {
 
 async function loadAdminData() {
     try {
-        const response = await fetch("/api/admin");
+        const response = await fetch("/api/admin", { cache: "no-store" });
         const data = await response.json();
 
         // Update stat cards with real data
@@ -3974,7 +3974,7 @@ async function loadAdminData() {
 async function loadDriverPerformanceStats(loadedVehicles = null) {
   try {
     const vehicles = loadedVehicles || await (async () => {
-      const response = await fetch("/api/vehicles");
+      const response = await fetch("/api/vehicles", { cache: "no-store" });
       return response.json();
     })();
         
@@ -4017,25 +4017,19 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
     });
 
     // Find company with highest net profit
-    let topEarnerCompany = null;
-    let maxCompanyProfit = 0;
-    Object.values(companyRevenueStats).forEach(company => {
-      if (company.totalProfit > maxCompanyProfit) {
-        maxCompanyProfit = company.totalProfit;
-        topEarnerCompany = company;
-      }
+    const sortedCompanies = Object.values(companyRevenueStats).sort((a, b) => {
+      if (b.totalProfit !== a.totalProfit) return b.totalProfit - a.totalProfit;
+      return (b.tripCount || 0) - (a.tripCount || 0);
     });
+    const topEarnerCompany = sortedCompanies[0] || null;
 
-    // Find driver with highest net profit
-    let topEarner = null;
-    let maxProfit = 0;
-
-    Object.values(driverStats).forEach(driver => {
-      if (driver.totalProfit > maxProfit) {
-        maxProfit = driver.totalProfit;
-        topEarner = driver;
-      }
+    // Find driver with highest net profit, using a deterministic sort so the card always reflects the true leader.
+    const sortedDrivers = Object.values(driverStats).sort((a, b) => {
+      if (b.totalProfit !== a.totalProfit) return b.totalProfit - a.totalProfit;
+      if ((b.tripCount || 0) !== (a.tripCount || 0)) return (b.tripCount || 0) - (a.tripCount || 0);
+      return ((b.totalSpeed || 0) / (b.tripCount || 1)) - ((a.totalSpeed || 0) / (a.tripCount || 1));
     });
+    const topEarner = sortedDrivers[0] || null;
         
     // Find most active driver
     let mostActive = null;
