@@ -3937,13 +3937,23 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
         
     // Group by driver to calculate totals
     const driverStats = {};
+    const companyRevenueStats = {};
         
     vehicles.forEach(vehicle => {
       const driverId = vehicle.Driver_ID;
       const driverName = vehicle.Driver_Name;
       const carName = vehicle.Car_Name;
+      const companyName = String(vehicle.Make || vehicle.Company || 'Unknown').trim() || 'Unknown';
       const revenue = parseFloat(vehicle.Per_Day_Revenue) || 0;
-        const speed = parseFloat(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh) || 0;
+      const speed = parseFloat(vehicle.Driving_Speed_kmph ?? vehicle.Speed_kmh) || 0;
+
+      if (!companyRevenueStats[companyName]) {
+        companyRevenueStats[companyName] = {
+          companyName,
+          totalRevenue: 0
+        };
+      }
+      companyRevenueStats[companyName].totalRevenue += revenue;
             
       if (!driverStats[driverId]) {
         driverStats[driverId] = {
@@ -3961,7 +3971,17 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       driverStats[driverId].totalSpeed += speed;
     });
         
-    // Find top earner
+    // Find top earner company
+    let topEarnerCompany = null;
+    let maxCompanyRevenue = 0;
+    Object.values(companyRevenueStats).forEach(company => {
+      if (company.totalRevenue > maxCompanyRevenue) {
+        maxCompanyRevenue = company.totalRevenue;
+        topEarnerCompany = company;
+      }
+    });
+
+    // Find top earner driver
     let topEarner = null;
     let maxRevenue = 0;
         
@@ -3990,8 +4010,13 @@ async function loadDriverPerformanceStats(loadedVehicles = null) {
       return driverAverageSpeed > fastestAverageSpeed ? driver : fastest;
     }, null);
         
-    // Update UI with top earner
-    if (topEarner) {
+    // Update UI with top earning car company
+    if (topEarnerCompany) {
+      document.getElementById("statTopEarnerName").innerText = topEarnerCompany.companyName || "N/A";
+      document.getElementById("statTopEarnerID").innerText = "Top Company";
+      document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarnerCompany.totalRevenue.toFixed(2);
+      document.getElementById("statTopEarnerCar").innerText = "Highest Revenue Brand";
+    } else if (topEarner) {
       document.getElementById("statTopEarnerName").innerText = topEarner.driverName || "N/A";
       document.getElementById("statTopEarnerID").innerText = topEarner.driverId;
       document.getElementById("statTopEarnerRevenue").innerText = "₹" + topEarner.totalRevenue.toFixed(2);
