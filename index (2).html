@@ -2026,6 +2026,18 @@
     }
 
     function latestVehicleRecords(vehicles) {
+      if (!Array.isArray(vehicles) || !vehicles.length) return [];
+
+      const hasDuplicateRegNo = vehicles.some((vehicle, index, list) => {
+        const registration = String(vehicle.Car_RegNo || '').trim();
+        if (!registration) return false;
+        return list.findIndex(item => String(item.Car_RegNo || '').trim() === registration) !== index;
+      });
+
+      if (!hasDuplicateRegNo) {
+        return vehicles.map(vehicle => ({ ...vehicle }));
+      }
+
       const vehicleGroups = new Map();
       vehicles.forEach(vehicle => {
         const registration = String(vehicle.Car_RegNo || '').trim();
